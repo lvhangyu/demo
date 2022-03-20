@@ -9,3 +9,13 @@ spring:
     name: service-hi
   zipkin:
     base-url: http://localhost:9411
+
+
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    #schema: classpath:db/schema-h2.sql
+    #data: classpath:db/data-h2.sql
+    url: jdbc:mysql://172.16.52.85:3307/edas1?zeroDateTimeBehavior=round&useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
+    username: root
+    password: test

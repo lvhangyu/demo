@@ -1,5 +1,7 @@
 package com.forezp.service;
 
+import com.forezp.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -7,8 +9,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SchedualServiceHiHystric implements SchedualServiceHi {
+
+    @Autowired
+    private UserMapper userMapper;
     @Override
     public String sayHiFromClientOne(String name) {
+        userMapper.selectList(null);
         return "sorry "+name;
     }
 }
