@@ -9,11 +9,19 @@ spring:
     name: service-zuul
   zipkin:
     base-url: http://localhost:9411
+  datasource:
+    type: org.apache.tomcat.jdbc.pool.DataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.16.52.85:3307/demo?zeroDateTimeBehavior=round&useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
+    username: root
+    password: lenovolabs
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 zuul:
   routes:
     api-b:
       path: /api-b/**
       serviceId: service-feign
-
-
-
