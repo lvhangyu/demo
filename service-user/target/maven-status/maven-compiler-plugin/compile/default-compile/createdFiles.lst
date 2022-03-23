@@ -1,0 +1,6 @@
+com\forezp\mapper\UserMapper.class
+com\forezp\ServiceUserApplication.class
+com\forezp\service\UserService.class
+com\forezp\controller\UserController.class
+com\forezp\service\impl\UserServiceImpl.class
+com\forezp\pojo\User.class
