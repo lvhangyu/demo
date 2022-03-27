@@ -17,7 +17,6 @@
         <module>service-zuul</module>
         <module>server-zipkin</module>
         <module>core</module>
-        <module>service-zipkin</module>
         <module>service-user</module>
         <module>service-flight</module>
         <module>service-order</module>
