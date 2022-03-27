@@ -1,12 +1,18 @@
 package com.forezp;
 
+import com.alibaba.fastjson.JSONObject;
+import com.forezp.mvc.ResultModel;
+import com.forezp.util.JwtUtils;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+
 /**
  * Created by forezp on 2017/4/8.
  */
@@ -44,6 +50,21 @@ public class MyFilter extends ZuulFilter{
             }catch (Exception e){}
 
             return null;
+        }
+
+
+        try {
+            String userInfo = JwtUtils.verifyJWTToken(accessToken.toString());
+            ctx.addZuulRequestHeader("userInfo",userInfo);
+        }catch (Exception e){
+            log.warn("token is unauthorized");
+            ctx.setSendZuulResponse(false);
+            ctx.setResponseStatusCode(401);
+            ResultModel resultModel = new ResultModel<>().setCode(HttpStatus.UNAUTHORIZED.value()).setMsg(HttpStatus.UNAUTHORIZED.getReasonPhrase());
+            try {
+                ctx.getResponse().getWriter().write(JSONObject.toJSONString(resultModel));
+            } catch (IOException ex) {
+            }
         }
         log.info("ok");
         return null;
