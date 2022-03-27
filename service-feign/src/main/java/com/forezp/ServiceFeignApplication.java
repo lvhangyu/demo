@@ -12,10 +12,10 @@ import org.springframework.context.annotation.Bean;
 @EnableDiscoveryClient
 @EnableFeignClients
 @MapperScan("com.forezp.mapper")
-public class ServiceUserApplication {
+public class ServiceFeignApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ServiceUserApplication.class, args);
+		SpringApplication.run(ServiceFeignApplication.class, args);
 	}
 
 	@Bean
