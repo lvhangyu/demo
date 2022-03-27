@@ -12,7 +12,7 @@
 
     <modules>
         <module>eureka-server</module>
-        <module>service-user</module>
+        <module>service-feign</module>
         <module>service-hi</module>
         <module>service-zuul</module>
         <module>server-zipkin</module>
