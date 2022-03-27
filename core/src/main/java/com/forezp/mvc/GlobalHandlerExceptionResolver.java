@@ -17,14 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Locale;
 
-/**
- * @Author: Yyang
- * @Date: 2019/4/24 14:18
- * @Description:
- */
-@Component
-public class HandlerExceptionResolver implements org.springframework.web.servlet.HandlerExceptionResolver {
-    private static final Logger logger = LoggerFactory.getLogger(HandlerExceptionResolver.class);
+public class GlobalHandlerExceptionResolver implements org.springframework.web.servlet.HandlerExceptionResolver {
+    private static final Logger logger = LoggerFactory.getLogger(GlobalHandlerExceptionResolver.class);
 
     @Override
     public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
@@ -32,14 +26,12 @@ public class HandlerExceptionResolver implements org.springframework.web.servlet
         if (e instanceof MyException) {
             //业务失败
             resultModel.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value()).setMsg(e.getMessage());
-            logger.error("error: {}",e.getMessage());
         } else if (e instanceof NoHandlerFoundException) {
             //接口不存在的情况
             resultModel.setCode(HttpStatus.NOT_FOUND.value()).setMsg("接口 {" + httpServletRequest.getRequestURI() + "} 不存在");
         }else {
             //服务器内部错误
             resultModel.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-
             if (o instanceof HandlerMethod) {
                 HandlerMethod handlerMethod = (HandlerMethod) o;
                 logger.error("接口{} 出现异常 方法:{}.{}() 异常信息:{}",
@@ -48,11 +40,10 @@ public class HandlerExceptionResolver implements org.springframework.web.servlet
                         handlerMethod.getMethod().getName(),
                         e.getMessage());
                 resultModel.setMsg(e.getMessage());
-
             } else {
                 resultModel.setMsg(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
-                logger.error(e.getMessage());
             }
+            logger.error("error: {}",e.getMessage());
         }
         responseResult(httpServletResponse, resultModel);
         return new ModelAndView();
