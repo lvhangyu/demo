@@ -1,3 +1,5 @@
+D:\github\test\bishe\service-user\src\main\java\com\forezp\pojo\vo\UserVo.java
+D:\github\test\bishe\service-user\src\main\java\com\forezp\pojo\dao\UserDao.java
 D:\github\test\bishe\service-user\src\main\java\com\forezp\service\SchedualServiceHiHystric.java
 D:\github\test\bishe\service-user\src\main\java\com\forezp\ServiceUserApplication.java
 D:\github\test\bishe\service-user\src\main\java\com\forezp\mapper\UserMapper.java
@@ -5,4 +7,4 @@ D:\github\test\bishe\service-user\src\main\java\com\forezp\service\UserService.j
 D:\github\test\bishe\service-user\src\main\java\com\forezp\controller\UserController.java
 D:\github\test\bishe\service-user\src\main\java\com\forezp\service\impl\UserServiceImpl.java
 D:\github\test\bishe\service-user\src\main\java\com\forezp\service\SchedualServiceHi.java
-D:\github\test\bishe\service-user\src\main\java\com\forezp\pojo\User.java
+D:\github\test\bishe\service-user\src\main\java\com\forezp\pojo\dto\UserDto.java

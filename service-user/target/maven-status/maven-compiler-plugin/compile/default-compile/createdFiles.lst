@@ -1,8 +1,10 @@
 com\forezp\service\SchedualServiceHi.class
+com\forezp\pojo\dao\UserDao.class
+com\forezp\pojo\vo\UserVo.class
 com\forezp\service\SchedualServiceHiHystric.class
 com\forezp\mapper\UserMapper.class
 com\forezp\ServiceUserApplication.class
 com\forezp\service\UserService.class
+com\forezp\pojo\dto\UserDto.class
 com\forezp\controller\UserController.class
 com\forezp\service\impl\UserServiceImpl.class
-com\forezp\pojo\User.class

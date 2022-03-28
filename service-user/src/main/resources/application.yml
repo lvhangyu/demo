@@ -3,10 +3,10 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 server:
-  port: 8766
+  port: 8764
 spring:
   application:
-    name: service-order
+    name: service-user
   zipkin:
     base-url: http://localhost:9411
   datasource:
@@ -16,11 +16,12 @@ spring:
     username: root
     password: lenovolabs
 
+
 mybatis:
   table:
     auto: update
   model:
-    pack: com.forezp.entity
+    pack: com.forezp.pojo.dao
   database:
     type: mysql
 

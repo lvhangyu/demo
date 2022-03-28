@@ -1,4 +1,4 @@
-package com.forezp.entity;
+package com.forezp.pojo.dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -19,7 +19,7 @@ import java.util.Date;
  */
 @Data
 @Table(name = "ls_order")
-public class Order {
+public class OrderDao {
     /**
      * 主键
      */

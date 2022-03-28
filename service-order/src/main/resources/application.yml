@@ -20,7 +20,7 @@ mybatis:
   table:
     auto: update
   model:
-    pack: com.forezp.entity
+    pack: com.forezp.pojo.dao
   database:
     type: mysql
 

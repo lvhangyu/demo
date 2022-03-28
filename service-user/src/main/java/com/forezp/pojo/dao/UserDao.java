@@ -2,23 +2,37 @@ package com.forezp.pojo.dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
+import com.gitee.sunchenbin.mybatis.actable.annotation.IsAutoIncrement;
+import com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;
+import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
+@Table(name = "ls_user")
 public class UserDao {
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.AUTO) //mybatis-plus主键注解
+    @IsKey                         //actable主键注解
+    @IsAutoIncrement             //自增
+    @Column(name = "id", comment = "主键id")
     private Long id;
-    //0管理员1普通用户
+    @Column(name = "role",comment = "角色id")
     private Integer role;
-    private String name;
-    //0男1女
+    @Column(name = "username",comment = "用户名字")
+    private String username;
+    @Column(name = "gender",comment = "性别")
     private Integer gender;
+    @Column(name = "age",comment = "年龄")
     private Integer age;
+    @Column(name = "email",comment = "邮箱")
     private String email;
+    @Column(name = "mobile",comment = "手机号")
     private Integer mobile;
+    @Column(name = "registrationTime",comment = "注册时间")
     private Date registrationTime;
+    @Column(name = "password",comment = "密码")
     private String password;
 
 }

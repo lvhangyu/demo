@@ -37,7 +37,7 @@ public class DataSourceConfig {
     public PropertiesFactoryBean configProperties() throws Exception{
         PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        propertiesFactoryBean.setLocations(resolver.getResources("classpath*:bootstrap.yml"));
+        propertiesFactoryBean.setLocations(resolver.getResources("classpath*:application.yml"));
         return propertiesFactoryBean;
     }
 
@@ -68,7 +68,7 @@ public class DataSourceConfig {
         sqlSessionFactoryBean.setDataSource(dataSource());
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml"));
-        sqlSessionFactoryBean.setTypeAliasesPackage("com.forezp.entity.*");
+        sqlSessionFactoryBean.setTypeAliasesPackage("com.forezp.pojo.dao.*");
         return sqlSessionFactoryBean;
     }
 }
