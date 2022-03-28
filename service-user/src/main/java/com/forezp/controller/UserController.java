@@ -1,8 +1,10 @@
 package com.forezp.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.forezp.exception.MyException;
 import com.forezp.mvc.ResultModel;
-import com.forezp.pojo.User;
+import com.forezp.pojo.dto.UserDto;
+import com.forezp.pojo.vo.UserVo;
 import com.forezp.service.SchedualServiceHi;
 import com.forezp.service.UserService;
 import com.forezp.util.JwtUtils;
@@ -10,14 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 import java.util.Map;
 
 @RestController()
@@ -38,12 +36,19 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public ResultModel login(HttpServletRequest request, HttpServletResponse response){
-        Map<String, Object> map = userService.login();
+    public ResultModel<UserVo> login(
+            @RequestBody UserDto userDto,
+            HttpServletRequest request, HttpServletResponse response) throws MyException {
+        UserVo userVo = null;
+        try {
+            userVo = userService.login(userDto);
+        }catch (Exception e){
+            throw new MyException(HttpStatus.UNAUTHORIZED.value(), "Incorrect account password");
+        }
+        String token = JwtUtils.createJWTToken(JSONObject.toJSONString(userVo));
+        userVo.setToken(token);
         //将token存入Http的header中
-        response.setHeader("Authorization", (String) map.get("token"));
-        String token = JwtUtils.createJWTToken(JSONObject.toJSONString(map));
-        map.put("token",token);
-        return new ResultModel<>().setCode(HttpStatus.OK.value()).setData(JSONObject.toJSONString(map)).setMsg("success");
+        response.setHeader("Authorization", token);
+        return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setData(userVo).setMsg("success");
     }
 }

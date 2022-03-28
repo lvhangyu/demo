@@ -1,4 +1,4 @@
-package com.forezp.pojo;
+package com.forezp.pojo.dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class User {
+public class UserDao {
     @TableId(type = IdType.AUTO)
     private Long id;
     //0管理员1普通用户
@@ -20,4 +20,5 @@ public class User {
     private Integer mobile;
     private Date registrationTime;
     private String password;
+
 }
