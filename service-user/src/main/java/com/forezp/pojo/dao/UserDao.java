@@ -6,6 +6,7 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsAutoIncrement;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
+import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Data;
 
 import java.util.Date;
@@ -34,5 +35,9 @@ public class UserDao {
     private Date registrationTime;
     @Column(name = "password",comment = "密码")
     private String password;
+    @Column(name = "ctime", comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)
+    private Date ctime = new Date();
+    @Column(name = "mtime", comment = "修改时间", type = MySqlTypeConstant.TIMESTAMP)
+    private Date mtime;
 
 }

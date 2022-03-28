@@ -1,4 +1,5 @@
 package com.forezp.controller;
+import java.util.Date;
 
 import com.alibaba.fastjson.JSONObject;
 import com.forezp.exception.MyException;
@@ -8,6 +9,7 @@ import com.forezp.pojo.vo.UserVo;
 import com.forezp.service.SchedualServiceHi;
 import com.forezp.service.UserService;
 import com.forezp.util.JwtUtils;
+import org.apache.tomcat.util.security.MD5Encoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +52,24 @@ public class UserController {
         //将token存入Http的header中
         response.setHeader("Authorization", token);
         return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setData(userVo).setMsg("success");
+    }
+
+    @RequestMapping("/register")
+    public ResultModel register(
+          //  @RequestBody UserDto userDto,
+            HttpServletRequest request, HttpServletResponse response){
+        UserDto userDto1 = new UserDto();
+        userDto1.setUsername("aaa");
+        userDto1.setPassword(MD5Encoder.encode("123".getBytes()));
+        userDto1.setRole(0);
+        userDto1.setGender(0);
+        userDto1.setAge(0);
+        userDto1.setEmail("123@qq.com");
+        userDto1.setMobile("12345678912");
+        userDto1.setRegistrationTime(new Date());
+        userDto1.setCtime(new Date());
+        userDto1.setMtime(new Date());
+        userService.register(userDto1);
+        return new ResultModel();
     }
 }

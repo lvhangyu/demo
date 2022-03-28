@@ -34,4 +34,14 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(userDao, userVo);
         return userVo;
     }
+
+    @Override
+    public UserVo register(UserDto userDto) {
+        UserDao userDao = new UserDao();
+        BeanUtils.copyProperties(userDto, userDao);
+        int r = userMapper.insert(userDao);
+        UserVo userVo = new UserVo();
+        BeanUtils.copyProperties(userDto, userVo);
+        return userVo;
+    }
 }

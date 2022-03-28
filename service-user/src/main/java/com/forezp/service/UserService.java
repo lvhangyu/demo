@@ -7,4 +7,6 @@ import com.forezp.pojo.vo.UserVo;
 public interface UserService {
 
     UserVo login(UserDto userDto) throws MyException;
+
+    UserVo register(UserDto userDto);
 }
