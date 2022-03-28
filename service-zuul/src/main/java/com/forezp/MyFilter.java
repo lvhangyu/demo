@@ -40,13 +40,20 @@ public class MyFilter extends ZuulFilter{
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
         log.info(String.format("%s >>> %s", request.getMethod(), request.getRequestURL().toString()));
+
+        if(!isNeedToken(request)){
+            log.info("not need token");
+            return null;
+        }
+
         Object accessToken = request.getParameter("token");
         if(accessToken == null) {
             log.warn("token is empty");
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(401);
             try {
-                ctx.getResponse().getWriter().write("token is empty");
+                ResultModel resultModel = new ResultModel<>().setCode(HttpStatus.UNAUTHORIZED.value()).setMsg(HttpStatus.UNAUTHORIZED.getReasonPhrase());
+                ctx.getResponse().getWriter().write(JSONObject.toJSONString(resultModel));
             }catch (Exception e){}
 
             return null;
@@ -56,6 +63,7 @@ public class MyFilter extends ZuulFilter{
         try {
             String userInfo = JwtUtils.verifyJWTToken(accessToken.toString());
             ctx.addZuulRequestHeader("userInfo",userInfo);
+            log.info("ok");
         }catch (Exception e){
             log.warn("token is unauthorized");
             ctx.setSendZuulResponse(false);
@@ -66,7 +74,13 @@ public class MyFilter extends ZuulFilter{
             } catch (IOException ex) {
             }
         }
-        log.info("ok");
         return null;
+    }
+
+    private boolean isNeedToken(HttpServletRequest request) {
+        if(request.getRequestURI().startsWith("/api-b/login")){
+            return false;
+        }
+        return true;
     }
 }
