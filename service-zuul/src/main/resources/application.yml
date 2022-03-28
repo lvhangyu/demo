@@ -23,5 +23,5 @@ mybatis-plus:
 zuul:
   routes:
     api-b:
-      path: /api-b/**
-      serviceId: service-feign
+      path: /user/**
+      serviceId: service-user

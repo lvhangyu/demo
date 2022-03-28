@@ -1,2 +1,5 @@
+com\forezp\entity\Order.class
 com\forezp\ServiceOrderApplication.class
+com\forezp\config\DataSourceConfig.class
 com\forezp\controller\OrderController.class
+com\forezp\config\MyBatisMapperScannerConfig.class

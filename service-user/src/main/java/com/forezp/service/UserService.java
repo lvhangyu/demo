@@ -1,10 +1,8 @@
 package com.forezp.service;
 
-import com.forezp.pojo.User;
-
-import java.util.List;
+import java.util.Map;
 
 public interface UserService {
-    User saveOrUpdate(User user);
-    List<User> userQuery(Integer role);
+
+    Map<String,Object> login();
 }

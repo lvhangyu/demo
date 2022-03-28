@@ -78,7 +78,7 @@ public class MyFilter extends ZuulFilter{
     }
 
     private boolean isNeedToken(HttpServletRequest request) {
-        if(request.getRequestURI().startsWith("/api-b/login")){
+        if(request.getRequestURI().startsWith("/user/login")){
             return false;
         }
         return true;
