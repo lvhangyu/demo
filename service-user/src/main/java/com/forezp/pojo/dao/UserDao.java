@@ -10,8 +10,8 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@Table(name = "ls_ams_user")
-@TableName("ls_ams_user")
+@Table(name = "ls_user")
+@TableName("ls_user")
 public class UserDao {
     @TableId(type = IdType.AUTO) //mybatis-plus主键注解
     @IsKey                         //actable主键注解

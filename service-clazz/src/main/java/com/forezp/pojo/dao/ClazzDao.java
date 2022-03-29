@@ -2,6 +2,7 @@ package com.forezp.pojo.dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.gitee.sunchenbin.mybatis.actable.annotation.*;
 import lombok.Data;
 
@@ -13,7 +14,8 @@ import lombok.Data;
  * Version 1.0
  */
 @Data
-@Table(name = "ls_ams_clazz")
+@Table(name = "ls_clazz")
+@TableName("ls_clazz")
 public class ClazzDao {
     /**
      * 主键

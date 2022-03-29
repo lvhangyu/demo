@@ -2,6 +2,7 @@ package com.forezp.pojo.dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsAutoIncrement;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;
@@ -18,7 +19,8 @@ import java.util.Date;
  * Version 1.0
  */
 @Data
-@Table(name = "ls_ams_absence")
+@Table(name = "ls_absence")
+@TableName("ls_absence")
 public class AbsenceDao {
     /**
      * 主键
