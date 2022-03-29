@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
-@RestController()
+@RestController
 public class UserController {
     private static Logger log = LoggerFactory.getLogger(UserController.class);
     @Autowired
@@ -54,7 +54,7 @@ public class UserController {
         return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setData(userVo).setMsg("success");
     }
 
-    @RequestMapping("/register")
+    @PostMapping("/register")
     public ResultModel register(
           //  @RequestBody UserDto userDto,
             HttpServletRequest request, HttpServletResponse response){

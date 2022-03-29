@@ -1,6 +1,7 @@
-package com.forezp.service;
+package com.forezp.service.impl;
 
 import com.forezp.mapper.UserMapper;
+import com.forezp.service.SchedualServiceHi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 @EnableZuulProxy
 @EnableEurekaClient
 @SpringBootApplication
-@MapperScan("com.forezp.test.mapper")
+@MapperScan("com.forezp.mapper")
 public class ServiceZuulApplication {
 
 	public static void main(String[] args) {
