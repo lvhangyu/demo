@@ -62,13 +62,13 @@ public class DataSourceConfig {
         return dataSourceTransactionManager;
     }
 
-    @Bean
-    public SqlSessionFactoryBean sqlSessionFactory() throws Exception{
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource());
-        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml"));
-        sqlSessionFactoryBean.setTypeAliasesPackage("com.forezp.pojo.dao.*");
-        return sqlSessionFactoryBean;
-    }
+//    @Bean
+//    public SqlSessionFactoryBean sqlSessionFactory() throws Exception{
+//        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+//        sqlSessionFactoryBean.setDataSource(dataSource());
+//        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+//        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml"));
+//        sqlSessionFactoryBean.setTypeAliasesPackage("com.forezp.pojo.dao.*");
+//        return sqlSessionFactoryBean;
+//    }
 }

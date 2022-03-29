@@ -2,6 +2,7 @@ package com.forezp.pojo.dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsAutoIncrement;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;
@@ -13,6 +14,7 @@ import java.util.Date;
 
 @Data
 @Table(name = "ls_user")
+@TableName("ls_user")
 public class UserDao {
     @TableId(type = IdType.AUTO) //mybatis-plus主键注解
     @IsKey                         //actable主键注解
@@ -31,7 +33,7 @@ public class UserDao {
     private String email;
     @Column(name = "mobile",comment = "手机号")
     private Integer mobile;
-    @Column(name = "registrationTime",comment = "注册时间")
+    @Column(name = "registration_time",comment = "注册时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date registrationTime;
     @Column(name = "password",comment = "密码")
     private String password;
