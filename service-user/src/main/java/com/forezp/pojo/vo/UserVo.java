@@ -8,7 +8,7 @@ import java.util.Date;
 public class UserVo {
     private Long id;
     private Integer role;
-    private String name;
+    private String username;
     private Integer gender;
     private Integer age;
     private String email;
