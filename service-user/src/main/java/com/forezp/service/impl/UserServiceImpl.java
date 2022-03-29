@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService {
     public UserVo login(UserDto userDto) throws MyException {
         QueryWrapper<UserDao> wrapperUser = new QueryWrapper<>();
         wrapperUser.eq("username", userDto.getUsername());
-        wrapperUser.eq("passwrod", MD5Encoder.encode(userDto.getPassword().getBytes()));
+        wrapperUser.eq("password", DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
         //throw new MyException(HttpStatus.UNAUTHORIZED.value(), "Incorrect account password");
         UserDao userDao = userMapper.selectOne(wrapperUser);
         UserVo userVo = new UserVo();
@@ -41,7 +42,7 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(userDto, userDao);
         int r = userMapper.insert(userDao);
         UserVo userVo = new UserVo();
-        BeanUtils.copyProperties(userDto, userVo);
+        BeanUtils.copyProperties(userDao, userVo);
         return userVo;
     }
 }

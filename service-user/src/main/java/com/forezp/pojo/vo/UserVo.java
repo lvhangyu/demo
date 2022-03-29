@@ -12,7 +12,7 @@ public class UserVo {
     private Integer gender;
     private Integer age;
     private String email;
-    private Integer mobile;
+    private String mobile;
     private Date registrationTime;
     private String token;
 

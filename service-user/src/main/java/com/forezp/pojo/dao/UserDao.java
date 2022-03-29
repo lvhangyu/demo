@@ -3,10 +3,7 @@ package com.forezp.pojo.dao;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
-import com.gitee.sunchenbin.mybatis.actable.annotation.IsAutoIncrement;
-import com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;
-import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
+import com.gitee.sunchenbin.mybatis.actable.annotation.*;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Data;
 
@@ -23,6 +20,7 @@ public class UserDao {
     private Long id;
     @Column(name = "role",comment = "角色id")
     private Integer role;
+    @Unique
     @Column(name = "username",comment = "用户名字")
     private String username;
     @Column(name = "gender",comment = "性别")
@@ -32,7 +30,7 @@ public class UserDao {
     @Column(name = "email",comment = "邮箱")
     private String email;
     @Column(name = "mobile",comment = "手机号")
-    private Integer mobile;
+    private String mobile;
     @Column(name = "registration_time",comment = "注册时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date registrationTime;
     @Column(name = "password",comment = "密码")

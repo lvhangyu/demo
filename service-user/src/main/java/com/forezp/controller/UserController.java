@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,11 +57,11 @@ public class UserController {
 
     @PostMapping("/register")
     public ResultModel register(
-          //  @RequestBody UserDto userDto,
+//            @RequestBody UserDto userDto,
             HttpServletRequest request, HttpServletResponse response){
         UserDto userDto1 = new UserDto();
         userDto1.setUsername("aaa");
-        userDto1.setPassword(MD5Encoder.encode("123".getBytes()));
+        userDto1.setPassword(DigestUtils.md5DigestAsHex("abc".getBytes()));
         userDto1.setRole(0);
         userDto1.setGender(0);
         userDto1.setAge(0);
@@ -69,7 +70,7 @@ public class UserController {
         userDto1.setRegistrationTime(new Date());
         userDto1.setCtime(new Date());
         userDto1.setMtime(new Date());
-        userService.register(userDto1);
-        return new ResultModel();
+        UserVo userVo =  userService.register(userDto1);
+        return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
     }
 }

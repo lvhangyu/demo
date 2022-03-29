@@ -15,6 +15,8 @@ spring:
     url: jdbc:mysql://172.16.52.151:3307/demo?zeroDateTimeBehavior=round&useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
     username: root
     password: lenovolabs
+  jackson:
+    default-property-inclusion: non_null
 
 
 mybatis:
