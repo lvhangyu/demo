@@ -1,7 +1,8 @@
-package com.forezp.pojo;
+package com.forezp.pojo.dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsAutoIncrement;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;
@@ -18,7 +19,8 @@ import java.util.Date;
  * Version 1.0
  */
 @Data
-@Table(name = "flight")
+@Table(name = "ls_flight")
+@TableName("ls_flight")
 public class Flight {
     /**
      * 主键

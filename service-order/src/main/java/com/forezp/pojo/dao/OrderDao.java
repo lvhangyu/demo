@@ -2,6 +2,7 @@ package com.forezp.pojo.dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsAutoIncrement;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;
@@ -19,6 +20,7 @@ import java.util.Date;
  */
 @Data
 @Table(name = "ls_order")
+@TableName("ls_order")
 public class OrderDao {
     /**
      * 主键
