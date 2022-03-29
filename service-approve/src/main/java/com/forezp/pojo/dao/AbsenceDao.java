@@ -30,6 +30,8 @@ public class AbsenceDao {
     private Long id;
     @Column(name = "absence_time",comment = "请假日期")
     private Date absenceTime;
+    @Column(name = "major_name",comment = "专业名称")
+    private String majorName;
     @Column(name = "reason",comment = "请假理由")
     private String reason;
     @Column(name = "status",comment = "0未同意 1已同意")
