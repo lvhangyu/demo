@@ -48,17 +48,20 @@ public class PreFilter extends ZuulFilter{
 
         Object accessToken = request.getParameter("token");
         if(accessToken == null) {
-            log.warn("token is empty");
-            ctx.setSendZuulResponse(false);
-            ctx.setResponseStatusCode(401);
-            try {
-                ResultModel resultModel = new ResultModel<>().setCode(HttpStatus.UNAUTHORIZED.value()).setMsg(HttpStatus.UNAUTHORIZED.getReasonPhrase());
-                ctx.getResponse().getWriter().write(JSONObject.toJSONString(resultModel));
-            }catch (Exception e){}
+            accessToken = request.getHeader("Authorization");
+            if(accessToken == null){
+                log.warn("token is empty");
+                ctx.setSendZuulResponse(false);
+                ctx.setResponseStatusCode(401);
+                try {
+                    ResultModel resultModel = new ResultModel<>().setCode(HttpStatus.UNAUTHORIZED.value()).setMsg(HttpStatus.UNAUTHORIZED.getReasonPhrase());
+                    ctx.getResponse().getWriter().write(JSONObject.toJSONString(resultModel));
+                }catch (Exception e){
 
-            return null;
+                }
+                return null;
+            }
         }
-
 
         try {
             String userInfo = JwtUtils.verifyJWTToken(accessToken.toString());
