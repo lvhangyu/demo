@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
     private static Logger log = LoggerFactory.getLogger(UserController.class);
     @Autowired
@@ -57,20 +58,20 @@ public class UserController {
 
     @PostMapping("/register")
     public ResultModel register(
-//            @RequestBody UserDto userDto,
+            @RequestBody UserDto userDto,
             HttpServletRequest request, HttpServletResponse response){
-        UserDto userDto1 = new UserDto();
-        userDto1.setUsername("aaa");
-        userDto1.setPassword(DigestUtils.md5DigestAsHex("abc".getBytes()));
-        userDto1.setRole(0);
-        userDto1.setGender(0);
-        userDto1.setAge(0);
-        userDto1.setEmail("123@qq.com");
-        userDto1.setMobile("12345678912");
-        userDto1.setRegistrationTime(new Date());
-        userDto1.setCtime(new Date());
-        userDto1.setMtime(new Date());
-        UserVo userVo =  userService.register(userDto1);
+//        UserDto userDto = new UserDto();
+//        userDto.setUsername("aaa");
+//        userDto.setPassword(DigestUtils.md5DigestAsHex("abc".getBytes()));
+//        userDto.setRole(0);
+//        userDto.setGender(0);
+//        userDto.setAge(0);
+//        userDto.setEmail("123@qq.com");
+//        userDto.setMobile("12345678912");
+//        userDto.setRegistrationTime(new Date());
+        userDto.setCtime(new Date());
+        userDto.setMtime(new Date());
+        UserVo userVo =  userService.register(userDto);
         return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
     }
 }

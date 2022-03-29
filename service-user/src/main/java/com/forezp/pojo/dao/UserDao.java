@@ -10,19 +10,23 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@Table(name = "ls_user")
-@TableName("ls_user")
+@Table(name = "ls_ams_user")
+@TableName("ls_ams_user")
 public class UserDao {
     @TableId(type = IdType.AUTO) //mybatis-plus主键注解
     @IsKey                         //actable主键注解
     @IsAutoIncrement             //自增
     @Column(name = "id", comment = "主键id")
     private Long id;
-    @Column(name = "role",comment = "角色id")
+    @Column(name = "role",comment = "角色id 0管理员，1老师，2学生")
     private Integer role;
-    @Unique
+    @IsNotNull
     @Column(name = "username",comment = "用户名字")
     private String username;
+    @Unique
+    @IsNotNull
+    @Column(name = "number",comment = "用户编号：管理员默认为0、教师教师编号、学生为学生编号，此字段为登录名")
+    private String number;
     @Column(name = "gender",comment = "性别")
     private Integer gender;
     @Column(name = "age",comment = "年龄")
