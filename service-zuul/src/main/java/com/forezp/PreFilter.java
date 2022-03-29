@@ -17,9 +17,9 @@ import java.io.IOException;
  * Created by forezp on 2017/4/8.
  */
 @Component
-public class MyFilter extends ZuulFilter{
+public class PreFilter extends ZuulFilter{
 
-    private static Logger log = LoggerFactory.getLogger(MyFilter.class);
+    private static Logger log = LoggerFactory.getLogger(PreFilter.class);
     @Override
     public String filterType() {
         return "pre";

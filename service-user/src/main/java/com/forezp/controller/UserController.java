@@ -37,7 +37,7 @@ public class UserController {
         return schedualServiceHi.sayHiFromClientOne(name);
     }
 
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public ResultModel<UserVo> login(
             @RequestBody UserDto userDto,
             HttpServletRequest request, HttpServletResponse response) throws MyException {

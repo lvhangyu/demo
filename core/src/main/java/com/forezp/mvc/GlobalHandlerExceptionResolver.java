@@ -25,7 +25,7 @@ public class GlobalHandlerExceptionResolver implements org.springframework.web.s
         ResultModel resultModel = new ResultModel();
         if (e instanceof MyException) {
             //业务失败
-            resultModel.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value()).setMsg(e.getMessage());
+            resultModel.setCode(((MyException) e).getCode()).setMsg(((MyException) e).getErrorMsg());
         } else if (e instanceof NoHandlerFoundException) {
             //接口不存在的情况
             resultModel.setCode(HttpStatus.NOT_FOUND.value()).setMsg("接口 {" + httpServletRequest.getRequestURI() + "} 不存在");
