@@ -8,15 +8,10 @@ import com.forezp.pojo.dao.UserDao;
 import com.forezp.pojo.dto.UserDto;
 import com.forezp.pojo.vo.UserVo;
 import com.forezp.service.UserService;
-import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {

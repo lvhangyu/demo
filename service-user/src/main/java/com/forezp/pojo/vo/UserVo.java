@@ -15,6 +15,4 @@ public class UserVo {
     private String mobile;
     private Date registrationTime;
     private String token;
-
-
 }

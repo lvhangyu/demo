@@ -21,7 +21,7 @@ import java.util.Date;
 @Data
 @Table(name = "ls_order")
 @TableName("ls_order")
-public class OrderDao {
+public class OrderDO {
     /**
      * 主键
      */
@@ -42,7 +42,7 @@ public class OrderDao {
     private Long mobile;
     @Column(name = "boarding_time",comment = "登机时间")
     private Date boardingTime;
-    @Column(name = "boarding_room",comment = "登机时间")
+    @Column(name = "boarding_room",comment = "登机室")
     private Date boardingRoom;
     @Column(name = "ticket_type",comment = "机票类型")
     private Integer ticketType;

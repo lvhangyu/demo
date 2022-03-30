@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
     @RequestMapping(value = "/query",method = RequestMethod.GET)
     public String test(){
+        System.out.println("cc");
         return "cc";
     }
 }
