@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
     public UserVo register(UserDto userDto) {
         UserDao userDao = new UserDao();
         BeanUtils.copyProperties(userDto, userDao);
+        userDao.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
         userDao.setRegistrationTime(new Date());
         userDao.setCtime(new Date());
         userDao.setMtime(new Date());
