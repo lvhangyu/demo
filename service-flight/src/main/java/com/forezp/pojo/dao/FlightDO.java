@@ -3,11 +3,15 @@ package com.forezp.pojo.dao;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsAutoIncrement;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
+import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Data;
+import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -21,7 +25,7 @@ import java.util.Date;
 @Data
 @Table(name = "ls_flight")
 @TableName("ls_flight")
-public class Flight {
+public class FlightDO {
     /**
      * 主键
      */
@@ -30,7 +34,8 @@ public class Flight {
     @IsAutoIncrement             //自增
     @Column(comment = "主键id")                   //对应数据库字段，不配置name会直接采用属性名作为字段名
     private Long id;
-    @Column(name = "flight_date",comment = "航班日期")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @Column(name = "flight_date",comment = "航班日期", type = MySqlTypeConstant.TIMESTAMP)
     private Date flightDate;
     @Column(name = "aviation_corp",comment = "航空公司")
     private String aviationCorp;
@@ -40,13 +45,15 @@ public class Flight {
     private String departureAddr;
     @Column(name = "arrival_addr",comment = "到达地点")
     private String arrivalAddr;
-    @Column(name = "departure_time",comment = "起飞时间")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+    @Column(name = "departure_time",comment = "起飞时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date departureTime;
-    @Column(name = "arrival_time",comment = "到达时间")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+    @Column(name = "arrival_time",comment = "到达时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date arrivalTime;
     @Column(name = "flight_time",comment = "飞行时间")
-    private Date flightTime;
-    @Column(name = "luggage",comment = "托运行李额")
+    private String flightTime;
+    @Column(name = "luggage",comment = "托运行李额,0无免费托运 1托运行李额20kg")
     private Integer luggage;
     @Column(name = "fuel_surcharge",comment = "燃油费")
     private Integer fuelSurcharge;
@@ -59,7 +66,7 @@ public class Flight {
     @Column(name = "child_fare",comment = "儿童票价")
     private Integer childFare;
     @Column(name = "ctime",comment = "创建时间")
-    private Date ctime;
+    private Date ctime = new Date();
     @Column(name = "mtime",comment = "修改时间")
-    private Date mtime;
+    private Date mtime = new Date();
 }
