@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import java.util.Date;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -35,6 +37,10 @@ public class UserServiceImpl implements UserService {
     public UserVo register(UserDto userDto) {
         UserDao userDao = new UserDao();
         BeanUtils.copyProperties(userDto, userDao);
+        userDao.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
+        userDao.setRegistrationTime(new Date());
+        userDao.setCtime(new Date());
+        userDao.setMtime(new Date());
         int r = userMapper.insert(userDao);
         UserVo userVo = new UserVo();
         BeanUtils.copyProperties(userDao, userVo);
