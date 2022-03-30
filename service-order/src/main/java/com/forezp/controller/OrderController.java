@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
  * Version 1.0
  */
 @RestController
-@RequestMapping("/order")
 public class OrderController {
     @RequestMapping(value = "/query",method = RequestMethod.GET)
     public String test(){
