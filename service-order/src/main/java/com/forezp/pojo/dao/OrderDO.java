@@ -36,15 +36,17 @@ public class OrderDO {
     private Long flightId;
     @Column(name = "order_code",comment = "订单编号")
     private String orderCode;
-    @Column(name = "user_name",comment = "乘机人")
+    @Column(name = "user_name",comment = "乘机人姓名")
     private String userName;
+    @Column(name = "user_number",comment = "乘机人身份证号")
+    private String userNumber;
     @Column(name = "user_mobile",comment = "联系方式")
     private Long mobile;
     @Column(name = "boarding_time",comment = "登机时间")
     private Date boardingTime;
     @Column(name = "boarding_room",comment = "登机室")
     private Date boardingRoom;
-    @Column(name = "ticket_type",comment = "机票类型")
+    @Column(name = "ticket_type",comment = "机票类型 0经济舱，1商务舱，2头等舱")
     private Integer ticketType;
     @Column(name = "ticket_price",comment = "机票价格")
     private Integer ticketPrice;
