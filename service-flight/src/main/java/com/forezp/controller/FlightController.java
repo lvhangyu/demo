@@ -1,5 +1,6 @@
 package com.forezp.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.forezp.mvc.ResultModel;
 import com.forezp.pojo.dto.FlightDTO;
 import com.forezp.pojo.vo.FlightVO;
@@ -26,7 +27,7 @@ import java.util.Date;
  * Version 1.0
  */
 @RestController
-@RequestMapping("/flight")
+@RequestMapping
 public class FlightController {
 
     @Autowired

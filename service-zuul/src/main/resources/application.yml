@@ -22,6 +22,12 @@ mybatis-plus:
 
 zuul:
   routes:
-    api-b:
+    api-user:
       path: /user/**
       serviceId: service-user
+    api-order:
+      path: /order/**
+      serviceId: service-order
+    api-flight:
+      path: /flight/**
+      serviceId: service-flight
