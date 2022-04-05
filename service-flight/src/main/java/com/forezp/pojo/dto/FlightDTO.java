@@ -37,6 +37,8 @@ public class FlightDTO {
     private Integer remainingTicket;
     private Integer normalFare;
     private Integer childFare;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date ctime;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date mtime;
 }

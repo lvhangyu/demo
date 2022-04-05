@@ -14,7 +14,6 @@ public class UserVo {
     private Integer age;
     private String email;
     private String mobile;
-    @JsonFormat(pattern = "YYYY-MM-DD HH:MM:SS")
     private Date registrationTime;
     private String token;
 }

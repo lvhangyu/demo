@@ -61,10 +61,12 @@ public class FlightDO {
     private Integer airportTax;
     @Column(name = "remaining_ticket",comment = "剩余票数")
     private Integer remainingTicket;
-    @Column(name = "normal_fare",comment = "普通票价")
-    private Integer normalFare;
-    @Column(name = "child_fare",comment = "儿童票价")
-    private Integer childFare;
+    @Column(name = "first_clazz_price",comment = "头等舱票价")
+    private Integer firstClassPrice;
+    @Column(name = "business_clazz_price",comment = "商务舱票价")
+    private Integer businessClassPrice;
+    @Column(name = "economy_clazz_price",comment = "经济舱票价")
+    private Integer economyClassPrice;
     @Column(name = "ctime",comment = "创建时间")
     private Date ctime = new Date();
     @Column(name = "mtime",comment = "修改时间")
