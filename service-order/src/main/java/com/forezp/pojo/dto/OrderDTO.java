@@ -7,8 +7,10 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsAutoIncrement;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
+import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -20,17 +22,16 @@ import java.util.Date;
  */
 @Data
 public class OrderDTO {
-
     private Long id;
     private Long userId;
     private Long flightId;
     private String orderCode;
     private String userName;
     private String userNumber;
-    private Long mobile;
+    private String mobile;
     private Date boardingTime;
-    private Date boardingRoom;
+    private String boardingRoom;
     private Integer ticketType;
-    private Integer ticketPrice;
+    private BigDecimal ticketPrice;
     private Integer status;
 }

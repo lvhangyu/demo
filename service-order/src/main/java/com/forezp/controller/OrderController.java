@@ -1,9 +1,20 @@
 package com.forezp.controller;
 
+import com.forezp.mvc.ResultModel;
+import com.forezp.pojo.dao.OrderDO;
+import com.forezp.pojo.dto.OrderDTO;
+import com.forezp.pojo.vo.OrderVo;
+import com.forezp.service.OrderService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @ClassName OrderController
@@ -14,9 +25,77 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class OrderController {
-    @RequestMapping(value = "/query",method = RequestMethod.GET)
-    public String test(){
-        System.out.println("cc");
-        return "cc";
+
+    @Autowired
+    private OrderService orderService;
+
+    /**
+     * 订单列表
+     * @return
+     */
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    public ResultModel<List<OrderVo>> selectList(){
+        List<OrderVo> orderVoList = new ArrayList<>();
+        List<OrderDO> orderDOList = orderService.getList();
+        BeanUtils.copyProperties(orderDOList, orderVoList);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(orderVoList);
     }
+
+    /**
+     * 创建订单
+     * @return
+     */
+    @PostMapping("/create")
+    public ResultModel<OrderVo> create(@RequestBody OrderDTO orderDTO,
+                                       HttpServletRequest request, HttpServletResponse response){
+        OrderVo orderVo = new OrderVo();
+        OrderDO orderDO = orderService.create(orderDTO);
+        BeanUtils.copyProperties(orderDO, orderVo);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(orderVo);
+    }
+
+    /**
+     * 更新订单
+     * @param orderDTO
+     * @param request
+     * @param response
+     * @return
+     */
+    public ResultModel<OrderVo> update(@RequestBody OrderDTO orderDTO,
+                                       HttpServletRequest request, HttpServletResponse response){
+        OrderVo orderVo = new OrderVo();
+        OrderDO orderDO = orderService.update(orderDTO);
+        BeanUtils.copyProperties(orderDO, orderVo);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(orderVo);
+    }
+
+    /**
+     * 我的订单
+     * @param orderDTO
+     * @param request
+     * @param response
+     * @return
+     */
+    public ResultModel<List<OrderVo>> getOrderByUserId(@RequestBody OrderDTO orderDTO,
+                                       HttpServletRequest request, HttpServletResponse response){
+        List<OrderVo> orderVoList = new ArrayList<>();
+        List<OrderDO> orderDOList = orderService.listByUserId(orderDTO.getUserId());
+        BeanUtils.copyProperties(orderDOList, orderVoList);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(orderVoList);
+    }
+
+
+    /**
+     * 删除订单
+     * @param orderDTO
+     * @param request
+     * @param response
+     * @return
+     */
+    public ResultModel deleteById(@RequestBody OrderDTO orderDTO,
+                                  HttpServletRequest request, HttpServletResponse response){
+        orderService.deleteById(orderDTO.getId());
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
+
 }
