@@ -64,6 +64,7 @@ public class OrderController {
      * @param response
      * @return
      */
+    @PostMapping("/update")
     public ResultModel<OrderVo> update(@RequestBody OrderDTO orderDTO,
                                        HttpServletRequest request, HttpServletResponse response){
         OrderVo orderVo = new OrderVo();
@@ -79,6 +80,7 @@ public class OrderController {
      * @param response
      * @return
      */
+    @PostMapping("/list_by_user")
     public ResultModel<List<OrderVo>> getOrderByUserId(@CurrentUser UserInfo userInfo,
                                        HttpServletRequest request, HttpServletResponse response){
         List<OrderVo> orderVoList = new ArrayList<>();
@@ -95,6 +97,7 @@ public class OrderController {
      * @param response
      * @return
      */
+    @PostMapping("/delete")
     public ResultModel deleteById(@RequestBody OrderDTO orderDTO,
                                   HttpServletRequest request, HttpServletResponse response){
         orderService.deleteById(orderDTO.getId());
