@@ -1,6 +1,7 @@
 package com.forezp.service.impl;
 
 import com.forezp.mapper.FlightMapper;
+import com.forezp.mvc.ResultModel;
 import com.forezp.pojo.dao.FlightDO;
 import com.forezp.pojo.dto.FlightDTO;
 import com.forezp.pojo.vo.FlightVO;
@@ -10,7 +11,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Wrapper;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName FlightServiceImpl
@@ -28,7 +33,44 @@ public class FlightServiceImpl implements FlightService {
         FlightDO flightDO = new FlightDO();
         BeanUtils.copyProperties(flightDTO, flightDO);
         flightDO.setFlightTime(DateUtil.getDurationByDate(flightDO.getArrivalTime(),flightDO.getDepartureTime(),DateUtil.dateFormat[1]));
+        flightDO.setCtime(new Date());
+        flightDO.setMtime(new Date());
         int result = flightMapper.insert(flightDO);
+        FlightVO flightVO = new FlightVO();
+        BeanUtils.copyProperties(flightDO, flightVO);
+        return flightVO;
+    }
+
+    @Override
+    public void delete(Long id) {
+        flightMapper.deleteById(id);
+    }
+
+    @Override
+    public FlightVO update(FlightDTO flightDTO) {
+        FlightDO flightDO = new FlightDO();
+        BeanUtils.copyProperties(flightDTO, flightDO);
+        flightDO.setMtime(new Date());
+        flightMapper.updateById(flightDO);
+        FlightDO flightDONew = flightMapper.selectById(flightDO.getId());
+        FlightVO flightVO = new FlightVO();
+        BeanUtils.copyProperties(flightDONew, flightVO);
+        return flightVO;
+    }
+
+    @Override
+    public List<FlightVO> query() {
+        List<FlightDO> flightDOList = flightMapper.selectList(null);
+        System.out.println(flightDOList.size());
+        List<FlightVO> flightVOList = new ArrayList<>(16);
+        BeanUtils.copyProperties(flightDOList, flightVOList);
+        System.out.println(flightVOList.size());
+        return flightVOList;
+    }
+
+    @Override
+    public FlightVO info(Long id) {
+        FlightDO flightDO = flightMapper.selectById(id);
         FlightVO flightVO = new FlightVO();
         BeanUtils.copyProperties(flightDO, flightVO);
         return flightVO;

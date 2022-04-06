@@ -3,6 +3,7 @@ package com.forezp.pojo.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -27,11 +28,12 @@ public class FlightVO {
     private Date arrivalTime;
     private String flightTime;
     private Integer luggage;
-    private Integer fuelSurcharge;
-    private Integer airportTax;
+    private BigDecimal fuelSurcharge;
+    private BigDecimal airportTax;
     private Integer remainingTicket;
-    private Integer normalFare;
-    private Integer childFare;
+    private BigDecimal firstClazzPrice;
+    private BigDecimal businessClazzPrice;
+    private BigDecimal economyClazzPrice;
     private Date ctime;
     private Date mtime;
 }

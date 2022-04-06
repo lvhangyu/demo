@@ -8,8 +8,12 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsAutoIncrement;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
+import jdk.nashorn.internal.objects.annotations.Constructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -20,6 +24,7 @@ import java.util.Date;
  * Version 1.0
  */
 @Data
+@Accessors(chain = true)
 public class FlightDTO {
     private Long id;
     private Date flightDate;
@@ -32,11 +37,12 @@ public class FlightDTO {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date arrivalTime;
     private Integer luggage;
-    private Integer fuelSurcharge;
-    private Integer airportTax;
+    private BigDecimal fuelSurcharge;
+    private BigDecimal airportTax;
     private Integer remainingTicket;
-    private Integer normalFare;
-    private Integer childFare;
+    private BigDecimal firstClazzPrice;
+    private BigDecimal businessClazzPrice;
+    private BigDecimal economyClazzPrice;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date ctime;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")

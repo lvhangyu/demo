@@ -10,9 +10,8 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Data;
-import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -55,18 +54,18 @@ public class FlightDO {
     private String flightTime;
     @Column(name = "luggage",comment = "托运行李额,0无免费托运 1托运行李额20kg")
     private Integer luggage;
-    @Column(name = "fuel_surcharge",comment = "燃油费")
-    private Integer fuelSurcharge;
-    @Column(name = "airport_tax",comment = "机建费")
-    private Integer airportTax;
+    @Column(name = "fuel_surcharge",comment = "燃油费",type = MySqlTypeConstant.DECIMAL,length = 65)
+    private BigDecimal fuelSurcharge;
+    @Column(name = "airport_tax",comment = "机建费",type = MySqlTypeConstant.DECIMAL,length = 65)
+    private BigDecimal airportTax;
     @Column(name = "remaining_ticket",comment = "剩余票数")
     private Integer remainingTicket;
-    @Column(name = "first_clazz_price",comment = "头等舱票价")
-    private Integer firstClassPrice;
-    @Column(name = "business_clazz_price",comment = "商务舱票价")
-    private Integer businessClassPrice;
-    @Column(name = "economy_clazz_price",comment = "经济舱票价")
-    private Integer economyClassPrice;
+    @Column(name = "first_clazz_price",comment = "头等舱票价",type = MySqlTypeConstant.DECIMAL,length = 65)
+    private BigDecimal firstClazzPrice;
+    @Column(name = "business_clazz_price",comment = "商务舱票价",type = MySqlTypeConstant.DECIMAL,length = 65)
+    private BigDecimal businessClazzPrice;
+    @Column(name = "economy_clazz_price",comment = "经济舱票价",type = MySqlTypeConstant.DECIMAL,length = 65)
+    private BigDecimal economyClazzPrice;
     @Column(name = "ctime",comment = "创建时间")
     private Date ctime = new Date();
     @Column(name = "mtime",comment = "修改时间")
