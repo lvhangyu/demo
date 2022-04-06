@@ -33,5 +33,4 @@ public class OrderDTO {
     private String boardingRoom;
     private Integer ticketType;
     private BigDecimal ticketPrice;
-    private Integer status;
 }
