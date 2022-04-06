@@ -1,6 +1,8 @@
 package com.forezp.controller;
 
+import com.forezp.mvc.CurrentUser;
 import com.forezp.mvc.ResultModel;
+import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dao.OrderDO;
 import com.forezp.pojo.dto.OrderDTO;
 import com.forezp.pojo.vo.OrderVo;
@@ -34,7 +36,8 @@ public class OrderController {
      * @return
      */
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public ResultModel<List<OrderVo>> selectList(){
+    public ResultModel<List<OrderVo>> selectList(
+                                                 HttpServletRequest request, HttpServletResponse response){
         List<OrderVo> orderVoList = new ArrayList<>();
         List<OrderDO> orderDOList = orderService.getList();
         BeanUtils.copyProperties(orderDOList, orderVoList);
@@ -71,15 +74,15 @@ public class OrderController {
 
     /**
      * 我的订单
-     * @param orderDTO
+     * @param userInfo
      * @param request
      * @param response
      * @return
      */
-    public ResultModel<List<OrderVo>> getOrderByUserId(@RequestBody OrderDTO orderDTO,
+    public ResultModel<List<OrderVo>> getOrderByUserId(@CurrentUser UserInfo userInfo,
                                        HttpServletRequest request, HttpServletResponse response){
         List<OrderVo> orderVoList = new ArrayList<>();
-        List<OrderDO> orderDOList = orderService.listByUserId(orderDTO.getUserId());
+        List<OrderDO> orderDOList = orderService.listByUserId(userInfo.getId());
         BeanUtils.copyProperties(orderDOList, orderVoList);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(orderVoList);
     }
