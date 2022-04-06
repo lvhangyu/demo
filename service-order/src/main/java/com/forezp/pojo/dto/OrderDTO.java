@@ -22,7 +22,6 @@ import java.util.Date;
  */
 @Data
 public class OrderDTO {
-    private Long id;
     private Long userId;
     private Long flightId;
     private String orderCode;
@@ -33,5 +32,4 @@ public class OrderDTO {
     private String boardingRoom;
     private Integer ticketType;
     private BigDecimal ticketPrice;
-    private Integer status;
 }
