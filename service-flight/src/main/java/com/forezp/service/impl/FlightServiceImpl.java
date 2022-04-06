@@ -1,7 +1,8 @@
 package com.forezp.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.forezp.mapper.FlightMapper;
-import com.forezp.mvc.ResultModel;
 import com.forezp.pojo.dao.FlightDO;
 import com.forezp.pojo.dto.FlightDTO;
 import com.forezp.pojo.vo.FlightVO;
@@ -11,7 +12,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Wrapper;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,10 +61,10 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public List<FlightVO> query() {
         List<FlightDO> flightDOList = flightMapper.selectList(null);
-        System.out.println(flightDOList.size());
         List<FlightVO> flightVOList = new ArrayList<>(16);
-        BeanUtils.copyProperties(flightDOList, flightVOList);
-        System.out.println(flightVOList.size());
+        CopyOptions copyOptions = new CopyOptions();
+        copyOptions.ignoreCase();
+        flightVOList = BeanUtil.copyToList(flightDOList, FlightVO.class, copyOptions);
         return flightVOList;
     }
 
