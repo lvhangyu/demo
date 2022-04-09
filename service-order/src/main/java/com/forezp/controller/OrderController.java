@@ -6,11 +6,11 @@ import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dao.OrderDO;
 import com.forezp.pojo.dto.OrderDTO;
 import com.forezp.pojo.vo.OrderVo;
+import com.forezp.service.RestFlightService;
 import com.forezp.service.OrderService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +30,9 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private RestFlightService restFlightService;
 
     /**
      * 订单列表
@@ -87,6 +90,18 @@ public class OrderController {
         List<OrderDO> orderDOList = orderService.listByUserId(userInfo.getId());
         BeanUtils.copyProperties(orderDOList, orderVoList);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(orderVoList);
+    }
+
+    /**
+     * 订单详情
+     * @return
+     */
+    @GetMapping("/details")
+    public ResultModel orderDetails(@CurrentUser UserInfo userInfo,
+                                    HttpServletRequest request, HttpServletResponse response){
+//        restFlightService.getQuery(request.getHeader("userInfo"));
+
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
     }
 
 
