@@ -3,7 +3,9 @@ import java.util.Date;
 
 import com.alibaba.fastjson.JSONObject;
 import com.forezp.exception.MyException;
+import com.forezp.mvc.CurrentUser;
 import com.forezp.mvc.ResultModel;
+import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dto.UserDto;
 import com.forezp.pojo.vo.UserVo;
 import com.forezp.service.SchedualServiceHi;
@@ -70,6 +72,16 @@ public class UserController {
 //        userDto1.setCtime(new Date());
 //        userDto1.setMtime(new Date());
         UserVo userVo =  userService.register(userDto);
+        return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
+    }
+
+
+    @PostMapping("/update")
+    public ResultModel update(
+            @CurrentUser UserInfo userInfo,
+            @RequestBody UserDto userDto,
+            HttpServletRequest request, HttpServletResponse response){
+        UserVo userVo =  userService.update(userDto, userInfo);
         return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
     }
 }

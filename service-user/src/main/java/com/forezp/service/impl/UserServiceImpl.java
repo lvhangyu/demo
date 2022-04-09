@@ -4,6 +4,7 @@ package com.forezp.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.forezp.exception.MyException;
 import com.forezp.mapper.UserMapper;
+import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dao.UserDao;
 import com.forezp.pojo.dto.UserDto;
 import com.forezp.pojo.vo.UserVo;
@@ -42,6 +43,25 @@ public class UserServiceImpl implements UserService {
         userDao.setCtime(new Date());
         userDao.setMtime(new Date());
         int r = userMapper.insert(userDao);
+        UserVo userVo = new UserVo();
+        BeanUtils.copyProperties(userDao, userVo);
+        return userVo;
+    }
+
+    @Override
+    public UserVo update(UserDto userDto, UserInfo userInfo) {
+        UserDao userDao = userMapper.selectById(userInfo.getId());
+//        userDao.setRole(0);
+        userDao.setUsername(userDto.getUsername());
+        userDao.setGender(userDto.getGender());
+        userDao.setAge(userDto.getAge());
+        userDao.setEmail(userDto.getEmail());
+        userDao.setMobile(userDto.getMobile());
+//        userDao.setRegistrationTime(new Date());
+//        userDao.setPassword("");
+//        userDao.setCtime(new Date());
+        userDao.setMtime(new Date());
+        userMapper.updateById(userDao);
         UserVo userVo = new UserVo();
         BeanUtils.copyProperties(userDao, userVo);
         return userVo;
