@@ -60,14 +60,12 @@ public class FlightDO {
     private BigDecimal airportTax;
     @Column(name = "remaining_ticket",comment = "剩余票数")
     private Integer remainingTicket;
-    @Column(name = "first_clazz_price",comment = "头等舱票价",type = MySqlTypeConstant.DECIMAL,length = 65)
-    private BigDecimal firstClazzPrice;
-    @Column(name = "business_clazz_price",comment = "商务舱票价",type = MySqlTypeConstant.DECIMAL,length = 65)
-    private BigDecimal businessClazzPrice;
-    @Column(name = "economy_clazz_price",comment = "经济舱票价",type = MySqlTypeConstant.DECIMAL,length = 65)
-    private BigDecimal economyClazzPrice;
-    @Column(name = "ctime",comment = "创建时间")
+    @Column(name = "ticket_price",comment = "票价",type = MySqlTypeConstant.DECIMAL,length = 65)
+    private BigDecimal ticketPrice;
+    @Column(name = "cabin_type",comment = "仓位类型, 0 头等舱，1 商务舱，2 经济舱")
+    private Integer cabinType;
+    @Column(name = "ctime",comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date ctime = new Date();
-    @Column(name = "mtime",comment = "修改时间")
+    @Column(name = "mtime",comment = "修改时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date mtime = new Date();
 }

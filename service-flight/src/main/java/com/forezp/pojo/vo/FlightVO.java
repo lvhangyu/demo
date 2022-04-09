@@ -31,9 +31,8 @@ public class FlightVO {
     private BigDecimal fuelSurcharge;
     private BigDecimal airportTax;
     private Integer remainingTicket;
-    private BigDecimal firstClazzPrice;
-    private BigDecimal businessClazzPrice;
-    private BigDecimal economyClazzPrice;
+    private BigDecimal ticketPrice;
+    private Integer cabinType;
     private Date ctime;
     private Date mtime;
 }

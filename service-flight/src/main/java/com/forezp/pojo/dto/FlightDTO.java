@@ -40,9 +40,8 @@ public class FlightDTO {
     private BigDecimal fuelSurcharge;
     private BigDecimal airportTax;
     private Integer remainingTicket;
-    private BigDecimal firstClazzPrice;
-    private BigDecimal businessClazzPrice;
-    private BigDecimal economyClazzPrice;
+    private BigDecimal ticketPrice;
+    private Integer cabinType;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date ctime;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")

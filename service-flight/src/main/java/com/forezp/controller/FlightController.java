@@ -6,6 +6,7 @@ import com.forezp.service.FlightService;
 import com.forezp.service.OrderService;
 import com.forezp.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,26 +53,35 @@ public class FlightController {
     @PostMapping("/update")
     public ResultModel<FlightVO> update(
             @RequestParam(required = true, value = "id") Long id,
-            @RequestParam(required = false, value = "flightDate") Date flightDate,
+            @RequestParam(required = false, value = "flightDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date flightDate,
             @RequestParam(required = false, value = "aviationCorp") String aviationCorp,
             @RequestParam(required = false, value = "departureAddr") String departureAddr,
             @RequestParam(required = false, value = "arrivalAddr") String arrivalAddr,
-            @RequestParam(required = false, value = "departureTime") Date departureTime,
-            @RequestParam(required = false, value = "arrivalTime") Date arrivalTime,
+            @RequestParam(required = false, value = "departureTime") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date departureTime,
+            @RequestParam(required = false, value = "arrivalTime") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date arrivalTime,
             @RequestParam(required = false, value = "luggage") Integer luggage,
             @RequestParam(required = false, value = "fuelSurcharge") BigDecimal fuelSurcharge,
             @RequestParam(required = false, value = "airportTax") BigDecimal airportTax,
             @RequestParam(required = false, value = "remainingTicket") Integer remainingTicket,
-            @RequestParam(required = false, value = "normalFare") BigDecimal firstClassPrice,
-            @RequestParam(required = false, value = "childFare") BigDecimal businessClassPrice,
-            @RequestParam(required = false, value = "childFare") BigDecimal economyClassPrice,
+            @RequestParam(required = false, value = "ticketPrice") BigDecimal ticketPrice,
+            @RequestParam(required = false, value = "cabinType") Integer cabinType,
             HttpServletRequest request, HttpServletResponse response) throws ParseException {
         FlightDTO flightDTO = new FlightDTO();
-        flightDTO.setId(id).setFlightDate(flightDate).setAviationCorp(aviationCorp).setDepartureAddr(departureAddr)
-        .setArrivalAddr(arrivalAddr).setDepartureTime(departureTime).setArrivalTime(arrivalTime).setLuggage(luggage)
-        .setFuelSurcharge(fuelSurcharge).setAirportTax(airportTax).setRemainingTicket(remainingTicket)
-        .setFirstClazzPrice(firstClassPrice).setBusinessClazzPrice(businessClassPrice).setEconomyClazzPrice(economyClassPrice);
+        flightDTO.setId(id)
+                .setFlightDate(flightDate)
+                .setAviationCorp(aviationCorp)
+                .setDepartureAddr(departureAddr)
+                .setArrivalAddr(arrivalAddr)
+                .setDepartureTime(departureTime)
+                .setArrivalTime(arrivalTime).setLuggage(luggage)
+                .setFuelSurcharge(fuelSurcharge)
+                .setAirportTax(airportTax)
+                .setRemainingTicket(remainingTicket)
+                .setTicketPrice(ticketPrice)
+                .setCabinType(cabinType);
+        System.out.println(flightDTO.toString());
         FlightVO flightVO = flightService.update(flightDTO);
+        System.out.println(flightVO.getFlightDate());
         return new ResultModel<FlightVO>().setCode(HttpStatus.OK.value()).setMsg("success").setData(flightVO);
     }
 
@@ -89,6 +99,22 @@ public class FlightController {
         FlightVO flightVO = flightService.info(id);
         return new ResultModel<FlightVO>().setCode(HttpStatus.OK.value()).setMsg("success").setData(flightVO);
     }
+
+    @GetMapping("/search")
+    public ResultModel<List<FlightVO>> search(
+            @RequestParam(required = false, value = "flightDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date flightDate,
+            @RequestParam(required = false, value = "aviationCorp") String aviationCorp,
+            @RequestParam(required = false, value = "departureAddr") String departureAddr,
+            @RequestParam(required = false, value = "arrivalAddr") String arrivalAddr,
+            @RequestParam(required = false, value = "departureTime") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date departureTime,
+            @RequestParam(required = false, value = "arrivalTime") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date arrivalTime,
+            @RequestParam(required = false, value = "ticketPrice") BigDecimal ticketPrice,
+            @RequestParam(required = false, value = "cabinType") Integer cabinType,
+            HttpServletRequest request, HttpServletResponse response) throws ParseException {
+        List<FlightVO> flightVOList = flightService.serach(flightDate, aviationCorp, departureAddr, arrivalAddr, departureTime, arrivalTime, ticketPrice, cabinType);
+        return new ResultModel<List<FlightVO>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(flightVOList);
+    }
+
 
     public static void main(String[] args) throws ParseException {
         String date1 = "2022-03-30 18:49:00";
