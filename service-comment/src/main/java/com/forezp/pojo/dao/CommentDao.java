@@ -28,8 +28,8 @@ public class CommentDao {
     private Long postId;
     @Column(name = "parent_id",comment = "父级id")
     private Long parentId;
-    @Column(name = "creator_id",comment = "创建人")
-    private Long creatorId;
+    @Column(name = "user_id",comment = "用户id")
+    private Long userId;
     @Column(name = "content",comment = "内容")
     private String content;
     @Column(name = "likes",comment = "点赞数")

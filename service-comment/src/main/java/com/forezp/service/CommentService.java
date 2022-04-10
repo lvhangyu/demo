@@ -1,5 +1,11 @@
 package com.forezp.service;
 
+import com.forezp.mvc.UserInfo;
+import com.forezp.pojo.dao.CommentDao;
+import com.forezp.pojo.dto.CommentDto;
+
+import java.util.List;
+
 /**
  * @ClassName FlightService
  * @Description TODO
@@ -8,6 +14,12 @@ package com.forezp.service;
  * Version 1.0
  */
 public interface CommentService {
+
+    CommentDao save(CommentDto commentDto, UserInfo userInfo);
+
+    void delete(Long id);
+
+    List<CommentDao> getListByPostId(Long postId);
 
 }
 
