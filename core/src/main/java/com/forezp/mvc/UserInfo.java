@@ -1,12 +1,12 @@
-package com.forezp.pojo.vo;
+package com.forezp.mvc;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class UserVo {
+public class UserInfo {
+
     private Long id;
     private Integer role;
     private String username;

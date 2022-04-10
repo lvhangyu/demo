@@ -12,6 +12,25 @@ spring:
   datasource:
     type: org.apache.tomcat.jdbc.pool.DataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://172.16.52.151:3307/demo?zeroDateTimeBehavior=round&useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
+    url: jdbc:mysql://localhost:3306/airline_reservation_system?zeroDateTimeBehavior=round&useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai
     username: root
-    password: lenovolabs
+    password: 123456
+  jackson:
+    default-property-inclusion: non_null
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+feign:
+  hystrix:
+    enabled: true
+
+
+mybatis:
+  table:
+    auto: update
+  model:
+    pack: com.forezp.pojo.dao
+  database:
+    type: mysql
+
+mybatis-plus:
+  mapper-locations: classpath*:xxxxxx/*.xml,classpath*:com/gitee/sunchenbin/mybatis/actable/mapping/*/*.xml
