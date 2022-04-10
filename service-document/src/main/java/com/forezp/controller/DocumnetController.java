@@ -1,9 +1,20 @@
 package com.forezp.controller;
 
+import com.forezp.mvc.CurrentUser;
+import com.forezp.mvc.ResultModel;
+import com.forezp.mvc.UserInfo;
+import com.forezp.pojo.dao.DocumentDao;
+import com.forezp.pojo.dto.DocumentDto;
+import com.forezp.pojo.vo.DocumentVo;
 import com.forezp.service.CommentRestService;
 import com.forezp.service.DocumentService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @ClassName OrderController
@@ -23,4 +34,35 @@ public class DocumnetController {
 
 
 
+    @PostMapping("/create")
+    public ResultModel<DocumentVo> create(
+            @CurrentUser UserInfo userInfo,
+            @RequestBody DocumentDto documentDto,
+            HttpServletRequest request, HttpServletResponse response){
+        DocumentDao documentDao = documentService.save(documentDto);
+        DocumentVo documentVo = new DocumentVo();
+        BeanUtils.copyProperties(documentDao,documentVo);
+        return new ResultModel<DocumentVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(documentVo);
+    }
+
+
+
+    @PostMapping("/delete")
+    public ResultModel<DocumentVo> delete(
+            @CurrentUser UserInfo userInfo,
+            @RequestParam("id") Long id,
+            HttpServletRequest request, HttpServletResponse response){
+        documentService.delete(id);
+        return new ResultModel<DocumentVo>().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
+
+
+    @PostMapping("/update")
+    public ResultModel<DocumentVo> update(
+            @CurrentUser UserInfo userInfo,
+            @RequestBody DocumentDto documentDto,
+            HttpServletRequest request, HttpServletResponse response){
+        documentService.update(documentDto);
+        return new ResultModel<DocumentVo>().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
 }
