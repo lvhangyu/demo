@@ -42,7 +42,7 @@ public class PostDao {
     private Integer comments ;
 
     @Column(name = "ctime", comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)
-    private Date ctime = new Date();
+    private Date ctime;
     @Column(name = "mtime", comment = "修改时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date mtime;
 
