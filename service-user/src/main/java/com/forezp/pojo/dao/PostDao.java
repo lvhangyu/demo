@@ -9,6 +9,9 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * 帖子
+ */
 @Data
 @Table(name = "ls_post")
 @TableName("ls_post")

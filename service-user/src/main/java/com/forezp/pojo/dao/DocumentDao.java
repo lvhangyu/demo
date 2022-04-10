@@ -9,6 +9,9 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * 资源
+ */
 @Data
 @Table(name = "ls_document")
 @TableName("ls_document")

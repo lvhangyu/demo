@@ -6,7 +6,7 @@ server:
   port: 8763
 spring:
   application:
-    name: service-flight
+    name: service-comment
   zipkin:
     base-url: http://localhost:9411
   datasource:

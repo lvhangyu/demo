@@ -9,6 +9,9 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * 评论
+ */
 @Data
 @Table(name = "ls_comment")
 @TableName("ls_comment")

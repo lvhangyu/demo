@@ -12,10 +12,10 @@ import org.springframework.context.annotation.Bean;
 @EnableEurekaClient
 @EnableFeignClients
 @MapperScan("com.forezp.mapper")
-public class ServiceFlightApplication {
+public class ServiceCommentApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ServiceFlightApplication.class, args);
+		SpringApplication.run(ServiceCommentApplication.class, args);
 	}
 
 	@Bean

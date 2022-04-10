@@ -16,7 +16,7 @@
         <module>server-zipkin</module>
         <module>core</module>
         <module>service-user</module>
-        <module>service-flight</module>
+        <module>service-comment</module>
         <module>service-order</module>
     </modules>
 
