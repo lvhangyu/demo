@@ -1,4 +1,4 @@
-package com.forezp.pojo.bo;
+package com.forezp.pojo.dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

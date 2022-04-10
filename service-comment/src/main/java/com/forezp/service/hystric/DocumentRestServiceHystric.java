@@ -1,6 +1,6 @@
 package com.forezp.service.hystric;
 
-import com.forezp.service.RestFlightService;
+import com.forezp.service.DocumentRestService;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,11 +11,9 @@ import org.springframework.stereotype.Component;
  * Version 1.0
  */
 @Component
-public class RestFlightServiceHystric implements RestFlightService {
-
-
+public class DocumentRestServiceHystric implements DocumentRestService {
     @Override
-    public String getQuery(String header, Long accountId) {
+    public String getQuery() {
         return "sorry";
     }
 }

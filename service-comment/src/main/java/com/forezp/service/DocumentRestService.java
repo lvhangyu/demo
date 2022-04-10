@@ -1,11 +1,9 @@
 package com.forezp.service;
 
-import com.forezp.service.hystric.OrderServiceHystric;
+import com.forezp.service.hystric.DocumentRestServiceHystric;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @ClassName OrderService
@@ -15,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Version 1.0
  */
 @Service
-@FeignClient(value = "service-order",fallback = OrderServiceHystric.class)
-public interface OrderService {
+@FeignClient(value = "service-order",fallback = DocumentRestServiceHystric.class)
+public interface DocumentRestService {
     @GetMapping(value = "/query")
     String getQuery();
 }

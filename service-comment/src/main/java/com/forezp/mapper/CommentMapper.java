@@ -1,7 +1,7 @@
 package com.forezp.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.forezp.pojo.dao.FlightDO;
+import com.forezp.pojo.dao.CommentDao;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +14,5 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-public interface FlightMapper extends BaseMapper<FlightDO> {
+public interface CommentMapper extends BaseMapper<CommentDao> {
 }

@@ -1,6 +1,6 @@
 package com.forezp.service.hystric;
 
-import com.forezp.service.OrderService;
+import com.forezp.service.CommentRestService;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,9 +11,11 @@ import org.springframework.stereotype.Component;
  * Version 1.0
  */
 @Component
-public class OrderServiceHystric implements OrderService {
+public class CommentRestServiceHystric implements CommentRestService {
+
+
     @Override
-    public String getQuery() {
+    public String getQuery(String header, Long accountId) {
         return "sorry";
     }
 }
