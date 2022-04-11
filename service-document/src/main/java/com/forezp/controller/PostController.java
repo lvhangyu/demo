@@ -1,5 +1,6 @@
 package com.forezp.controller;
 
+import com.forezp.mvc.CurrentUser;
 import com.forezp.mvc.ResultModel;
 import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dto.PostDto;
@@ -25,16 +26,16 @@ public class PostController {
 
     @PostMapping("/create")
     public ResultModel<PostVo> create(
-            @RequestHeader UserInfo userInfo,
+            @CurrentUser UserInfo userInfo,
             @RequestBody PostDto postDto
     ){
         PostVo postVo = postService.create(userInfo, postDto);
         return new ResultModel<PostVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(postVo);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/update")
     public ResultModel<PostVo> update(
-            @RequestHeader UserInfo userInfo,
+            @CurrentUser UserInfo userInfo,
             @RequestBody PostDto postDto
     ){
         PostVo postVo = postService.update(userInfo, postDto);
