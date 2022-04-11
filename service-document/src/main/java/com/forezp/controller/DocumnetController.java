@@ -1,5 +1,6 @@
 package com.forezp.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.forezp.mvc.CurrentUser;
 import com.forezp.mvc.ResultModel;
 import com.forezp.mvc.UserInfo;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * @ClassName OrderController
@@ -64,5 +66,14 @@ public class DocumnetController {
             HttpServletRequest request, HttpServletResponse response){
         documentService.update(documentDto);
         return new ResultModel<DocumentVo>().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
+
+    @GetMapping("/list")
+    public ResultModel<List<DocumentVo>> list(
+            @CurrentUser UserInfo userInfo,
+            HttpServletRequest request, HttpServletResponse response){
+        List<DocumentDao> documentDaoList = documentService.list();
+        List<DocumentVo> documentVoList = BeanUtil.copyToList(documentDaoList, DocumentVo.class, null);
+        return new ResultModel<List<DocumentVo>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(documentVoList);
     }
 }
