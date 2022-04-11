@@ -25,9 +25,12 @@ zuul:
     api-user:
       path: /user/**
       serviceId: service-user
-    api-order:
-      path: /order/**
-      serviceId: service-order
-    api-flight:
-      path: /flight/**
-      serviceId: service-flight
+    api-document:
+      path: /document/**
+      serviceId: service-document
+    api-post:
+      path: /post/**
+      serviceId: service-document
+    api-comment:
+      path: /comment/**
+      serviceId: service-comment
