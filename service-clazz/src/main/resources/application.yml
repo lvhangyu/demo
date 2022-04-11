@@ -15,7 +15,10 @@ spring:
     url: jdbc:mysql://localhost:3306/attendance_management_system?zeroDateTimeBehavior=round&useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=GMT%2B8
     username: root
     password: 123456
-
+  jackson:
+    default-property-inclusion: non_null
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 mybatis:
   table:
     auto: update

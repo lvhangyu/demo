@@ -3,7 +3,9 @@ import java.util.Date;
 
 import com.alibaba.fastjson.JSONObject;
 import com.forezp.exception.MyException;
+import com.forezp.mvc.CurrentUser;
 import com.forezp.mvc.ResultModel;
+import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dto.UserDto;
 import com.forezp.pojo.vo.UserVo;
 import com.forezp.service.SchedualServiceHi;
@@ -22,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/user")
 public class UserController {
     private static Logger log = LoggerFactory.getLogger(UserController.class);
     @Autowired
@@ -60,18 +61,27 @@ public class UserController {
     public ResultModel register(
             @RequestBody UserDto userDto,
             HttpServletRequest request, HttpServletResponse response){
-//        UserDto userDto = new UserDto();
-//        userDto.setUsername("aaa");
-//        userDto.setPassword(DigestUtils.md5DigestAsHex("abc".getBytes()));
-//        userDto.setRole(0);
-//        userDto.setGender(0);
-//        userDto.setAge(0);
-//        userDto.setEmail("123@qq.com");
-//        userDto.setMobile("12345678912");
-//        userDto.setRegistrationTime(new Date());
-        userDto.setCtime(new Date());
-        userDto.setMtime(new Date());
+//        UserDto userDto1 = new UserDto();
+//        userDto1.setUsername("aaa");
+//        userDto1.setPassword(DigestUtils.md5DigestAsHex("abc".getBytes()));
+//        userDto1.setRole(0);
+//        userDto1.setGender(0);
+//        userDto1.setAge(0);
+//        userDto1.setEmail("123@qq.com");
+//        userDto1.setMobile("12345678912");
+//        userDto1.setCtime(new Date());
+//        userDto1.setMtime(new Date());
         UserVo userVo =  userService.register(userDto);
+        return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
+    }
+
+
+    @PostMapping("/update")
+    public ResultModel update(
+            @CurrentUser UserInfo userInfo,
+            @RequestBody UserDto userDto,
+            HttpServletRequest request, HttpServletResponse response){
+        UserVo userVo =  userService.update(userDto, userInfo);
         return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
     }
 }
