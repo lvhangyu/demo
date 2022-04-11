@@ -18,7 +18,4 @@ public class UserDto {
     private Integer age;
     private String email;
     private String mobile;
-    private Date registrationTime;
-    private Date ctime = new Date();
-    private Date mtime;
 }
