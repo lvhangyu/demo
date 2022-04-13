@@ -19,6 +19,10 @@ import java.util.Date;
 @Table(name = "ls_post")
 @TableName("ls_post")
 public class PostDao {
+    public static Integer NOT_APPROVE = 0;
+    public static Integer PASSED = 1;
+    public static Integer NOT_PASS = 2;
+
     @TableId(type = IdType.AUTO) //mybatis-plus主键注解
     @IsKey                         //actable主键注解
     @IsAutoIncrement             //自增
@@ -40,7 +44,8 @@ public class PostDao {
     private Integer conllections ;
     @Column(name = "comments",comment = "评论数")
     private Integer comments ;
-
+    @Column(name = "status",comment = "帖子状态，0待审核，1审核通过，2审核未通过")
+    private Integer status;
     @Column(name = "ctime", comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date ctime;
     @Column(name = "mtime", comment = "修改时间", type = MySqlTypeConstant.TIMESTAMP)

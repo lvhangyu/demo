@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
 /**
  * @ClassName PostController
  * @Description TODO
@@ -27,8 +31,9 @@ public class PostController {
     @PostMapping("/create")
     public ResultModel<PostVo> create(
             @CurrentUser UserInfo userInfo,
-            @RequestBody PostDto postDto
-    ){
+            @RequestBody PostDto postDto,
+            HttpServletRequest request, HttpServletResponse response
+    ) {
         PostVo postVo = postService.create(userInfo, postDto);
         return new ResultModel<PostVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(postVo);
     }
@@ -36,9 +41,43 @@ public class PostController {
     @PostMapping("/update")
     public ResultModel<PostVo> update(
             @CurrentUser UserInfo userInfo,
-            @RequestBody PostDto postDto
-    ){
+            @RequestBody PostDto postDto,
+            HttpServletRequest request, HttpServletResponse response) {
         PostVo postVo = postService.update(userInfo, postDto);
         return new ResultModel<PostVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(postVo);
+    }
+
+    @PostMapping("/delete")
+    public ResultModel<PostVo> delete(
+            @CurrentUser UserInfo userInfo,
+            @RequestParam("id") Long id,
+            HttpServletRequest request, HttpServletResponse response) {
+        postService.delete(id);
+        return new ResultModel<PostVo>().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
+
+    @PostMapping("/query")
+    public ResultModel<List<PostVo>> query(
+            @CurrentUser UserInfo userInfo,
+            @RequestParam("id") Long id,
+            HttpServletRequest request, HttpServletResponse response) {
+        List<PostVo> postVoList = postService.query();
+        return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
+
+    @PostMapping("/myposts")
+    public ResultModel<List<PostVo>> myposts(
+            @CurrentUser UserInfo userInfo,
+            HttpServletRequest request, HttpServletResponse response) {
+        List<PostVo> postVoList = postService.queryByUid(userInfo.getId());
+        return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
+
+    @PostMapping("/trending")
+    public ResultModel<List<PostVo>> trending(
+            @CurrentUser UserInfo userInfo,
+            HttpServletRequest request, HttpServletResponse response) {
+        List<PostVo> postVoList = postService.trending();
+        return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success");
     }
 }

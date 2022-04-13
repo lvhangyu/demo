@@ -24,6 +24,7 @@ public class PostVo {
     private Integer likes ;
     private Integer conllections ;
     private Integer comments ;
+    private Integer status;
     private Date ctime;
     private Date mtime;
 }
