@@ -6,6 +6,7 @@ import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dto.PostDto;
 import com.forezp.pojo.vo.PostVo;
 import com.forezp.service.PostService;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +48,7 @@ public class PostController {
         return new ResultModel<PostVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(postVo);
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public ResultModel<PostVo> delete(
             @CurrentUser UserInfo userInfo,
             @RequestParam("id") Long id,
