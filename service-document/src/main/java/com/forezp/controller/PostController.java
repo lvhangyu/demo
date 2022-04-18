@@ -57,7 +57,7 @@ public class PostController {
         return new ResultModel<PostVo>().setCode(HttpStatus.OK.value()).setMsg("success");
     }
 
-    @PostMapping("/query")
+    @GetMapping("/query")
     public ResultModel<List<PostVo>> query(
             @CurrentUser UserInfo userInfo,
             @RequestParam("id") Long id,
@@ -66,7 +66,7 @@ public class PostController {
         return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success");
     }
 
-    @PostMapping("/myposts")
+    @GetMapping("/myposts")
     public ResultModel<List<PostVo>> myposts(
             @CurrentUser UserInfo userInfo,
             HttpServletRequest request, HttpServletResponse response) {
@@ -74,7 +74,7 @@ public class PostController {
         return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success");
     }
 
-    @PostMapping("/trending")
+    @GetMapping("/trending")
     public ResultModel<List<PostVo>> trending(
             @CurrentUser UserInfo userInfo,
             HttpServletRequest request, HttpServletResponse response) {

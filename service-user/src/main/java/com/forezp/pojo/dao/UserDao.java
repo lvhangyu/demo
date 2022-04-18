@@ -18,7 +18,7 @@ public class UserDao {
     @IsAutoIncrement             //自增
     @Column(name = "id", comment = "主键id")
     private Long id;
-    @Column(name = "role",comment = "角色id")
+    @Column(name = "role",comment = "角色 0 admin ,1 普通用户")
     private Integer role;
     @Unique
     @Column(name = "username",comment = "用户名字")
