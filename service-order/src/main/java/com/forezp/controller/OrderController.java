@@ -1,5 +1,10 @@
 package com.forezp.controller;
+import java.math.BigDecimal;
+import java.util.Date;
 
+import cn.hutool.core.bean.BeanUtil;
+import com.alibaba.fastjson.JSONObject;
+import com.forezp.exception.MyException;
 import com.forezp.mvc.CurrentUser;
 import com.forezp.mvc.ResultModel;
 import com.forezp.mvc.UserInfo;
@@ -43,7 +48,7 @@ public class OrderController {
                                                  HttpServletRequest request, HttpServletResponse response){
         List<OrderVo> orderVoList = new ArrayList<>();
         List<OrderDO> orderDOList = orderService.getList();
-        BeanUtils.copyProperties(orderDOList, orderVoList);
+        orderVoList =  BeanUtil.copyToList(orderDOList, OrderVo.class, null);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(orderVoList);
     }
 
@@ -52,26 +57,46 @@ public class OrderController {
      * @return
      */
     @PostMapping("/create")
-    public ResultModel<OrderVo> create(@RequestBody OrderDTO orderDTO,
+    public ResultModel<OrderVo> create(@CurrentUser UserInfo userInfo,
+                                       @RequestBody OrderDTO orderDTO,
                                        HttpServletRequest request, HttpServletResponse response){
         OrderVo orderVo = new OrderVo();
-        OrderDO orderDO = orderService.create(orderDTO);
+        OrderDO orderDO = orderService.create(orderDTO, userInfo);
         BeanUtils.copyProperties(orderDO, orderVo);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(orderVo);
     }
 
+    public static void main(String[] args) {
+        OrderDTO dto = new OrderDTO();
+        dto.setId(0L);
+        dto.setUserId(0L);
+        dto.setFlightId(0L);
+        dto.setOrderCode("");
+        dto.setUserName("");
+        dto.setUserNumber("");
+        dto.setMobile("");
+        dto.setBoardingTime(new Date());
+        dto.setBoardingRoom("");
+        dto.setTicketType(0);
+        dto.setTicketPrice(new BigDecimal("0"));
+        System.out.println(JSONObject.toJSONString(dto));
+    }
+
     /**
      * 更新订单
-     * @param orderDTO
+     * @param status
      * @param request
      * @param response
      * @return
      */
-    @PostMapping("/update")
-    public ResultModel<OrderVo> update(@RequestBody OrderDTO orderDTO,
-                                       HttpServletRequest request, HttpServletResponse response){
+    @PostMapping("/update/{id}")
+    public ResultModel<OrderVo> update(
+            @CurrentUser UserInfo userInfo,
+            @PathVariable("id") Long id,
+            @RequestParam("status") Integer status,
+                                       HttpServletRequest request, HttpServletResponse response) throws MyException {
         OrderVo orderVo = new OrderVo();
-        OrderDO orderDO = orderService.update(orderDTO);
+        OrderDO orderDO = orderService.update(userInfo, id, status);
         BeanUtils.copyProperties(orderDO, orderVo);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(orderVo);
     }
@@ -83,12 +108,12 @@ public class OrderController {
      * @param response
      * @return
      */
-    @PostMapping("/list_by_user")
+    @GetMapping("/list_by_user")
     public ResultModel<List<OrderVo>> getOrderByUserId(@CurrentUser UserInfo userInfo,
                                        HttpServletRequest request, HttpServletResponse response){
         List<OrderVo> orderVoList = new ArrayList<>();
         List<OrderDO> orderDOList = orderService.listByUserId(userInfo.getId());
-        BeanUtils.copyProperties(orderDOList, orderVoList);
+        orderVoList =  BeanUtil.copyToList(orderDOList, OrderVo.class, null);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(orderVoList);
     }
 
@@ -107,15 +132,15 @@ public class OrderController {
 
     /**
      * 删除订单
-     * @param orderDTO
+     * @param id
      * @param request
      * @param response
      * @return
      */
-    @PostMapping("/delete")
-    public ResultModel deleteById(@RequestBody OrderDTO orderDTO,
+    @PostMapping("/delete/{id}")
+    public ResultModel deleteById(@PathVariable("id") Long id,
                                   HttpServletRequest request, HttpServletResponse response){
-        orderService.deleteById(orderDTO.getId());
+        orderService.deleteById(id);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
     }
 

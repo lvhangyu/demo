@@ -40,6 +40,9 @@ public class GlobalHandlerExceptionResolver implements org.springframework.web.s
                         handlerMethod.getMethod().getName(),
                         e.getMessage());
                 resultModel.setMsg(e.getMessage());
+                if(null == e.getMessage()){
+                    resultModel.setMsg(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+                }
             } else {
                 resultModel.setMsg(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
             }

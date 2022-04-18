@@ -1,5 +1,7 @@
 package com.forezp.service;
 
+import com.forezp.exception.MyException;
+import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dao.OrderDO;
 import com.forezp.pojo.dto.OrderDTO;
 
@@ -9,9 +11,9 @@ public interface OrderService {
 
     List<OrderDO> getList();
 
-    OrderDO create(OrderDTO orderDTO);
+    OrderDO create(OrderDTO orderDTO, UserInfo userInfo);
 
-    OrderDO update(OrderDTO orderDTO);
+    OrderDO update(UserInfo userInfo, Long id, Integer status) throws MyException;
 
     List<OrderDO> listByUserId(Long userId);
 
