@@ -84,4 +84,13 @@ public class UserController {
         UserVo userVo =  userService.update(userDto, userInfo);
         return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
     }
+
+
+    @PostMapping("/search")
+    public ResultModel search(
+            @RequestBody UserDto userDto,
+            HttpServletRequest request, HttpServletResponse response){
+        UserVo userVo =  userService.search();
+        return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
+    }
 }
