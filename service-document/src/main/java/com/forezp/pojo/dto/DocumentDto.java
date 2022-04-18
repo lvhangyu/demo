@@ -12,10 +12,7 @@ import java.util.Date;
 public class DocumentDto {
 
     private Long id;
-//    @Column(name = "title",comment = "标题")
     private String title;
-//    @Column(name = "content",comment = "内容")
     private String content;
-//    @Column(name = "images",comment = "图片")
     private String images;
 }

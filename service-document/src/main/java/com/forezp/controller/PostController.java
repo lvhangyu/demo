@@ -71,7 +71,7 @@ public class PostController {
             @CurrentUser UserInfo userInfo,
             HttpServletRequest request, HttpServletResponse response) {
         List<PostVo> postVoList = postService.queryByUid(userInfo.getId());
-        return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success");
+        return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(postVoList);
     }
 
     @GetMapping("/trending")
@@ -79,6 +79,6 @@ public class PostController {
             @CurrentUser UserInfo userInfo,
             HttpServletRequest request, HttpServletResponse response) {
         List<PostVo> postVoList = postService.trending();
-        return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success");
+        return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(postVoList);
     }
 }
