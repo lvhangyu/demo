@@ -28,9 +28,11 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentDao save(CommentDto commentDto, UserInfo userInfo) {
         CommentDao commentDao = new CommentDao();
+        BeanUtils.copyProperties(commentDto, commentDao);
         commentDao.setLikes(0);
         commentDao.setUserId(userInfo.getId());
-        BeanUtils.copyProperties(commentDto, commentDao);
+        commentDao.setCtime(new Date());
+        commentDao.setMtime(new Date());
         commentMapper.insert(commentDao);
         return commentDao;
     }

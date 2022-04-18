@@ -1,7 +1,11 @@
 package com.forezp.pojo.vo;
 
-import java.util.Date;
+import lombok.Data;
 
+import java.util.Date;
+import java.util.List;
+
+@Data
 public class CommentVo {
 
     private Long id;
@@ -10,6 +14,7 @@ public class CommentVo {
     private Long userId;
     private String content;
     private Integer likes;
+    private List<CommentVo> commentVoList;
     private Date ctime;
     private Date mtime;
 }

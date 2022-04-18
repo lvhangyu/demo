@@ -1,7 +1,10 @@
 package com.forezp.pojo.vo;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class DocumentVo {
 
     private Long id;

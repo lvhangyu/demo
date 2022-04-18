@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/user")
 public class UserController {
     private static Logger log = LoggerFactory.getLogger(UserController.class);
     @Autowired

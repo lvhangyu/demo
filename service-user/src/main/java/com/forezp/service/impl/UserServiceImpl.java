@@ -42,6 +42,7 @@ public class UserServiceImpl implements UserService {
         userDao.setRegistrationTime(new Date());
         userDao.setCtime(new Date());
         userDao.setMtime(new Date());
+        userDao.setRole(1);
         int r = userMapper.insert(userDao);
         UserVo userVo = new UserVo();
         BeanUtils.copyProperties(userDao, userVo);

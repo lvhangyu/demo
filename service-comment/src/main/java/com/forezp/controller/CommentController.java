@@ -1,6 +1,7 @@
 package com.forezp.controller;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
+import com.alibaba.fastjson.JSONObject;
 import com.forezp.mvc.CurrentUser;
 import com.forezp.mvc.ResultModel;
 import com.forezp.mvc.UserInfo;
@@ -47,10 +48,19 @@ public class CommentController {
         return new ResultModel<CommentVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(commentVo);
     }
 
-    @PostMapping("/delete")
+    public static void main(String[] args) {
+        CommentDto commentDto = new CommentDto();
+        commentDto.setPostId(0L);
+        commentDto.setParentId(0L);
+        commentDto.setContent("评论");
+        System.out.println(JSONObject.toJSONString(commentDto));
+
+    }
+
+    @PostMapping("/delete/{id}")
     public ResultModel delete(
             @CurrentUser UserInfo userInfo,
-            @RequestParam("id") Long commentId,
+            @PathVariable("id") Long commentId,
             HttpServletRequest request, HttpServletResponse response){
         commentService.delete(commentId);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
@@ -67,6 +77,7 @@ public class CommentController {
         CopyOptions copyOptions = new CopyOptions();
         copyOptions.ignoreCase();
         List<CommentVo> commentVoList = BeanUtil.copyToList(commentDaoList, CommentVo.class,copyOptions);
+//        commentDaoList.forEach(commentDao -> {commentDao.get});
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(commentVoList);
     }
 

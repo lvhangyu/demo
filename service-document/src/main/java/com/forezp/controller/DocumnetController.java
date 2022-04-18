@@ -49,6 +49,12 @@ public class DocumnetController {
     }
 
 
+    public static void main(String[] args) {
+        DocumentDto documentDto = new DocumentDto();
+
+    }
+
+
 
     @PostMapping("/delete")
     public ResultModel<DocumentVo> delete(
