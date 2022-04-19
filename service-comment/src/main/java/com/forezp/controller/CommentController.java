@@ -77,7 +77,15 @@ public class CommentController {
         CopyOptions copyOptions = new CopyOptions();
         copyOptions.ignoreCase();
         List<CommentVo> commentVoList = BeanUtil.copyToList(commentDaoList, CommentVo.class,copyOptions);
-//        commentDaoList.forEach(commentDao -> {commentDao.get});
+        for (CommentVo commentVo : commentVoList){
+            List<CommentVo> childCommentVo = new ArrayList<>();
+            for (CommentVo commentVo1 : commentVoList){
+                if(commentVo1.getParentId().equals(commentVo.getId())){
+                    childCommentVo.add(commentVo1);
+                }
+            }
+            commentVo.setCommentVoList(childCommentVo);
+        }
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(commentVoList);
     }
 
