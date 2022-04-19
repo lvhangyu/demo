@@ -23,4 +23,11 @@ public interface CommentMapper extends BaseMapper<CommentDao> {
      */
     @Update("update ls_comment set replys=replys+1 where id = #{id}")
     void autoIncrementreplysNumber(@Param("id") Long id);
+
+
+    /**
+     * 评论回复数+1
+     */
+    @Update("update ls_comment set likes=likes+1 where id = #{id}")
+    void like(@Param("id") Long id);
 }

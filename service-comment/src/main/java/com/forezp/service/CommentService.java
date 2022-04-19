@@ -19,6 +19,8 @@ public interface CommentService {
 
     void delete(Long id);
 
+    void like(Long id, UserInfo userInfo);
+
     List<CommentDao> getListByPostId(Long postId, Long commentId);
 
 }

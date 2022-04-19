@@ -7,6 +7,7 @@ import java.util.Map;
 import com.forezp.mapper.CommentMapper;
 import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dao.CommentDao;
+import com.forezp.pojo.dao.CommentLikeDao;
 import com.forezp.pojo.dto.CommentDto;
 import com.forezp.service.CommentService;
 import org.springframework.beans.BeanUtils;
@@ -47,6 +48,18 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void delete(Long id) {
         commentMapper.deleteById(id);
+    }
+
+    @Override
+    public void like(Long id, UserInfo userInfo) {
+        //评论点赞数+1
+        commentMapper.like(id);
+        //评论点赞中间表
+        CommentLikeDao commentLikeDao = new CommentLikeDao();
+//        commentLikeDao.setPostId(0L);
+        commentLikeDao.setCommentId(id);
+        commentLikeDao.setUserId(userInfo.getId());
+        //todo insert
     }
 
     @Override

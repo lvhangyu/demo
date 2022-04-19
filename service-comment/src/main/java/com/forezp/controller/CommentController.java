@@ -83,4 +83,13 @@ public class CommentController {
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(commentVoList);
     }
 
+    @PostMapping("/like/{id}")
+    public ResultModel giveALike(
+            @CurrentUser UserInfo userInfo,
+            @PathVariable("id") Long commentId,
+            HttpServletRequest request, HttpServletResponse response){
+        commentService.like(commentId, userInfo);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
+
 }
