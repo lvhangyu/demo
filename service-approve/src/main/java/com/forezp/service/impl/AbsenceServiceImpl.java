@@ -1,0 +1,60 @@
+package com.forezp.service.impl;
+
+import cn.hutool.core.bean.BeanUtil;
+import com.forezp.mapper.AbsenceMapper;
+import com.forezp.pojo.dao.AbsenceDao;
+import com.forezp.pojo.dto.AbsenceDto;
+import com.forezp.pojo.vo.AbsenceVo;
+import com.forezp.service.AbsenceService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
+
+@Service
+public class AbsenceServiceImpl implements AbsenceService {
+    @Autowired
+    private AbsenceMapper absenceMapper;
+    @Override
+    public AbsenceVo create(AbsenceDto absenceDto) {
+        AbsenceDao absenceDao = new AbsenceDao();
+        BeanUtils.copyProperties(absenceDto, absenceDao);
+        absenceDao.setCtime(new Date());
+        absenceDao.setMtime(new Date());
+        absenceDao.setStatus(0);
+        absenceMapper.insert(absenceDao);
+        AbsenceVo absenceVo = new AbsenceVo();
+        BeanUtils.copyProperties(absenceDao, absenceVo);
+        return absenceVo;
+    }
+
+    @Override
+    public void delete(Long id) {
+        absenceMapper.deleteById(id);
+    }
+
+    @Override
+    public AbsenceVo update(AbsenceDto absenceDto) {
+        AbsenceDao absenceDao = new AbsenceDao();
+        BeanUtils.copyProperties(absenceDto, absenceDao);
+        absenceDao.setMtime(new Date());
+        absenceMapper.update(absenceDao, null);
+        AbsenceVo absenceVo = new AbsenceVo();
+        BeanUtils.copyProperties(absenceDao, absenceVo);
+        return absenceVo;
+    }
+
+    @Override
+    public List<AbsenceVo> query() {
+        List<AbsenceDao> absenceDaoList = absenceMapper.selectList(null);
+        List<AbsenceVo> absenceVoList = BeanUtil.copyToList(absenceDaoList, AbsenceVo.class, null);
+        return absenceVoList;
+    }
+
+    @Override
+    public List<AbsenceVo> search(Date absenceTime, String majorName, String reason, Integer status, Integer key, Integer order) {
+        return null;
+    }
+}
