@@ -12,6 +12,7 @@ import com.forezp.service.CommentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @ClassName FlightServiceImpl
@@ -25,11 +26,17 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentMapper commentMapper;
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public CommentDao save(CommentDto commentDto, UserInfo userInfo) {
+        //评论的回复数量+1
+        if(commentDto.getParentId() != null){
+            commentMapper.autoIncrementreplysNumber(commentDto.getParentId());
+        }
         CommentDao commentDao = new CommentDao();
         BeanUtils.copyProperties(commentDto, commentDao);
         commentDao.setLikes(0);
+        commentDao.setReplys(0);
         commentDao.setUserId(userInfo.getId());
         commentDao.setCtime(new Date());
         commentDao.setMtime(new Date());
@@ -43,9 +50,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDao> getListByPostId(Long postId) {
+    public List<CommentDao> getListByPostId(Long postId, Long commentId) {
         Map<String,Object> map = new HashMap<>();
         map.put("post_id", postId);
+        map.put("parent_id", commentId);
         List<CommentDao> commentDaoList = commentMapper.selectByMap(map);
         return commentDaoList;
     }

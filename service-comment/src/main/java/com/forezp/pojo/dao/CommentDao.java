@@ -32,6 +32,8 @@ public class CommentDao {
     private Long userId;
     @Column(name = "content",comment = "内容")
     private String content;
+    @Column(name = "replys",comment = "回复数")
+    private Integer replys;
     @Column(name = "likes",comment = "点赞数")
     private Integer likes;
     @Column(name = "ctime", comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)

@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName FlightController
@@ -72,20 +74,12 @@ public class CommentController {
     public ResultModel<List<CommentVo>> list(
             @CurrentUser UserInfo userInfo,
             @RequestParam("post_id") Long postId,
+            @RequestParam(value = "comment_id", required = false) Long commentId,
             HttpServletRequest request, HttpServletResponse response){
-        List<CommentDao> commentDaoList = commentService.getListByPostId(postId);
+        List<CommentDao> commentDaoList = commentService.getListByPostId(postId, commentId);
         CopyOptions copyOptions = new CopyOptions();
         copyOptions.ignoreCase();
         List<CommentVo> commentVoList = BeanUtil.copyToList(commentDaoList, CommentVo.class,copyOptions);
-        for (CommentVo commentVo : commentVoList){
-            List<CommentVo> childCommentVo = new ArrayList<>();
-            for (CommentVo commentVo1 : commentVoList){
-                if(commentVo1.getParentId().equals(commentVo.getId())){
-                    childCommentVo.add(commentVo1);
-                }
-            }
-            commentVo.setCommentVoList(childCommentVo);
-        }
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(commentVoList);
     }
 

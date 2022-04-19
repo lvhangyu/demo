@@ -19,7 +19,7 @@ public interface CommentService {
 
     void delete(Long id);
 
-    List<CommentDao> getListByPostId(Long postId);
+    List<CommentDao> getListByPostId(Long postId, Long commentId);
 
 }
 

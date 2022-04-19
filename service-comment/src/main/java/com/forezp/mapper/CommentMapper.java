@@ -3,6 +3,8 @@ package com.forezp.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.forezp.pojo.dao.CommentDao;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,4 +17,10 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface CommentMapper extends BaseMapper<CommentDao> {
+
+    /**
+     * 评论回复数+1
+     */
+    @Update("update ls_comment set replys=replys+1 where id = #{id}")
+    void autoIncrementreplysNumber(@Param("id") Long id);
 }
