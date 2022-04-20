@@ -24,7 +24,7 @@ public interface PostService {
 
     List<PostVo> queryByUid(Long id);
 
-    List<PostVo> trending();
+    List<PostVo> trending(UserInfo userInfo);
 
     void like(Long postId, UserInfo userInfo);
 

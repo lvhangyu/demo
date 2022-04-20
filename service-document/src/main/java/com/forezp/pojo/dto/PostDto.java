@@ -18,4 +18,9 @@ public class PostDto {
     private Integer type ;
     private String content ;
     private String images ;
+    private Long creatorId ;
+    private Integer likes ;
+    private Integer collections ;
+    private Integer comments ;
+    private Integer status;
 }

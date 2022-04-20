@@ -44,7 +44,7 @@ public class PostServiceImpl implements PostService {
         postDao.setStatus(0);
         postDao.setLikes(0);
         postDao.setComments(0);
-        postDao.setConllections(0);
+        postDao.setCollections(0);
         postMapper.insert(postDao);
         PostVo postVo = new PostVo();
         BeanUtils.copyProperties(postDao, postVo);
@@ -80,16 +80,30 @@ public class PostServiceImpl implements PostService {
         queryWrapper.eq("creator_id", id);
         List<PostDao> postDaoList = postMapper.selectList(queryWrapper);
         List<PostVo> postVoList =  BeanUtil.copyToList(postDaoList, PostVo.class, null);
+        for (PostVo p:postVoList) {
+            QueryWrapper postLikeQueryWrapper = new QueryWrapper();
+            postLikeQueryWrapper.eq("post_id", p.getId());
+            postLikeQueryWrapper.eq("user_id", id);
+            Boolean liked = postLikeMapper.exists(postLikeQueryWrapper);
+            p.setLiked(liked);
+        }
         return postVoList;
     }
 
     @Override
-    public List<PostVo> trending() {
+    public List<PostVo> trending(UserInfo userInfo) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("status", PostDao.PASSED);
         queryWrapper.orderByDesc("likes");
         List<PostDao> postDaoList = postMapper.selectList(queryWrapper);
         List<PostVo> postVoList =  BeanUtil.copyToList(postDaoList, PostVo.class, null);
+        for (PostVo p:postVoList) {
+            QueryWrapper postLikeQueryWrapper = new QueryWrapper();
+            postLikeQueryWrapper.eq("post_id", p.getId());
+            postLikeQueryWrapper.eq("user_id", userInfo.getId());
+            Boolean liked = postLikeMapper.exists(postLikeQueryWrapper);
+            p.setLiked(liked);
+        }
         return postVoList;
     }
 
