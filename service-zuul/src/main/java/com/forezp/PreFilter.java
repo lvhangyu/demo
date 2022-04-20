@@ -83,7 +83,8 @@ public class PreFilter extends ZuulFilter{
     private boolean isNeedToken(HttpServletRequest request) {
         if(
                 request.getRequestURI().startsWith("/user/login") ||
-                request.getRequestURI().startsWith("/user/register")
+                request.getRequestURI().startsWith("/user/register") ||
+                request.getRequestURI().contains("/v2/api-docs")
         ){
             return false;
         }

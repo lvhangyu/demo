@@ -10,6 +10,8 @@ import com.forezp.pojo.dto.CommentDto;
 import com.forezp.pojo.vo.CommentVo;
 import com.forezp.service.CommentService;
 import com.forezp.service.DocumentRestService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,7 @@ import java.util.stream.Collectors;
  * @Date 2022/3/30 10:15
  * Version 1.0
  */
+@Api(description = "测试源服务API接口")
 @RestController
 public class CommentController {
 
@@ -38,7 +41,7 @@ public class CommentController {
     @Autowired
     private DocumentRestService documentRestService;
 
-
+    @ApiOperation(value = "加法", notes = "加法")
     @PostMapping("/create")
     public ResultModel create(
             @CurrentUser UserInfo userInfo,

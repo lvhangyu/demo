@@ -8,5 +8,6 @@ user:http://127.0.0.1:8764
 fight:http://127.0.0.1:8763
 order:http://127.0.0.1:8766
 
+http://localhost:8769/swagger-ui.html#/
 
 mysql://192.168.18.4:3306
