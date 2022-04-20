@@ -60,7 +60,6 @@ public class PostController {
     @GetMapping("/query")
     public ResultModel<List<PostVo>> query(
             @CurrentUser UserInfo userInfo,
-            @RequestParam("id") Long id,
             HttpServletRequest request, HttpServletResponse response) {
         List<PostVo> postVoList = postService.query();
         return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success");
@@ -78,7 +77,7 @@ public class PostController {
     public ResultModel<List<PostVo>> trending(
             @CurrentUser UserInfo userInfo,
             HttpServletRequest request, HttpServletResponse response) {
-        List<PostVo> postVoList = postService.trending();
+        List<PostVo> postVoList = postService.trending(userInfo);
         return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(postVoList);
     }
 

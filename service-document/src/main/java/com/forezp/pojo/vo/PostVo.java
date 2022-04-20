@@ -22,9 +22,10 @@ public class PostVo {
     private String images ;
     private Long creatorId ;
     private Integer likes ;
-    private Integer conllections ;
+    private Integer collections ;
     private Integer comments ;
     private Integer status;
+    private boolean liked;
     private Date ctime;
     private Date mtime;
 }

@@ -40,8 +40,8 @@ public class PostDao {
     private Long creatorId ;
     @Column(name = "likes",comment = "点赞数")
     private Integer likes ;
-    @Column(name = "conllections",comment = "收藏数")
-    private Integer conllections ;
+    @Column(name = "collections",comment = "收藏数")
+    private Integer collections ;
     @Column(name = "comments",comment = "评论数")
     private Integer comments ;
     @Column(name = "status",comment = "帖子状态，0待审核，1审核通过，2审核未通过")

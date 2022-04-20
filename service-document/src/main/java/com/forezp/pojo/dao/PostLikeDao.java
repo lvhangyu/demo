@@ -18,8 +18,8 @@ import java.util.Date;
  * 帖子点赞记录表
  */
 @Data
-@Table(name = "ls_comment_like")
-@TableName("ls_comment_like")
+@Table(name = "ls_post_like")
+@TableName("ls_post_like")
 public class PostLikeDao {
 
     @TableId(type = IdType.AUTO) //mybatis-plus主键注解
