@@ -3,6 +3,7 @@ package com.forezp.service;
 import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dao.CommentDao;
 import com.forezp.pojo.dto.CommentDto;
+import com.forezp.pojo.vo.CommentVo;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public interface CommentService {
 
     void like(Long id, UserInfo userInfo);
 
-    List<CommentDao> getListByPostId(Long postId, Long commentId);
+    List<CommentVo> getListByPostId(Long postId, Long commentId, UserInfo userInfo);
 
 }
 
