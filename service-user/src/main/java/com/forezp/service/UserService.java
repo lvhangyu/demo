@@ -9,7 +9,7 @@ public interface UserService {
 
     UserVo login(UserDto userDto) throws MyException;
 
-    UserVo register(UserDto userDto);
+    UserVo register(UserDto userDto) throws MyException;
 
 
     UserVo update(UserDto userDto, UserInfo userInfo);
