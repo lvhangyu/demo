@@ -93,7 +93,7 @@ public class CommentController {
     }
 
     @PostMapping("/unlike/{id}")
-    public ResultModel UnLike(
+    public ResultModel unLike(
             @CurrentUser UserInfo userInfo,
             @PathVariable("id") Long commentId,
             HttpServletRequest request, HttpServletResponse response){
