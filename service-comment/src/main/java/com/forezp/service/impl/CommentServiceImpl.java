@@ -89,4 +89,12 @@ public class CommentServiceImpl implements CommentService {
 
         return commentVoList;
     }
+
+    @Override
+    public void unlike(Long commentId, UserInfo userInfo) {
+        Map map1 = new HashMap();
+        map1.put("comment_id",commentId);
+        map1.put("user_id",userInfo.getId());
+        commentLikeMapper.deleteByMap(map1);
+    }
 }

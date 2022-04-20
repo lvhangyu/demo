@@ -24,5 +24,6 @@ public interface CommentService {
 
     List<CommentVo> getListByPostId(Long postId, Long commentId, UserInfo userInfo);
 
+    void unlike(Long commentId, UserInfo userInfo);
 }
 

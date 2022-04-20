@@ -92,4 +92,13 @@ public class CommentController {
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
     }
 
+    @PostMapping("/unlike/{id}")
+    public ResultModel UnLike(
+            @CurrentUser UserInfo userInfo,
+            @PathVariable("id") Long commentId,
+            HttpServletRequest request, HttpServletResponse response){
+        commentService.unlike(commentId, userInfo);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
+
 }
