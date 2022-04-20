@@ -65,6 +65,7 @@ public class CommentServiceImpl implements CommentService {
 //        commentLikeDao.setPostId(0L);
         commentLikeDao.setCommentId(id);
         commentLikeDao.setUserId(userInfo.getId());
+        commentLikeMapper.insert(commentLikeDao);
         //todo insert
     }
 
