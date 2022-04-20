@@ -26,10 +26,7 @@ zuul:
       path: /user/**
       serviceId: service-user
     api-document:
-      path: /document/**
-      serviceId: service-document
-    api-post:
-      path: /post/**
+      path: /resource/**
       serviceId: service-document
     api-comment:
       path: /comment/**
