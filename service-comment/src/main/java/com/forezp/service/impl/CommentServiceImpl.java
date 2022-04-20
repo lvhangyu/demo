@@ -38,7 +38,7 @@ public class CommentServiceImpl implements CommentService {
     public CommentDao save(CommentDto commentDto, UserInfo userInfo) {
         //评论的回复数量+1
         if(commentDto.getParentId() != null){
-            commentMapper.autoIncrementreplysNumber(commentDto.getParentId());
+            commentMapper.autoIncrementReplysNumber(commentDto.getParentId());
         }
         CommentDao commentDao = new CommentDao();
         BeanUtils.copyProperties(commentDto, commentDao);
@@ -83,7 +83,7 @@ public class CommentServiceImpl implements CommentService {
             map1.put("user_id",userInfo.getId());
             List<CommentLikeDao> commentLikeDaoList = commentLikeMapper.selectByMap(map1);
             if(commentLikeDaoList != null && commentLikeDaoList.size() > 0){
-                commentVo.setIlike(true);
+                commentVo.setLiked(true);
             }
         }
 
@@ -93,6 +93,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void unlike(Long commentId, UserInfo userInfo) {
+        commentMapper.unlike(commentId);
         Map map1 = new HashMap();
         map1.put("comment_id",commentId);
         map1.put("user_id",userInfo.getId());

@@ -14,6 +14,7 @@ import com.forezp.service.PostService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -92,8 +93,10 @@ public class PostServiceImpl implements PostService {
         return postVoList;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void like(Long postId, UserInfo userInfo) {
+        postMapper.like(postId);
         PostLikeDao postLikeDao = new PostLikeDao();
         postLikeDao.setCtime(new Date());
         postLikeDao.setMtime(new Date());
@@ -104,6 +107,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void unlike(Long postId, UserInfo userInfo) {
+        //-1
+        postMapper.unlike(postId);
         Map map1 = new HashMap();
         map1.put("post_id", postId);
         map1.put("user_id", userInfo.getId());
