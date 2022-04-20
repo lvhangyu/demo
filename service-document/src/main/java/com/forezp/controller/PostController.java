@@ -81,4 +81,13 @@ public class PostController {
         List<PostVo> postVoList = postService.trending();
         return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(postVoList);
     }
+
+    @PostMapping("/like/{id}")
+    public ResultModel giveALike(
+            @CurrentUser UserInfo userInfo,
+            @PathVariable("id") Long postId,
+            HttpServletRequest request, HttpServletResponse response){
+        postService.like(postId, userInfo);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
 }

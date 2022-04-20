@@ -8,7 +8,10 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsAutoIncrement;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
+import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Data;
+
+import java.util.Date;
 
 
 /**
@@ -28,4 +31,8 @@ public class PostLikeDao {
     private Long postId;
     @Column(name = "user_id", comment = "用户id")
     private Long userId;
+    @Column(name = "ctime", comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)
+    private Date ctime;
+    @Column(name = "mtime", comment = "修改时间", type = MySqlTypeConstant.TIMESTAMP)
+    private Date mtime;
 }

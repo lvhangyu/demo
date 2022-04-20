@@ -7,6 +7,7 @@ import com.forezp.mapper.PostMapper;
 import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dao.DocumentDao;
 import com.forezp.pojo.dao.PostDao;
+import com.forezp.pojo.dao.PostLikeDao;
 import com.forezp.pojo.dto.PostDto;
 import com.forezp.pojo.vo.PostVo;
 import com.forezp.service.PostService;
@@ -87,5 +88,15 @@ public class PostServiceImpl implements PostService {
         List<PostDao> postDaoList = postMapper.selectList(queryWrapper);
         List<PostVo> postVoList =  BeanUtil.copyToList(postDaoList, PostVo.class, null);
         return postVoList;
+    }
+
+    @Override
+    public void like(Long postId, UserInfo userInfo) {
+        PostLikeDao postLikeDao = new PostLikeDao();
+        postLikeDao.setCtime(new Date());
+        postLikeDao.setMtime(new Date());
+        postLikeDao.setPostId(postId);
+        postLikeDao.setUserId(userInfo.getId());
+        postLikeMapper.insert(postLikeDao);
     }
 }
