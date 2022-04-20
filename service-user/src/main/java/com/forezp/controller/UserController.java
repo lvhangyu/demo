@@ -60,7 +60,7 @@ public class UserController {
     @PostMapping("/register")
     public ResultModel register(
             @RequestBody UserDto userDto,
-            HttpServletRequest request, HttpServletResponse response){
+            HttpServletRequest request, HttpServletResponse response) throws MyException {
 //        UserDto userDto1 = new UserDto();
 //        userDto1.setUsername("aaa");
 //        userDto1.setPassword(DigestUtils.md5DigestAsHex("abc".getBytes()));

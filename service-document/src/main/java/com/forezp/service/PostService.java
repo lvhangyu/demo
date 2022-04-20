@@ -27,4 +27,6 @@ public interface PostService {
     List<PostVo> trending(UserInfo userInfo);
 
     void like(Long postId, UserInfo userInfo);
+
+    void unlike(Long postId, UserInfo userInfo);
 }

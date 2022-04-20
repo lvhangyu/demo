@@ -79,10 +79,7 @@ public class CommentController {
             @RequestParam("post_id") Long postId,
             @RequestParam(value = "comment_id", required = false) Long commentId,
             HttpServletRequest request, HttpServletResponse response){
-        List<CommentDao> commentDaoList = commentService.getListByPostId(postId, commentId);
-        CopyOptions copyOptions = new CopyOptions();
-        copyOptions.ignoreCase();
-        List<CommentVo> commentVoList = BeanUtil.copyToList(commentDaoList, CommentVo.class,copyOptions);
+        List<CommentVo> commentVoList = commentService.getListByPostId(postId, commentId, userInfo);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(commentVoList);
     }
 
@@ -92,6 +89,15 @@ public class CommentController {
             @PathVariable("id") Long commentId,
             HttpServletRequest request, HttpServletResponse response){
         commentService.like(commentId, userInfo);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
+
+    @PostMapping("/unlike/{id}")
+    public ResultModel unLike(
+            @CurrentUser UserInfo userInfo,
+            @PathVariable("id") Long commentId,
+            HttpServletRequest request, HttpServletResponse response){
+        commentService.unlike(commentId, userInfo);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
     }
 

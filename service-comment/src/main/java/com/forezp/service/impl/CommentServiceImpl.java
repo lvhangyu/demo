@@ -4,11 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
+import com.forezp.mapper.CommentLikeMapper;
 import com.forezp.mapper.CommentMapper;
 import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dao.CommentDao;
 import com.forezp.pojo.dao.CommentLikeDao;
 import com.forezp.pojo.dto.CommentDto;
+import com.forezp.pojo.vo.CommentVo;
 import com.forezp.service.CommentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentMapper commentMapper;
+    @Autowired
+    private CommentLikeMapper commentLikeMapper;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -59,15 +65,37 @@ public class CommentServiceImpl implements CommentService {
 //        commentLikeDao.setPostId(0L);
         commentLikeDao.setCommentId(id);
         commentLikeDao.setUserId(userInfo.getId());
+        commentLikeMapper.insert(commentLikeDao);
         //todo insert
     }
 
     @Override
-    public List<CommentDao> getListByPostId(Long postId, Long commentId) {
+    public List<CommentVo> getListByPostId(Long postId, Long commentId, UserInfo userInfo) {
         Map<String,Object> map = new HashMap<>();
         map.put("post_id", postId);
         map.put("parent_id", commentId);
         List<CommentDao> commentDaoList = commentMapper.selectByMap(map);
-        return commentDaoList;
+        List<CommentVo> commentVoList = BeanUtil.copyToList(commentDaoList, CommentVo.class,null);
+        //判断是否点赞过
+        for(CommentVo commentVo : commentVoList){
+            Map map1 = new HashMap();
+            map1.put("comment_id",commentVo.getId());
+            map1.put("user_id",userInfo.getId());
+            List<CommentLikeDao> commentLikeDaoList = commentLikeMapper.selectByMap(map1);
+            if(commentLikeDaoList != null && commentLikeDaoList.size() > 0){
+                commentVo.setIlike(true);
+            }
+        }
+
+
+        return commentVoList;
+    }
+
+    @Override
+    public void unlike(Long commentId, UserInfo userInfo) {
+        Map map1 = new HashMap();
+        map1.put("comment_id",commentId);
+        map1.put("user_id",userInfo.getId());
+        commentLikeMapper.deleteByMap(map1);
     }
 }
