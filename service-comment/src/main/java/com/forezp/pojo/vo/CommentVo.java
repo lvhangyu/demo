@@ -15,7 +15,7 @@ public class CommentVo {
     private String content;
     private Integer likes;
     private Integer replys;
-    private List<CommentVo> commentVoList;
+//    private List<CommentVo> commentVoList;
     private Date ctime;
     private Date mtime;
 }
