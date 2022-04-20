@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName PostServiceImpl
@@ -98,5 +100,13 @@ public class PostServiceImpl implements PostService {
         postLikeDao.setPostId(postId);
         postLikeDao.setUserId(userInfo.getId());
         postLikeMapper.insert(postLikeDao);
+    }
+
+    @Override
+    public void unlike(Long postId, UserInfo userInfo) {
+        Map map1 = new HashMap();
+        map1.put("post_id", postId);
+        map1.put("user_id", userInfo.getId());
+        postLikeMapper.deleteByMap(map1);
     }
 }

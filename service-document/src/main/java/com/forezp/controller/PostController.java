@@ -90,4 +90,13 @@ public class PostController {
         postService.like(postId, userInfo);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
     }
+
+    @PostMapping("/unlike/{id}")
+    public ResultModel unLike(
+            @CurrentUser UserInfo userInfo,
+            @PathVariable("id") Long postId,
+            HttpServletRequest request, HttpServletResponse response){
+        postService.unlike(postId, userInfo);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
 }
