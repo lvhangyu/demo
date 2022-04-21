@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVo login(UserDto userDto) throws MyException {
         QueryWrapper<UserDao> wrapperUser = new QueryWrapper<>();
-        wrapperUser.eq("username", userDto.getUsername());
+        wrapperUser.eq("number", userDto.getNumber());
         wrapperUser.eq("password", DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
         //throw new MyException(HttpStatus.UNAUTHORIZED.value(), "Incorrect account password");
         UserDao userDao = userMapper.selectOne(wrapperUser);
