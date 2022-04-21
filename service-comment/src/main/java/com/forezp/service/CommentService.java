@@ -1,5 +1,6 @@
 package com.forezp.service;
 
+import com.forezp.exception.MyException;
 import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dao.CommentDao;
 import com.forezp.pojo.dto.CommentDto;
@@ -18,7 +19,7 @@ public interface CommentService {
 
     CommentDao save(CommentDto commentDto, UserInfo userInfo);
 
-    void delete(Long id);
+    void delete(Long id) throws MyException;
 
     void like(Long id, UserInfo userInfo);
 

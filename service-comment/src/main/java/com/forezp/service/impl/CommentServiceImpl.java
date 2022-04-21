@@ -6,6 +6,7 @@ import java.util.Map;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
+import com.forezp.exception.MyException;
 import com.forezp.mapper.CommentLikeMapper;
 import com.forezp.mapper.CommentMapper;
 import com.forezp.mvc.UserInfo;
@@ -51,8 +52,15 @@ public class CommentServiceImpl implements CommentService {
         return commentDao;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public void delete(Long id) {
+    public void delete(Long id) throws MyException {
+        //找到父级评论 评论数-1
+        CommentDao commentDao = commentMapper.selectById(id);
+        if(null != commentDao){
+            throw new MyException(400, "评论不存在");
+        }
+        commentMapper.autodecreaseReplysNumber(commentDao.getParentId());
         commentMapper.deleteById(id);
     }
 

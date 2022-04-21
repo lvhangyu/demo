@@ -2,6 +2,7 @@ package com.forezp.controller;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import com.alibaba.fastjson.JSONObject;
+import com.forezp.exception.MyException;
 import com.forezp.mvc.CurrentUser;
 import com.forezp.mvc.ResultModel;
 import com.forezp.mvc.UserInfo;
@@ -66,7 +67,7 @@ public class CommentController {
     public ResultModel delete(
             @CurrentUser UserInfo userInfo,
             @PathVariable("id") Long commentId,
-            HttpServletRequest request, HttpServletResponse response){
+            HttpServletRequest request, HttpServletResponse response) throws MyException {
         commentService.delete(commentId);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
     }
