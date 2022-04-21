@@ -1,5 +1,6 @@
 package com.forezp.controller;
 
+import cn.hutool.http.server.HttpServerRequest;
 import com.forezp.exception.MyException;
 import com.forezp.feign.UserServiceFeign;
 import com.forezp.mvc.CurrentUser;
@@ -15,6 +16,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 import org.apache.tomcat.util.codec.binary.Base64;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 @RestController
@@ -30,7 +33,7 @@ public class ChangePasswordController {
     public void changePassword(
             @RequestParam(required = false, value = "new_pwd") String newPwd,
             @RequestParam(required = false, value = "email") String email,
-            HttpRequest httpRequest, HttpResponse httpResponse
+            HttpServletRequest httpRequest, HttpServletResponse httpResponse
     ){
         UserVo userVo = userServiceFeign.getEmailMatch(email);
         if (null != userVo){

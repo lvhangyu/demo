@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(userDto, userDao);
         userDao.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
         userDao.setRegistrationTime(new Date());
+        userDao.setNumber(userDto.getNumber());
         userDao.setCtime(new Date());
         userDao.setMtime(new Date());
         int r = userMapper.insert(userDao);

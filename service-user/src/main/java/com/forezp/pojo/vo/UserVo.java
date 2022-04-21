@@ -10,6 +10,7 @@ public class UserVo {
     private Long id;
     private Integer role;
     private String username;
+    private String number;
     private Integer gender;
     private Integer age;
     private String email;
