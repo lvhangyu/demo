@@ -16,6 +16,7 @@ import org.springframework.util.DigestUtils;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -40,7 +41,8 @@ public class UserServiceImpl implements UserService {
     public UserVo register(UserDto userDto) throws MyException {
         Map map = new HashMap<>();
         map.put("username",userDto.getUsername());
-        if(null != userMapper.selectByMap(map)){
+        List<UserDao> userDaoList = userMapper.selectByMap(map);
+        if(null != userDaoList && userDaoList.size() > 0){
             throw new MyException(400, "用户名已存在");
         }
         UserDao userDao = new UserDao();
