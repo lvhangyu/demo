@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
     private static Logger log = LoggerFactory.getLogger(UserController.class);
     @Autowired
@@ -86,11 +87,11 @@ public class UserController {
     }
 
 
-    @PostMapping("/search")
-    public ResultModel search(
-            @RequestBody UserDto userDto,
+    @GetMapping("/emailMatch")
+    public ResultModel emailMatch(
+            @RequestParam String email,
             HttpServletRequest request, HttpServletResponse response){
-        UserVo userVo =  userService.search();
+        UserVo userVo =  userService.emailMatch(email);
         return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
     }
 }

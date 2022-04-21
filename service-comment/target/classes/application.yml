@@ -6,31 +6,24 @@ server:
   port: 8763
 spring:
   application:
-    name: service-approve
+    name: service-comment
   zipkin:
     base-url: http://localhost:9411
   datasource:
     type: org.apache.tomcat.jdbc.pool.DataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/attendance_management_system?zeroDateTimeBehavior=round&useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/english_mutual_aid_platform?zeroDateTimeBehavior=round&useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
   jackson:
     default-property-inclusion: non_null
-    date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-  mail:
-    host: smtp.qq.com
-    port: 465
-    username: sjenterrement@qq.com
-    password: hwiuzyqikegvgdib
-    default-encoding: UTF-8
-    properties:
-      mail:
-        smtp:
-          socketFactoryClass: javax.net.ssl.SSLSocketFactory
-        mail:
-          debug: true
+    date-format: yyyy-MM-dd HH:mm:ss
+feign:
+  hystrix:
+    enabled: true
+
+
 mybatis:
   table:
     auto: update

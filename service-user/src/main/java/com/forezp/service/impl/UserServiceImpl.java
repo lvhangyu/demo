@@ -66,4 +66,14 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(userDao, userVo);
         return userVo;
     }
+
+    @Override
+    public UserVo emailMatch(String email) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("email", email);
+        UserDao userDao = userMapper.selectOne(queryWrapper);
+        UserVo userVo = new UserVo();
+        BeanUtils.copyProperties(userVo, userDao);
+        return userVo;
+    }
 }

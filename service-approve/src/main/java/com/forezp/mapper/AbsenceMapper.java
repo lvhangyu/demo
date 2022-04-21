@@ -5,7 +5,7 @@ import com.forezp.pojo.dao.AbsenceDao;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-@Repository
 @Mapper
+@Repository
 public interface AbsenceMapper extends BaseMapper<AbsenceDao> {
 }

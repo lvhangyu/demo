@@ -48,7 +48,7 @@ public class PreFilter extends ZuulFilter{
 
         Object accessToken = request.getParameter("token");
         if(accessToken == null) {
-            accessToken = request.getHeader("Authorization");
+            accessToken = request.getHeader("token");
             if(accessToken == null){
                 log.warn("token is empty");
                 ctx.setSendZuulResponse(false);
@@ -83,7 +83,8 @@ public class PreFilter extends ZuulFilter{
     private boolean isNeedToken(HttpServletRequest request) {
         if(
                 request.getRequestURI().startsWith("/user/login") ||
-                request.getRequestURI().startsWith("/user/register")
+                        request.getRequestURI().startsWith("/user/register") ||
+                        request.getRequestURI().startsWith("/approve/changePassword")
         ){
             return false;
         }
