@@ -83,4 +83,22 @@ public class DocumnetController {
         List<DocumentVo> documentVoList = BeanUtil.copyToList(documentDaoList, DocumentVo.class, null);
         return new ResultModel<List<DocumentVo>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(documentVoList);
     }
+
+    @PostMapping("/collect/{id}")
+    public ResultModel collect(
+            @CurrentUser UserInfo userInfo,
+            @PathVariable("id") Long documentId,
+            HttpServletRequest request, HttpServletResponse response){
+        documentService.collect(documentId, userInfo);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
+
+    @PostMapping("/collect/cancel/{id}")
+    public ResultModel cancelCollect(
+            @CurrentUser UserInfo userInfo,
+            @PathVariable("id") Long documentId,
+            HttpServletRequest request, HttpServletResponse response){
+        documentService.cancelCollect(documentId, userInfo);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
 }

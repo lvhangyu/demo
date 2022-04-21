@@ -1,5 +1,6 @@
 package com.forezp.service;
 
+import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dao.DocumentDao;
 import com.forezp.pojo.dto.DocumentDto;
 
@@ -14,4 +15,8 @@ public interface DocumentService {
     DocumentDao update(DocumentDto documentDto);
 
     List<DocumentDao> list();
+
+    void collect(Long documentId, UserInfo userInfo);
+
+    void cancelCollect(Long documentId, UserInfo userInfo);
 }

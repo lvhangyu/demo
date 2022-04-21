@@ -2,9 +2,11 @@ package com.forezp.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.forezp.mapper.CollectionMapper;
 import com.forezp.mapper.PostLikeMapper;
 import com.forezp.mapper.PostMapper;
 import com.forezp.mvc.UserInfo;
+import com.forezp.pojo.dao.CollectionDao;
 import com.forezp.pojo.dao.DocumentDao;
 import com.forezp.pojo.dao.PostDao;
 import com.forezp.pojo.dao.PostLikeDao;
@@ -35,6 +37,9 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private PostLikeMapper postLikeMapper;
+
+    @Autowired
+    private CollectionMapper collectionMapper;
 
     @Override
     public PostVo create(UserInfo userInfo, PostDto postDto) {
@@ -127,5 +132,27 @@ public class PostServiceImpl implements PostService {
         map1.put("post_id", postId);
         map1.put("user_id", userInfo.getId());
         postLikeMapper.deleteByMap(map1);
+    }
+
+    @Override
+    public void collect(Long postId, UserInfo userInfo) {
+        postMapper.collect(postId);
+        CollectionDao collectionDao = new CollectionDao();
+        collectionDao.setNoteId(postId);
+        collectionDao.setUserId(userInfo.getId());
+        collectionDao.setType(0);
+        collectionDao.setCtime(new Date());
+        collectionDao.setMtime(new Date());
+        collectionMapper.insert(collectionDao);
+    }
+
+    @Override
+    public void cancelCollect(Long postId, UserInfo userInfo) {
+        postMapper.cancelCollect(postId);
+        CollectionDao collectionDao = new CollectionDao();
+        collectionDao.setNoteId(postId);
+        collectionDao.setUserId(userInfo.getId());
+        collectionDao.setType(0);
+        collectionMapper.deleteById(collectionDao);
     }
 }

@@ -30,6 +30,8 @@ public class DocumentDao {
     private String content;
     @Column(name = "images",comment = "图片")
     private String images;
+    @Column(name = "collections",comment = "收藏数")
+    private Integer collections;
     @Column(name = "ctime", comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date ctime;
     @Column(name = "mtime", comment = "修改时间", type = MySqlTypeConstant.TIMESTAMP)

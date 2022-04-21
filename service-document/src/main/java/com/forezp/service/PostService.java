@@ -29,4 +29,8 @@ public interface PostService {
     void like(Long postId, UserInfo userInfo);
 
     void unlike(Long postId, UserInfo userInfo);
+
+    void collect(Long postId, UserInfo userInfo);
+
+    void cancelCollect(Long postId, UserInfo userInfo);
 }

@@ -98,4 +98,22 @@ public class PostController {
         postService.unlike(postId, userInfo);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
     }
+
+    @PostMapping("/collect/{id}")
+    public ResultModel collect(
+            @CurrentUser UserInfo userInfo,
+            @PathVariable("id") Long postId,
+            HttpServletRequest request, HttpServletResponse response){
+        postService.collect(postId, userInfo);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
+
+    @PostMapping("/collect/cancel/{id}")
+    public ResultModel cancelCollect(
+            @CurrentUser UserInfo userInfo,
+            @PathVariable("id") Long postId,
+            HttpServletRequest request, HttpServletResponse response){
+        postService.cancelCollect(postId, userInfo);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
 }

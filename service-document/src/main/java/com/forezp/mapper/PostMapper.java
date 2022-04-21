@@ -30,4 +30,16 @@ public interface PostMapper extends BaseMapper<PostDao> {
      */
     @Update("update ls_post set likes=likes-1 where id = #{id}")
     void unlike(@Param("id") Long id);
+
+    /**
+     * 帖子收藏+1
+     */
+    @Update("update ls_post set collections=collections+1 where id = #{id}")
+    void collect(@Param("id") Long id);
+
+    /**
+     * 帖子收藏-1
+     */
+    @Update("update ls_post set collections=collections-1 where id = #{id}")
+    void cancelCollect(@Param("id") Long id);
 }

@@ -27,7 +27,7 @@ public class CollectionDao {
     @Column(name = "user_id",comment = "角色id")
     private Long userId;
     @Column(name = "note_id",comment = "帖子/资源id")
-    private Integer noteId;
+    private Long noteId;
     @Column(name = "type",comment = "0帖子1资源")
     private Integer type;
     @Column(name = "ctime", comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)
