@@ -57,7 +57,7 @@ public class CommentServiceImpl implements CommentService {
     public void delete(Long id) throws MyException {
         //找到父级评论 评论数-1
         CommentDao commentDao = commentMapper.selectById(id);
-        if(null != commentDao){
+        if(null == commentDao){
             throw new MyException(400, "评论不存在");
         }
         commentMapper.autodecreaseReplysNumber(commentDao.getParentId());
