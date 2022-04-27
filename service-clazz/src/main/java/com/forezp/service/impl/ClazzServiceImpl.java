@@ -7,6 +7,7 @@ import com.forezp.pojo.dao.ClazzDao;
 import com.forezp.pojo.vo.ClazzVo;
 import com.forezp.service.ClazzService;
 import com.forezp.util.ExcelUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -33,8 +34,8 @@ public class ClazzServiceImpl implements ClazzService {
         }
         ClazzDao clazzDao = parseExeclData(dataList);
         clazzMapper.insert(clazzDao);
-
-        return null;
+        BeanUtils.copyProperties(clazzDao, clazzVo);
+        return clazzVo;
     }
 
     private ClazzDao parseExeclData(List<List<String>> dataList) {
@@ -58,7 +59,8 @@ public class ClazzServiceImpl implements ClazzService {
             System.out.println(dayMap);
             contentMap.put(dayStrs[i], dayMap);
         }
-        clazzDao.setContent(contentMap.toString());
+        String content = contentMap.toString().trim().replace("\n","");
+        clazzDao.setContent(content);
         return clazzDao;
     }
 
