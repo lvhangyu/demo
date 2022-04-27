@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(value = "service-user",fallback = UserServiceHystric.class)
 public interface UserServiceFeign {
-    @RequestMapping(value = "/user/emailMatch", method = RequestMethod.GET)
+    @RequestMapping(value = "/emailMatch", method = RequestMethod.GET)
     UserVo getEmailMatch(@RequestParam(value = "email") String email);
 
-    @RequestMapping(value = "/user/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     String update(@RequestBody UserDto userDto);
 }

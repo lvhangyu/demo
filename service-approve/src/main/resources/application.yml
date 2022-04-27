@@ -21,7 +21,7 @@ spring:
     time-zone: GMT+8
   mail:
     host: smtp.qq.com
-    port: 465
+    port: 587
     username: sjenterrement@qq.com
     password: hwiuzyqikegvgdib
     default-encoding: UTF-8

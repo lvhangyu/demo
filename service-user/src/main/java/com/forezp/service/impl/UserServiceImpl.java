@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
         queryWrapper.eq("email", email);
         UserDao userDao = userMapper.selectOne(queryWrapper);
         UserVo userVo = new UserVo();
-        BeanUtils.copyProperties(userVo, userDao);
+        BeanUtils.copyProperties(userDao, userVo);
         return userVo;
     }
 

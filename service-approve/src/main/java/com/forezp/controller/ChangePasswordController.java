@@ -4,6 +4,7 @@ import cn.hutool.http.server.HttpServerRequest;
 import com.forezp.exception.MyException;
 import com.forezp.feign.UserServiceFeign;
 import com.forezp.mvc.CurrentUser;
+import com.forezp.mvc.ResultModel;
 import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.feign.UserDto;
 import com.forezp.pojo.feign.UserVo;
@@ -11,6 +12,7 @@ import com.netflix.client.http.HttpRequest;
 import com.netflix.client.http.HttpResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
@@ -30,11 +32,11 @@ public class ChangePasswordController {
     JavaMailSender javaMailSender;
 
     @PostMapping("/changePassword")
-    public void changePassword(
+    public ResultModel changePassword(
             @RequestParam(required = false, value = "new_pwd") String newPwd,
             @RequestParam(required = false, value = "email") String email,
             HttpServletRequest httpRequest, HttpServletResponse httpResponse
-    ){
+    ) throws MyException {
         UserVo userVo = userServiceFeign.getEmailMatch(email);
         if (null != userVo){
             UserDto userDto = new UserDto();
@@ -52,8 +54,9 @@ public class ChangePasswordController {
             message.setSentDate(new Date());
             message.setText("您的密码已重置");
             javaMailSender.send(message);
+            return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success");
         }else {
-            new MyException(404, "error email");
+            throw new MyException(404, "error email");
         }
     }
 }
