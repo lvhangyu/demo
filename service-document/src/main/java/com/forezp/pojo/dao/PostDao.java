@@ -30,12 +30,14 @@ public class PostDao {
     private Long id;
     @Column(name = "title",comment = "标题")
     private String title ;
-    @Column(name = "type",comment = "类型")
-    private Integer type ;
     @Column(name = "content",comment = "内容")
     private String content ;
     @Column(name = "images",comment = "图片")
     private String images ;
+    @Column(name = "video",comment = "视频")
+    private String video ;
+    @Column(name = "video_cover_img",comment = "图片")
+    private String videoCoverImg ;
     @Column(name = "creator_id",comment = "创建人")
     private Long creatorId ;
     @Column(name = "likes",comment = "点赞数")

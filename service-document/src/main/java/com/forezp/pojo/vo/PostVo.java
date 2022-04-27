@@ -17,9 +17,10 @@ import java.util.Date;
 public class PostVo {
     private Long id;
     private String title ;
-    private Integer type ;
     private String content ;
     private String images ;
+    private String video ;
+    private String videoCoverImg ;
     private Long creatorId ;
     private Integer likes ;
     private Integer collections ;

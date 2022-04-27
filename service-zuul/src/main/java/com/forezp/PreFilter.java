@@ -48,6 +48,7 @@ public class PreFilter extends ZuulFilter{
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type,token");
 
+
         if(!isNeedToken(request)){
             log.info("not need token");
             return null;

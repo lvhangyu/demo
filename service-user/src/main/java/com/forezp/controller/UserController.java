@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @RestController
+@CrossOrigin
 public class UserController {
     private static Logger log = LoggerFactory.getLogger(UserController.class);
     @Autowired

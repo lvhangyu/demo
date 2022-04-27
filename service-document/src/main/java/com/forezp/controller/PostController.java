@@ -3,6 +3,7 @@ package com.forezp.controller;
 import com.forezp.mvc.CurrentUser;
 import com.forezp.mvc.ResultModel;
 import com.forezp.mvc.UserInfo;
+import com.forezp.pojo.dao.PostDao;
 import com.forezp.pojo.dto.PostDto;
 import com.forezp.pojo.vo.PostVo;
 import com.forezp.service.PostService;
@@ -38,6 +39,12 @@ public class PostController {
         PostVo postVo = postService.create(userInfo, postDto);
         return new ResultModel<PostVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(postVo);
     }
+
+    public static void main(String[] args) {
+        PostDao postDao = new PostDao();
+
+    }
+
 
     @PostMapping("/update")
     public ResultModel<PostVo> update(
