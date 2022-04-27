@@ -30,12 +30,12 @@ public class AbsenceController {
         return new ResultModel<AbsenceVo>().setCode(HttpStatus.HTTP_OK).setMsg("seccuss").setData(absenceVo);
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/delete/{id}")
     public ResultModel delete(
-            @RequestBody AbsenceDto absenceDto,
+           @PathVariable(value = "id") Long id,
             HttpRequest httpRequest, HttpResponse httpResponse
     ){
-        absenceService.create(absenceDto);
+        absenceService.delete(id);
         return new ResultModel().setCode(HttpStatus.HTTP_OK).setMsg("seccuss");
     }
 

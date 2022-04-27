@@ -85,6 +85,15 @@ public class UserController {
         return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
     }
 
+    @PostMapping("/delete/{id}")
+    public ResultModel delete(
+            @CurrentUser UserInfo userInfo,
+            @PathVariable(value = "id") Long id,
+            HttpServletRequest request, HttpServletResponse response){
+        userService.delete(id);
+        return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
+
 
     @GetMapping("/emailMatch")
     public ResultModel emailMatch(

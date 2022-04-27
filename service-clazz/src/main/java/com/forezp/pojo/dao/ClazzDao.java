@@ -26,6 +26,6 @@ public class ClazzDao {
     @Column(comment = "主键id")                   //对应数据库字段，不配置name会直接采用属性名作为字段名
     private Long id;
     @IsNotNull
-    @Column(name = "content",comment = "课表内容")
+    @Column(name = "content",comment = "课表内容", length = 512)
     private String content;
 }

@@ -16,7 +16,7 @@ import java.util.Date;
  * Version 1.0
  */
 @Data
-@Table(name = "ls_ams_major")
+@Table(name = "ls_major")
 public class MajorDao {
     /**
      * 主键
@@ -26,7 +26,6 @@ public class MajorDao {
     @IsAutoIncrement             //自增
     @Column(comment = "主键id")                   //对应数据库字段，不配置name会直接采用属性名作为字段名
     private Long id;
-    @IsNotNull
     @Column(name = "number",comment = "专业编号")
     private String number;
     @IsNotNull

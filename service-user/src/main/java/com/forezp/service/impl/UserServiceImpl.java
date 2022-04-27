@@ -77,4 +77,9 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(userVo, userDao);
         return userVo;
     }
+
+    @Override
+    public void delete(Long id) {
+        userMapper.deleteById(id);
+    }
 }

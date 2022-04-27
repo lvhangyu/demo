@@ -37,6 +37,8 @@ public class UserDao {
     private String mobile;
     @Column(name = "registration_time",comment = "注册时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date registrationTime;
+    @Column(name = "major_id",comment = "专业id")
+    private String majorId;
     @Column(name = "password",comment = "密码")
     private String password;
     @Column(name = "ctime", comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)
