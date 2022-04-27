@@ -13,6 +13,7 @@ public class UserDto {
     private String username;
     private String password;
     private String number;
+    private String majorId;
     private Integer role;
     private Integer gender;
     private Integer age;

@@ -16,8 +16,8 @@ import org.hibernate.validator.constraints.Length;
  * Version 1.0
  */
 @Data
-@Table(name = "ls_clazz")
-@TableName("ls_clazz")
+//@Table(name = "ls_clazz")
+//@TableName("ls_clazz")
 public class ClazzDao {
     /**
      * 主键

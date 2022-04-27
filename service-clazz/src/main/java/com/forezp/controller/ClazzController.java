@@ -1,27 +1,23 @@
 package com.forezp.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.forezp.exception.MyException;
 import com.forezp.mvc.CurrentUser;
+import com.forezp.mvc.ResultModel;
 import com.forezp.mvc.UserInfo;
-import com.forezp.pojo.vo.ClazzVo;
-import com.forezp.service.ClazzService;
+import com.forezp.pojo.vo.MajorClazzVo;
+import com.forezp.pojo.vo.MajorVo;
+import com.forezp.service.MajorClazzService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.apache.commons.io.IOUtils;
+import cn.hutool.http.HttpStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,10 +31,10 @@ import java.util.List;
 @RequestMapping("/class")
 public class ClazzController {
     @Autowired
-    private ClazzService clazzService;
+    private MajorClazzService majorClazzService;
 
     @PostMapping(value="/import")
-    public void clazzImport(
+    public ResultModel clazzImport(
             @RequestParam(required = true, value="major_number") String majorNumber,
             @RequestParam(required = true, value="major_name") String majorName,
             @CurrentUser UserInfo userInfo,
@@ -53,7 +49,7 @@ public class ClazzController {
         String fileType = "";
         //读取文件内容
         InputStream is = null;
-        ClazzVo clazzVo = new ClazzVo();
+        MajorClazzVo majorClazzVo = new MajorClazzVo();
         try {
             is = file.getInputStream();
             String name = file.getOriginalFilename();
@@ -62,22 +58,39 @@ public class ClazzController {
             byte[] buf = IOUtils.toByteArray(is);
             //在需要用到InputStream的地方再封装成InputStream
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(buf);
-            clazzVo = clazzService.importClazz(byteArrayInputStream,userInfo,fileType,majorNumber,majorName);
+            majorClazzVo = majorClazzService.importMajorClazz(byteArrayInputStream,userInfo,fileType,majorNumber,majorName);
 
         } finally {
             IOUtils.closeQuietly(is);
         }
-        String retStr = clazzVo.toString();
-        resp.setContentType("application/json; charset=utf-8");
-        String text = "";
-        if(retStr instanceof String){
-            text = retStr;
-        }else{
-            text = JSON.toJSONString(retStr, SerializerFeature.WriteMapNullValue,
-                    SerializerFeature.WriteNullStringAsEmpty);
-        }
-        resp.getWriter().write(text);
+        return new ResultModel().setCode(HttpStatus.HTTP_OK).setMsg("seccuss").setData(majorClazzVo);
     }
+
+
+    @GetMapping(value="/query")
+    public ResultModel<List<MajorClazzVo>> query(
+            @CurrentUser UserInfo userInfo,
+            HttpServletRequest req, HttpServletResponse resp) throws Exception{
+        List<MajorClazzVo> majorClazzVoList = majorClazzService.query();
+        return new ResultModel<List<MajorClazzVo>>().setCode(HttpStatus.HTTP_OK).setMsg("seccuss").setData(majorClazzVoList);
+    }
+
+    @GetMapping(value="/myclass")
+    public ResultModel<MajorClazzVo> myclass(
+            @CurrentUser UserInfo userInfo,
+            HttpServletRequest req, HttpServletResponse resp) throws Exception{
+        MajorClazzVo majorClazzVo = majorClazzService.myclass(userInfo);
+        return new ResultModel<MajorClazzVo>().setCode(HttpStatus.HTTP_OK).setMsg("seccuss").setData(majorClazzVo);
+    }
+
+    @GetMapping(value="/majors")
+    public ResultModel<List<MajorVo>> majorQuery(
+            @CurrentUser UserInfo userInfo,
+            HttpServletRequest req, HttpServletResponse resp) throws Exception{
+        List<MajorVo> majorVoList = majorClazzService.majors();
+        return new ResultModel<List<MajorVo>>().setCode(HttpStatus.HTTP_OK).setMsg("seccuss").setData(majorVoList);
+    }
+
 
     /**
      * 校验参数

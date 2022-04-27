@@ -2,6 +2,7 @@ package com.forezp.pojo.dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.gitee.sunchenbin.mybatis.actable.annotation.*;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Data;
@@ -16,8 +17,9 @@ import java.util.Date;
  * Version 1.0
  */
 @Data
-@Table(name = "ls_major")
-public class MajorDao {
+@Table(name = "ls_major_clazz")
+@TableName("ls_major_clazz")
+public class MajorClazzDao {
     /**
      * 主键
      */
@@ -31,8 +33,8 @@ public class MajorDao {
     @IsNotNull
     @Column(name = "name",comment = "专业名称")
     private String name;
-    @Column(name = "clazz_id",comment = "课表id")
-    private Long clazzId;
+    @Column(name = "content",comment = "课表内容", type = MySqlTypeConstant.LONGTEXT)
+    private String content;
     @Column(name = "ctime", comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date ctime = new Date();
     @Column(name = "mtime", comment = "修改时间", type = MySqlTypeConstant.TIMESTAMP)
