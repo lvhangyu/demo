@@ -34,7 +34,7 @@ public class ChangePasswordController {
             @RequestParam(required = false, value = "new_pwd") String newPwd,
             @RequestParam(required = false, value = "email") String email,
             HttpServletRequest httpRequest, HttpServletResponse httpResponse
-    ){
+    ) throws MyException {
         UserVo userVo = userServiceFeign.getEmailMatch(email);
         if (null != userVo){
             UserDto userDto = new UserDto();
@@ -53,7 +53,7 @@ public class ChangePasswordController {
             message.setText("您的密码已重置");
             javaMailSender.send(message);
         }else {
-            new MyException(404, "error email");
+            throw new MyException(404, "error email");
         }
     }
 }
