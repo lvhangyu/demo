@@ -18,10 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @ClassName PostServiceImpl
@@ -91,6 +88,12 @@ public class PostServiceImpl implements PostService {
             postLikeQueryWrapper.eq("user_id", id);
             Boolean liked = postLikeMapper.exists(postLikeQueryWrapper);
             p.setLiked(liked);
+            QueryWrapper postCollectQueryWrapper = new QueryWrapper();
+            postCollectQueryWrapper.eq("note_id", p.getId());
+            postCollectQueryWrapper.eq("type", 0);
+            postCollectQueryWrapper.eq("user_id", id);
+            Boolean collected = collectionMapper.exists(postCollectQueryWrapper);
+            p.setCollected(collected);
         }
         return postVoList;
     }
@@ -108,6 +111,12 @@ public class PostServiceImpl implements PostService {
             postLikeQueryWrapper.eq("user_id", userInfo.getId());
             Boolean liked = postLikeMapper.exists(postLikeQueryWrapper);
             p.setLiked(liked);
+            QueryWrapper postCollectQueryWrapper = new QueryWrapper();
+            postCollectQueryWrapper.eq("note_id", p.getId());
+            postCollectQueryWrapper.eq("type", 0);
+            postCollectQueryWrapper.eq("user_id", userInfo.getId());
+            Boolean collected = collectionMapper.exists(postCollectQueryWrapper);
+            p.setCollected(collected);
         }
         return postVoList;
     }
@@ -153,6 +162,66 @@ public class PostServiceImpl implements PostService {
         collectionDao.setNoteId(postId);
         collectionDao.setUserId(userInfo.getId());
         collectionDao.setType(0);
-        collectionMapper.deleteById(collectionDao);
+        Map map = new HashMap();
+        map.put("note_id", postId);
+        map.put("user_id", userInfo.getId());
+        map.put("type", 0);
+        collectionMapper.deleteByMap(map);
+    }
+
+    @Override
+    public List<PostVo> collected(UserInfo userInfo) {
+        List<PostDao> postDaoList = postMapper.selectList(null);
+        List<PostVo> postVoList =  BeanUtil.copyToList(postDaoList, PostVo.class, null);
+        List<PostVo> postVoCollectedList = new ArrayList<>(16);
+        for (PostVo p:postVoList) {
+            QueryWrapper postLikeQueryWrapper = new QueryWrapper();
+            postLikeQueryWrapper.eq("post_id", p.getId());
+            postLikeQueryWrapper.eq("user_id", userInfo.getId());
+            Boolean liked = postLikeMapper.exists(postLikeQueryWrapper);
+            p.setLiked(liked);
+            QueryWrapper postCollectQueryWrapper = new QueryWrapper();
+            postCollectQueryWrapper.eq("note_id", p.getId());
+            postCollectQueryWrapper.eq("type", 0);
+            postCollectQueryWrapper.eq("user_id", userInfo.getId());
+            Boolean collected = collectionMapper.exists(postCollectQueryWrapper);
+            p.setCollected(collected);
+            if (collected){
+                postVoCollectedList.add(p);
+            }
+        }
+        return postVoCollectedList;
+    }
+
+    @Override
+    public PostVo info(Long postId) {
+        PostDao postDao = postMapper.selectById(postId);
+        PostVo postVo = new PostVo();
+        BeanUtils.copyProperties(postDao, postVo);
+        return postVo;
+    }
+
+    @Override
+    public List<PostVo> liked(Long id) {
+        List<PostDao> postDaoList = postMapper.selectList(null);
+        List<PostVo> postVoList =  BeanUtil.copyToList(postDaoList, PostVo.class, null);
+        List<PostVo> postVoLikedList = new ArrayList<>(16);
+        for (PostVo p:postVoList) {
+            QueryWrapper postLikeQueryWrapper = new QueryWrapper();
+            postLikeQueryWrapper.eq("post_id", p.getId());
+            postLikeQueryWrapper.eq("user_id", id);
+            Boolean liked = postLikeMapper.exists(postLikeQueryWrapper);
+            p.setLiked(liked);
+            QueryWrapper postCollectQueryWrapper = new QueryWrapper();
+            postCollectQueryWrapper.eq("note_id", p.getId());
+            postCollectQueryWrapper.eq("type", 0);
+            postCollectQueryWrapper.eq("user_id", id);
+            Boolean collected = collectionMapper.exists(postCollectQueryWrapper);
+            p.setCollected(collected);
+            if (liked){
+                postVoLikedList.add(p);
+            }
+        }
+        return postVoLikedList;
     }
 }

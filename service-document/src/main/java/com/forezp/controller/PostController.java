@@ -69,7 +69,24 @@ public class PostController {
             @CurrentUser UserInfo userInfo,
             HttpServletRequest request, HttpServletResponse response) {
         List<PostVo> postVoList = postService.query();
-        return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success");
+        return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(postVoList);
+    }
+
+    @GetMapping("/collected")
+    public ResultModel<List<PostVo>> collected(
+            @CurrentUser UserInfo userInfo,
+            HttpServletRequest request, HttpServletResponse response) {
+        List<PostVo> postVoList = postService.collected(userInfo);
+        return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(postVoList);
+    }
+
+    @GetMapping("/info/{id}")
+    public ResultModel<PostVo> info(
+            @CurrentUser UserInfo userInfo,
+            @PathVariable("id") Long postId,
+            HttpServletRequest request, HttpServletResponse response) {
+        PostVo post = postService.info(postId);
+        return new ResultModel<PostVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(post);
     }
 
     @GetMapping("/myposts")
@@ -80,6 +97,13 @@ public class PostController {
         return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(postVoList);
     }
 
+    @GetMapping("/liked")
+    public ResultModel<List<PostVo>> liked(
+            @CurrentUser UserInfo userInfo,
+            HttpServletRequest request, HttpServletResponse response) {
+        List<PostVo> postVoList = postService.liked(userInfo.getId());
+        return new ResultModel<List<PostVo>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(postVoList);
+    }
     @GetMapping("/trending")
     public ResultModel<List<PostVo>> trending(
             @CurrentUser UserInfo userInfo,

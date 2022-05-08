@@ -13,4 +13,6 @@ public interface UserService {
 
 
     UserVo update(UserDto userDto, UserInfo userInfo);
+
+    UserVo infoById(Long userid);
 }

@@ -1,18 +1,19 @@
 package com.forezp.service.impl;
-import java.util.Date;
+import java.util.*;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.forezp.mapper.CollectionMapper;
 import com.forezp.mapper.DocumentMapper;
 import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dao.CollectionDao;
 import com.forezp.pojo.dao.DocumentDao;
 import com.forezp.pojo.dto.DocumentDto;
+import com.forezp.pojo.vo.DocumentVo;
+import com.forezp.pojo.vo.PostVo;
 import com.forezp.service.DocumentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class DocumentServiceImpl implements DocumentService {
@@ -71,6 +72,43 @@ public class DocumentServiceImpl implements DocumentService {
         collectionDao.setNoteId(documentId);
         collectionDao.setUserId(userInfo.getId());
         collectionDao.setType(1);
-        collectionMapper.deleteById(collectionDao);
+        Map map = new HashMap();
+        map.put("note_id", documentId);
+        map.put("user_id", userInfo.getId());
+        map.put("type", 1);
+        collectionMapper.deleteByMap(map);
+    }
+
+    @Override
+    public DocumentVo info(UserInfo userInfo, Long documentId) {
+        DocumentDao documentDao = documentMapper.selectById(documentId);
+        CollectionDao collectionDao = new CollectionDao();
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("note_id", documentDao.getId());
+        queryWrapper.eq("type", 1);
+        queryWrapper.eq("user_id", userInfo.getId());
+        boolean collected = collectionMapper.exists(queryWrapper);
+        DocumentVo documentVo = new DocumentVo();
+        BeanUtils.copyProperties(documentDao, documentVo);
+        documentVo.setCollected(collected);
+        return documentVo;
+    }
+
+    @Override
+    public List<DocumentDao> collected(UserInfo userInfo) {
+        List<DocumentDao> documentDaoList = documentMapper.selectList(null);
+        List<DocumentDao> documentDaoCollctedList = new ArrayList<>(16);
+        QueryWrapper queryWrapper = new QueryWrapper();
+        for (DocumentDao documentDao:documentDaoList) {
+            queryWrapper.eq("note_id", documentDao.getId());
+            queryWrapper.eq("type", 1);
+            queryWrapper.eq("user_id", userInfo.getId());
+            boolean collected = collectionMapper.exists(queryWrapper);
+            if (collected){
+                documentDaoCollctedList.add(documentDao);
+            }
+            queryWrapper.clear();
+        }
+        return documentDaoCollctedList;
     }
 }

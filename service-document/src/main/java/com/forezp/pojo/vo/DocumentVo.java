@@ -12,6 +12,7 @@ public class DocumentVo {
     private String content;
     private String images;
     private Integer collections;
+    private boolean collected;
     private Date ctime = new Date();
     private Date mtime;
 }

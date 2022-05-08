@@ -1,20 +1,16 @@
-package com.forezp.pojo.vo;
+package com.forezp.pojo.dto;
 
-import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
-import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Data;
 
-import java.util.Date;
-
 /**
- * @ClassName PostVo
+ * @ClassName PostDto
  * @Description TODO
  * @Author sunjie
- * @Date 2022/4/10 21:59
+ * @Date 2022/4/10 21:37
  * Version 1.0
  */
 @Data
-public class PostVo {
+public class PostDto {
     private Long id;
     private String title ;
     private String content ;
@@ -26,8 +22,4 @@ public class PostVo {
     private Integer collections ;
     private Integer comments ;
     private Integer status;
-    private boolean liked;
-    private boolean collected;
-    private Date ctime;
-    private Date mtime;
 }

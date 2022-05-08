@@ -1,7 +1,5 @@
 package com.forezp.pojo.vo;
 
-import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
-import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Data;
 
 import java.util.Date;

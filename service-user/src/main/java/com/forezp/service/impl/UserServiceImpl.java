@@ -76,4 +76,12 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(userDao, userVo);
         return userVo;
     }
+
+    @Override
+    public UserVo infoById(Long userid) {
+        UserDao userDao = userMapper.selectById(userid);
+        UserVo userVo = new UserVo();
+        BeanUtils.copyProperties(userDao, userVo);
+        return userVo;
+    }
 }

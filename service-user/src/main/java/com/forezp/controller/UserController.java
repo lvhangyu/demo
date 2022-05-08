@@ -85,4 +85,20 @@ public class UserController {
         UserVo userVo =  userService.update(userDto, userInfo);
         return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
     }
+
+    @GetMapping("/info")
+    public ResultModel<UserInfo> info(
+            @CurrentUser UserInfo userInfo,
+            HttpServletRequest request, HttpServletResponse response){
+        return new ResultModel<UserInfo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userInfo);
+    }
+
+    @GetMapping("/info/{id}")
+    public ResultModel<UserInfo> infoById(
+            @CurrentUser UserInfo userInfo,
+            @PathVariable("id") Long userid,
+            HttpServletRequest request, HttpServletResponse response){
+        UserVo userVo =  userService.infoById(userid);
+        return new ResultModel<UserInfo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userInfo);
+    }
 }

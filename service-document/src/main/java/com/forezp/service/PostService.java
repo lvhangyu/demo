@@ -33,4 +33,10 @@ public interface PostService {
     void collect(Long postId, UserInfo userInfo);
 
     void cancelCollect(Long postId, UserInfo userInfo);
+
+    List<PostVo> collected(UserInfo userInfo);
+
+    PostVo info(Long postId);
+
+    List<PostVo> liked(Long id);
 }

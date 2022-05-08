@@ -7,6 +7,7 @@ import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dao.DocumentDao;
 import com.forezp.pojo.dto.DocumentDto;
 import com.forezp.pojo.vo.DocumentVo;
+import com.forezp.pojo.vo.PostVo;
 import com.forezp.service.CommentRestService;
 import com.forezp.service.DocumentService;
 import org.springframework.beans.BeanUtils;
@@ -54,6 +55,14 @@ public class DocumnetController {
 
     }
 
+    @GetMapping("/info/{id}")
+    public ResultModel<DocumentVo> info(
+            @CurrentUser UserInfo userInfo,
+            @PathVariable("id") Long documentId,
+            HttpServletRequest request, HttpServletResponse response) {
+        DocumentVo documentVo = documentService.info(userInfo, documentId);
+        return new ResultModel<DocumentVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(documentVo);
+    }
 
 
     @PostMapping("/delete")
@@ -80,6 +89,15 @@ public class DocumnetController {
             @CurrentUser UserInfo userInfo,
             HttpServletRequest request, HttpServletResponse response){
         List<DocumentDao> documentDaoList = documentService.list();
+        List<DocumentVo> documentVoList = BeanUtil.copyToList(documentDaoList, DocumentVo.class, null);
+        return new ResultModel<List<DocumentVo>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(documentVoList);
+    }
+
+    @GetMapping("/collected")
+    public ResultModel<List<DocumentVo>> collected(
+            @CurrentUser UserInfo userInfo,
+            HttpServletRequest request, HttpServletResponse response){
+        List<DocumentDao> documentDaoList = documentService.collected(userInfo);
         List<DocumentVo> documentVoList = BeanUtil.copyToList(documentDaoList, DocumentVo.class, null);
         return new ResultModel<List<DocumentVo>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(documentVoList);
     }

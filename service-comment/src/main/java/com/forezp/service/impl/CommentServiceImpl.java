@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.bean.copier.CopyOptions;
 import com.forezp.exception.MyException;
 import com.forezp.mapper.CommentLikeMapper;
 import com.forezp.mapper.CommentMapper;
