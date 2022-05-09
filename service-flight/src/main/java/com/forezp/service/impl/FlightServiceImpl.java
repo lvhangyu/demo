@@ -94,9 +94,9 @@ public class FlightServiceImpl implements FlightService {
         if (StringUtils.isNotEmpty(arrivalAddr)){
             wrapper.like("arrival_addr", arrivalAddr);
         }
-        if (StringUtils.isNotEmpty(arrivalAddr)){
-            wrapper.like("arrival_addr", arrivalAddr);
-        }
+//        if (StringUtils.isNotEmpty(arrivalAddr)){
+//            wrapper.like("arrival_addr", arrivalAddr);
+//        }
         if (null != ticketPrice){
             wrapper.le("ticket_price", ticketPrice);
         }

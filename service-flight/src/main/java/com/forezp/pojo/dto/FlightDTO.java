@@ -27,6 +27,7 @@ import java.util.Date;
 @Accessors(chain = true)
 public class FlightDTO {
     private Long id;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date flightDate;
     private String aviationCorp;
     private String flightCode;
@@ -42,8 +43,8 @@ public class FlightDTO {
     private Integer remainingTicket;
     private BigDecimal ticketPrice;
     private Integer cabinType;
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date ctime;
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date mtime;
 }

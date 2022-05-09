@@ -48,7 +48,7 @@ public class UserController {
         try {
             userVo = userService.login(userDto);
         }catch (Exception e){
-            throw new MyException(HttpStatus.UNAUTHORIZED.value(), "Incorrect account password");
+            throw new MyException(HttpStatus.UNAUTHORIZED.value(), "用户名密码错误");
         }
         String token = JwtUtils.createJWTToken(JSONObject.toJSONString(userVo));
         userVo.setToken(token);
@@ -60,7 +60,7 @@ public class UserController {
     @PostMapping("/register")
     public ResultModel register(
             @RequestBody UserDto userDto,
-            HttpServletRequest request, HttpServletResponse response){
+            HttpServletRequest request, HttpServletResponse response) throws MyException {
 //        UserDto userDto1 = new UserDto();
 //        userDto1.setUsername("aaa");
 //        userDto1.setPassword(DigestUtils.md5DigestAsHex("abc".getBytes()));

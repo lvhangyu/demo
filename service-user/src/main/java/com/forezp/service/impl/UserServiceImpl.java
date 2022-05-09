@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -35,7 +38,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserVo register(UserDto userDto) {
+    public UserVo register(UserDto userDto) throws MyException {
+        Map map = new HashMap<>();
+        map.put("username",userDto.getUsername());
+        List<UserDao> userDaoList = userMapper.selectByMap(map);
+        if(null != userDaoList && userDaoList.size() > 0){
+            throw new MyException(400, "用户名已存在");
+        }
         UserDao userDao = new UserDao();
         BeanUtils.copyProperties(userDto, userDao);
         userDao.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));

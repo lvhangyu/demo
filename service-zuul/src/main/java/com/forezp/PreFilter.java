@@ -48,7 +48,7 @@ public class PreFilter extends ZuulFilter{
 
         Object accessToken = request.getParameter("token");
         if(accessToken == null) {
-            accessToken = request.getHeader("Authorization");
+            accessToken = request.getHeader("token");
             if(accessToken == null){
                 log.warn("token is empty");
                 ctx.setSendZuulResponse(false);

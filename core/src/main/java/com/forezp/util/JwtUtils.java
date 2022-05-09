@@ -25,7 +25,7 @@ public class JwtUtils {
         map.put("typ", "JWT");
 
         Date nowDate = new Date();
-        Date expireDate = AddDate(nowDate, 2 * 60);//120 分钟过期
+        Date expireDate = AddDate(nowDate, 24 * 60);//120 分钟过期
 
         String token = JWT.create()
                 .withHeader(map)
