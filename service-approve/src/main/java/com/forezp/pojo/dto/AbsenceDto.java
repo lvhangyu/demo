@@ -14,6 +14,7 @@ public class AbsenceDto {
     private Date absenceTime;
     private String absenceReason;
     private String absenceClazz;
+    private Long majorId;
     private Long userId;
     private String userNumber;
     private String userName;

@@ -12,6 +12,7 @@ public class AbsenceVo {
     private String majorName;
     private String absenceReason;
     private String absenceClazz;
+    private Long majorId;
     private Long userId;
     private String userNumber;
     private String userName;

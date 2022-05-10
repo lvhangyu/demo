@@ -31,6 +31,7 @@ public class UserDao {
     private Integer gender;
     @Column(name = "age",comment = "年龄")
     private Integer age;
+    @Unique
     @Column(name = "email",comment = "邮箱")
     private String email;
     @Column(name = "mobile",comment = "手机号")
@@ -41,6 +42,8 @@ public class UserDao {
     private String majorId;
     @Column(name = "password",comment = "密码")
     private String password;
+    @Column(name = "status",comment = "状态0正常，1禁用")
+    private Integer status;
     @Column(name = "ctime", comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date ctime = new Date();
     @Column(name = "mtime", comment = "修改时间", type = MySqlTypeConstant.TIMESTAMP)

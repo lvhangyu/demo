@@ -71,4 +71,22 @@ public class AbsenceServiceImpl implements AbsenceService {
         List<AbsenceVo> absenceVoList = BeanUtil.copyToList(absenceDaoList, AbsenceVo.class, null);
         return absenceVoList;
     }
+
+    @Override
+    public List<AbsenceVo> search(String absenceClazz) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.like("absence_clazz", absenceClazz);
+        List<AbsenceDao> absenceDaoList = absenceMapper.selectList(queryWrapper);
+        List<AbsenceVo> absenceVoList = BeanUtil.copyToList(absenceDaoList, AbsenceVo.class, null);
+        return absenceVoList;
+    }
+
+    @Override
+    public List<AbsenceVo> queryByMajorId(Long majorId) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.like("major_id", majorId);
+        List<AbsenceDao> absenceDaoList = absenceMapper.selectList(queryWrapper);
+        List<AbsenceVo> absenceVoList = BeanUtil.copyToList(absenceDaoList, AbsenceVo.class, null);
+        return absenceVoList;
+    }
 }

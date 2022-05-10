@@ -36,8 +36,10 @@ public class AbsenceDao {
     private String majorName;
     @Column(name = "absence_reason",comment = "请假理由")
     private String absenceReason;
-    @Column(name = "absence_clazz",comment = "请假理由")
+    @Column(name = "absence_clazz",comment = "请假课程")
     private String absenceClazz;
+    @Column(name = "major_id",comment = "请假课程")
+    private Long majorId;
     @Column(name = "user_id",comment = "请假人id")
     private Long userId;
     @Column(name = "user_number",comment = "请假人学号")

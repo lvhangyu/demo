@@ -68,17 +68,22 @@ public class AbsenceController {
         return new ResultModel().setCode(HttpStatus.HTTP_OK).setMsg("seccuss").setData(absenceVoList);
     }
 
-    @PostMapping("/search")
+    @GetMapping("/search")
     public ResultModel<List<AbsenceVo>> search(
-            @RequestParam(required = false, value = "absenceTime") Date absenceTime,
-            @RequestParam(required = false, value = "majorName") String majorName,
-            @RequestParam(required = false, value = "reason") String reason,
-            @RequestParam(required = false, value = "status") Integer status,
-            @RequestParam(required = false, value = "key") Integer key,
-            @RequestParam(required = false, value = "order") Integer order,
+            @CurrentUser UserInfo userInfo,
+            @RequestParam(required = false, value = "absence_class") String absenceClazz,
             HttpServletRequest req, HttpServletResponse resp
     ){
-        List<AbsenceVo> absenceVoList =  absenceService.search(absenceTime, majorName, reason, status, key, order);
+        List<AbsenceVo> absenceVoList =  absenceService.search(absenceClazz);
+        return new ResultModel().setCode(HttpStatus.HTTP_OK).setMsg("seccuss").setData(absenceVoList);
+    }
+
+    @GetMapping("/query/{major_id}")
+    public ResultModel<List<AbsenceVo>> queryByMajorId(
+            @PathVariable(value = "major_id") Long majorId,
+            HttpServletRequest req, HttpServletResponse resp
+    ){
+        List<AbsenceVo> absenceVoList =  absenceService.queryByMajorId(majorId);
         return new ResultModel().setCode(HttpStatus.HTTP_OK).setMsg("seccuss").setData(absenceVoList);
     }
 }

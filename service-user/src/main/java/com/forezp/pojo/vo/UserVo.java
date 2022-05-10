@@ -16,6 +16,7 @@ public class UserVo {
     private Integer age;
     private String email;
     private String mobile;
+    private Integer status;
     private Date registrationTime;
     private String token;
 }

@@ -1,6 +1,7 @@
 package com.forezp.service.impl;
 
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.forezp.exception.MyException;
 import com.forezp.mapper.UserMapper;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,7 +25,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public UserVo login(UserDto userDto) throws MyException {
+    public UserVo login(UserDto userDto) throws Exception {
         QueryWrapper<UserDao> wrapperUser = new QueryWrapper<>();
         wrapperUser.eq("number", userDto.getNumber());
         wrapperUser.eq("password", DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
@@ -43,6 +45,7 @@ public class UserServiceImpl implements UserService {
         userDao.setNumber(userDto.getNumber());
         userDao.setCtime(new Date());
         userDao.setMtime(new Date());
+        userDao.setStatus(0);
         int r = userMapper.insert(userDao);
         UserVo userVo = new UserVo();
         BeanUtils.copyProperties(userDao, userVo);
@@ -51,13 +54,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVo update(UserDto userDto, UserInfo userInfo) {
-        UserDao userDao = userMapper.selectById(userInfo.getId());
+        UserDao userDao = userMapper.selectById(userDto.getId());
 //        userDao.setRole(0);
         userDao.setUsername(userDto.getUsername());
         userDao.setGender(userDto.getGender());
         userDao.setAge(userDto.getAge());
         userDao.setEmail(userDto.getEmail());
         userDao.setMobile(userDto.getMobile());
+        userDao.setStatus(userDto.getStatus());
 //        userDao.setRegistrationTime(new Date());
 //        userDao.setPassword("");
 //        userDao.setCtime(new Date());
@@ -94,5 +98,14 @@ public class UserServiceImpl implements UserService {
         UserVo userVo = new UserVo();
         BeanUtils.copyProperties(userDao, userVo);
         return userVo;
+    }
+
+    @Override
+    public List<UserVo> queryByRole(Long role) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("role", role);
+        List<UserDao> userDaoList = userMapper.selectList(queryWrapper);
+        List<UserVo> userVoList = BeanUtil.copyToList(userDaoList, UserVo.class, null);
+        return userVoList;
     }
 }

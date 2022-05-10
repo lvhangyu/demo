@@ -5,9 +5,11 @@ import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dto.UserDto;
 import com.forezp.pojo.vo.UserVo;
 
+import java.util.List;
+
 public interface UserService {
 
-    UserVo login(UserDto userDto) throws MyException;
+    UserVo login(UserDto userDto) throws Exception;
 
     UserVo register(UserDto userDto);
 
@@ -19,4 +21,6 @@ public interface UserService {
     void delete(Long id);
 
     UserVo updatePassword(UserDto userDto);
+
+    List<UserVo> queryByRole(Long role);
 }

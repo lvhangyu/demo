@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -49,6 +50,9 @@ public class UserController {
             userVo = userService.login(userDto);
         }catch (Exception e){
             throw new MyException(HttpStatus.UNAUTHORIZED.value(), "Incorrect account password");
+        }
+        if (userVo.getStatus().equals(1)){
+            throw new MyException(HttpStatus.UNAUTHORIZED.value(), "user disabled");
         }
         String token = JwtUtils.createJWTToken(JSONObject.toJSONString(userVo));
         userVo.setToken(token);
@@ -107,6 +111,15 @@ public class UserController {
             @CurrentUser UserInfo userInfo,
             HttpServletRequest request, HttpServletResponse response){
         return new ResultModel<UserInfo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userInfo);
+    }
+
+    @GetMapping("/query/{role}")
+    public ResultModel query(
+            @CurrentUser UserInfo userInfo,
+            @PathVariable(value = "role") Long role,
+            HttpServletRequest request, HttpServletResponse response){
+        List<UserVo> userVoList = userService.queryByRole(role);
+        return new ResultModel<List<UserVo>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVoList);
     }
 
     @GetMapping("/emailMatch")

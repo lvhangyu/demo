@@ -10,6 +10,7 @@ import java.util.Date;
 
 @Data
 public class UserDto {
+    private Long id;
     private String username;
     private String password;
     private String number;
@@ -19,4 +20,5 @@ public class UserDto {
     private Integer age;
     private String email;
     private String mobile;
+    private Integer status;
 }

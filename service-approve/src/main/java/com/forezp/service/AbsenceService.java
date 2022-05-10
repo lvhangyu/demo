@@ -15,4 +15,8 @@ public interface AbsenceService {
     List<AbsenceVo> search(Date absenceTime, String majorName, String reason, Integer status, Integer key, Integer order);
 
     List<AbsenceVo> myAbsence(UserInfo userInfo);
+
+    List<AbsenceVo> search(String absenceClazz);
+
+    List<AbsenceVo> queryByMajorId(Long majorId);
 }
