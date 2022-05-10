@@ -12,7 +12,7 @@ import java.util.Date;
 public class AbsenceDto {
     private Long id;
     private Date absenceTime;
-    private String reason;
+    private String absenceReason;
     private String absenceClazz;
     private Long userId;
     private String userNumber;

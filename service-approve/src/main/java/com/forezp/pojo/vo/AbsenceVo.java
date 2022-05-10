@@ -10,7 +10,7 @@ public class AbsenceVo {
     private Long id;
     private Date absenceTime;
     private String majorName;
-    private String reason;
+    private String absenceReason;
     private String absenceClazz;
     private Long userId;
     private String userNumber;
