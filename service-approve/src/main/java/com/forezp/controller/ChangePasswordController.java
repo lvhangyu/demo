@@ -43,8 +43,10 @@ public class ChangePasswordController {
             BeanUtils.copyProperties(userVo,userDto);
             byte[] decodeBase64 = Base64.decodeBase64(newPwd);
             String newPwdDecoded = new String(decodeBase64);
+            userDto.setEmail(email);
             userDto.setPassword(newPwdDecoded);
-            userServiceFeign.update(userDto);
+            System.out.println(userDto);
+            userServiceFeign.updatePassword(userDto);
 
             //发送邮件
             SimpleMailMessage message = new SimpleMailMessage();

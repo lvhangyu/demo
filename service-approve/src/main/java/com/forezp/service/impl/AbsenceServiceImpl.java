@@ -1,7 +1,9 @@
 package com.forezp.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.forezp.mapper.AbsenceMapper;
+import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dao.AbsenceDao;
 import com.forezp.pojo.dto.AbsenceDto;
 import com.forezp.pojo.vo.AbsenceVo;
@@ -18,9 +20,12 @@ public class AbsenceServiceImpl implements AbsenceService {
     @Autowired
     private AbsenceMapper absenceMapper;
     @Override
-    public AbsenceVo create(AbsenceDto absenceDto) {
+    public AbsenceVo create(AbsenceDto absenceDto, UserInfo userInfo) {
         AbsenceDao absenceDao = new AbsenceDao();
         BeanUtils.copyProperties(absenceDto, absenceDao);
+        absenceDao.setUserId(userInfo.getId());
+        absenceDao.setUserName(userInfo.getUsername());
+        absenceDao.setUserNumber(userInfo.getNumber());
         absenceDao.setCtime(new Date());
         absenceDao.setMtime(new Date());
         absenceDao.setStatus(0);
@@ -40,7 +45,7 @@ public class AbsenceServiceImpl implements AbsenceService {
         AbsenceDao absenceDao = new AbsenceDao();
         BeanUtils.copyProperties(absenceDto, absenceDao);
         absenceDao.setMtime(new Date());
-        absenceMapper.update(absenceDao, null);
+        absenceMapper.updateById(absenceDao);
         AbsenceVo absenceVo = new AbsenceVo();
         BeanUtils.copyProperties(absenceDao, absenceVo);
         return absenceVo;
@@ -56,5 +61,14 @@ public class AbsenceServiceImpl implements AbsenceService {
     @Override
     public List<AbsenceVo> search(Date absenceTime, String majorName, String reason, Integer status, Integer key, Integer order) {
         return null;
+    }
+
+    @Override
+    public List<AbsenceVo> myAbsence(UserInfo userInfo) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("user_id", userInfo.getId());
+        List<AbsenceDao> absenceDaoList = absenceMapper.selectList(queryWrapper);
+        List<AbsenceVo> absenceVoList = BeanUtil.copyToList(absenceDaoList, AbsenceVo.class, null);
+        return absenceVoList;
     }
 }

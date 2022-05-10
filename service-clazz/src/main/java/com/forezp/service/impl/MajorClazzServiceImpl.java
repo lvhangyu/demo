@@ -1,6 +1,8 @@
 package com.forezp.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.forezp.mapper.MajorClazzMapper;
 import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dao.MajorClazzDao;
@@ -76,17 +78,17 @@ public class MajorClazzServiceImpl implements MajorClazzService {
             dayMap.clear();
             amMap.clear();
             pmMap.clear();
-            amMap.put("class_1", dataList.get(2).get(i+1));
-            amMap.put("class_2", dataList.get(8).get(i+1));
+            amMap.put("class_1", dataList.get(2).get(i+1).trim().replace("\n",""));
+            amMap.put("class_2", dataList.get(8).get(i+1).trim().replace("\n",""));
             dayMap.put("am", amMap);
-            pmMap.put("class_3", dataList.get(14).get(i+1));
-            pmMap.put("class_4", dataList.get(21).get(i+1));
+            pmMap.put("class_3", dataList.get(14).get(i+1).trim().replace("\n",""));
+            pmMap.put("class_4", dataList.get(21).get(i+1).trim().replace("\n",""));
             dayMap.put("pm", pmMap);
             System.out.println(dayMap);
             contentMap.put(dayStrs[i], dayMap);
         }
-        String content = contentMap.toString().trim().replace("\n","");
-        majorClazzDao.setContent(content);
+        String jsonString = JSONObject.toJSONString(contentMap, SerializerFeature.DisableCircularReferenceDetect);
+        majorClazzDao.setContent(jsonString);
         return majorClazzDao;
     }
 

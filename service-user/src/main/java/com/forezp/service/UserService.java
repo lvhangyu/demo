@@ -17,4 +17,6 @@ public interface UserService {
     UserVo emailMatch(String email);
 
     void delete(Long id);
+
+    UserVo updatePassword(UserDto userDto);
 }

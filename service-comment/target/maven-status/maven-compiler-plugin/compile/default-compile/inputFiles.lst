@@ -1,0 +1,17 @@
+C:\Github\demo\service-comment\src\main\java\com\forezp\pojo\vo\PostVo.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\service\DocumentRestService.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\pojo\dto\CommentDto.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\pojo\dao\PostDao.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\service\CommentService.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\ServiceCommentApplication.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\pojo\vo\CommentVo.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\service\fallback\PostServiceFallback.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\pojo\dao\CommentLikeDao.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\service\hystric\DocumentRestServiceHystric.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\service\PostService.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\mapper\CommentMapper.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\controller\CommentController.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\mapper\CommentLikeMapper.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\pojo\dto\PostDto.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\service\impl\CommentServiceImpl.java
+C:\Github\demo\service-comment\src\main\java\com\forezp\pojo\dao\CommentDao.java

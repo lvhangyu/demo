@@ -1,0 +1,17 @@
+com\forezp\pojo\dao\PostDao.class
+com\forezp\service\impl\CommentServiceImpl.class
+com\forezp\pojo\dao\CommentLikeDao.class
+com\forezp\pojo\dto\CommentDto.class
+com\forezp\pojo\dao\CommentDao.class
+com\forezp\service\PostService.class
+com\forezp\pojo\dto\PostDto.class
+com\forezp\ServiceCommentApplication.class
+com\forezp\service\DocumentRestService.class
+com\forezp\controller\CommentController.class
+com\forezp\service\fallback\PostServiceFallback.class
+com\forezp\mapper\CommentMapper.class
+com\forezp\mapper\CommentLikeMapper.class
+com\forezp\pojo\vo\CommentVo.class
+com\forezp\service\hystric\DocumentRestServiceHystric.class
+com\forezp\service\CommentService.class
+com\forezp\pojo\vo\PostVo.class

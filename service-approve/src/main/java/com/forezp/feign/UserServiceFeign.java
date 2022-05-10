@@ -14,6 +14,6 @@ public interface UserServiceFeign {
     @RequestMapping(value = "/emailMatch", method = RequestMethod.GET)
     UserVo getEmailMatch(@RequestParam(value = "email") String email);
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    String update(@RequestBody UserDto userDto);
+    @RequestMapping(value = "/update_password", method = RequestMethod.POST)
+    String updatePassword(@RequestBody UserDto userDto);
 }

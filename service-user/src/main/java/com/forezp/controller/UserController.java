@@ -85,6 +85,14 @@ public class UserController {
         return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
     }
 
+    @PostMapping("/update_password")
+    public ResultModel updatePassword(
+            @RequestBody UserDto userDto,
+            HttpServletRequest request, HttpServletResponse response){
+        UserVo userVo =  userService.updatePassword(userDto);
+        return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
+    }
+
     @PostMapping("/delete/{id}")
     public ResultModel delete(
             @CurrentUser UserInfo userInfo,
@@ -94,6 +102,12 @@ public class UserController {
         return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success");
     }
 
+    @GetMapping("/info")
+    public ResultModel info(
+            @CurrentUser UserInfo userInfo,
+            HttpServletRequest request, HttpServletResponse response){
+        return new ResultModel<UserInfo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userInfo);
+    }
 
     @GetMapping("/emailMatch")
     public ResultModel emailMatch(

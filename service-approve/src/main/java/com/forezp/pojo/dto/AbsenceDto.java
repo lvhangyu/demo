@@ -10,7 +10,12 @@ import lombok.Data;
 import java.util.Date;
 @Data
 public class AbsenceDto {
+    private Long id;
     private Date absenceTime;
     private String reason;
+    private String absenceClazz;
+    private Long userId;
+    private String userNumber;
+    private String userName;
     private Integer status;
 }

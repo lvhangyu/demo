@@ -28,7 +28,6 @@ import java.util.List;
  * Version 1.0
  */
 @RestController
-@RequestMapping("/class")
 public class ClazzController {
     @Autowired
     private MajorClazzService majorClazzService;
@@ -85,7 +84,6 @@ public class ClazzController {
 
     @GetMapping(value="/majors")
     public ResultModel<List<MajorVo>> majorQuery(
-            @CurrentUser UserInfo userInfo,
             HttpServletRequest req, HttpServletResponse resp) throws Exception{
         List<MajorVo> majorVoList = majorClazzService.majors();
         return new ResultModel<List<MajorVo>>().setCode(HttpStatus.HTTP_OK).setMsg("seccuss").setData(majorVoList);

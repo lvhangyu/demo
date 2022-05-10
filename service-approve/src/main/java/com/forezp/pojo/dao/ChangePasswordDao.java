@@ -19,8 +19,8 @@ import java.util.Date;
  * Version 1.0
  */
 @Data
-@Table(name = "ls_absence")
-@TableName("ls_absence")
+@Table(name = "ls_change_password")
+@TableName("ls_change_password")
 public class ChangePasswordDao {
     /**
      * 主键

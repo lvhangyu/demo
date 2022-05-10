@@ -13,7 +13,7 @@ public class UserServiceHystric implements UserServiceFeign {
     }
 
     @Override
-    public String update(UserDto userDto) {
+    public String updatePassword(UserDto userDto) {
         return "update fail";
     }
 }

@@ -82,4 +82,17 @@ public class UserServiceImpl implements UserService {
     public void delete(Long id) {
         userMapper.deleteById(id);
     }
+
+    @Override
+    public UserVo updatePassword(UserDto userDto) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("email", userDto.getEmail());
+        UserDao userDao = userMapper.selectOne(queryWrapper);
+        userDao.setPassword(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()));
+        System.out.println(userDao);
+        userMapper.updateById(userDao);
+        UserVo userVo = new UserVo();
+        BeanUtils.copyProperties(userDao, userVo);
+        return userVo;
+    }
 }

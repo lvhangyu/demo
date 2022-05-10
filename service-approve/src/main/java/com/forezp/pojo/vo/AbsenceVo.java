@@ -11,6 +11,10 @@ public class AbsenceVo {
     private Date absenceTime;
     private String majorName;
     private String reason;
+    private String absenceClazz;
+    private Long userId;
+    private String userNumber;
+    private String userName;
     private Integer status;
     private Date ctime;
     private Date mtime;

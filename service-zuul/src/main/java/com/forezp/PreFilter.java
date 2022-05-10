@@ -84,7 +84,8 @@ public class PreFilter extends ZuulFilter{
         if(
                 request.getRequestURI().startsWith("/user/login") ||
                         request.getRequestURI().startsWith("/user/register") ||
-                        request.getRequestURI().startsWith("/approve/changePassword")
+                        request.getRequestURI().startsWith("/approve/changePassword") ||
+                        request.getRequestURI().startsWith("/clazz/majors")
         ){
             return false;
         }
