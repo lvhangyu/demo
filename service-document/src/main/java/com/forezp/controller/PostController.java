@@ -147,4 +147,36 @@ public class PostController {
         postService.cancelCollect(postId, userInfo);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
     }
+
+
+    /**
+     * 评论数+1
+     * @param postId
+     * @param request
+     * @param response
+     * @return
+     */
+    @PostMapping("/comment/add/{id}")
+    public ResultModel jiayi(
+            @PathVariable("id") Long postId,
+            HttpServletRequest request, HttpServletResponse response){
+        postService.commentAdd(postId);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
+
+
+    /**
+     * 评论数+1
+     * @param postId
+     * @param request
+     * @param response
+     * @return
+     */
+    @PostMapping("/comment/cancel/{id}")
+    public ResultModel commentCancel(
+            @PathVariable("id") Long postId,
+            HttpServletRequest request, HttpServletResponse response){
+        postService.commentCancel(postId);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
 }

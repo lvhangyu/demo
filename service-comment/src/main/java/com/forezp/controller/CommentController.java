@@ -51,6 +51,8 @@ public class CommentController {
         CommentDao commentDao = commentService.save(commentDto, userInfo);
         CommentVo commentVo = new CommentVo();
         BeanUtils.copyProperties(commentDao, commentVo);
+        //帖子评论数+1
+        documentRestService.commentAdd(commentDto.getPostId());
         return new ResultModel<CommentVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(commentVo);
     }
 
@@ -68,7 +70,9 @@ public class CommentController {
             @CurrentUser UserInfo userInfo,
             @PathVariable("id") Long commentId,
             HttpServletRequest request, HttpServletResponse response) throws MyException {
-        commentService.delete(commentId);
+        Long postId = commentService.delete(commentId);
+        //帖子评论数+1
+        documentRestService.commentCancel(postId);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
     }
 

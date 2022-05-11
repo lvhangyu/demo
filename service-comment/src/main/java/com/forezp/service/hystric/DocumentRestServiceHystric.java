@@ -12,8 +12,14 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class DocumentRestServiceHystric implements DocumentRestService {
+
     @Override
-    public String getQuery() {
+    public String commentCancel(Long id) {
+        return "sorry";
+    }
+
+    @Override
+    public String commentAdd(Long id) {
         return "sorry";
     }
 }

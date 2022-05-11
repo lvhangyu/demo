@@ -42,4 +42,10 @@ public interface PostMapper extends BaseMapper<PostDao> {
      */
     @Update("update ls_post set collections=collections-1 where id = #{id}")
     void cancelCollect(@Param("id") Long id);
+
+    @Update("update ls_post set comments=comments+1 where id = #{id}")
+    void commentAdd(@Param("id") Long id);
+
+    @Update("update ls_post set comments=comments-1 where id = #{id}")
+    void commentCancel(Long postId);
 }

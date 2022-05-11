@@ -224,4 +224,14 @@ public class PostServiceImpl implements PostService {
         }
         return postVoLikedList;
     }
+
+    @Override
+    public void commentAdd(Long postId) {
+        postMapper.commentAdd(postId);
+    }
+
+    @Override
+    public void commentCancel(Long postId) {
+        postMapper.commentCancel(postId);
+    }
 }

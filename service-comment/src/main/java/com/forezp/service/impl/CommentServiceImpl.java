@@ -53,7 +53,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void delete(Long id) throws MyException {
+    public Long delete(Long id) throws MyException {
         //找到父级评论 评论数-1
         CommentDao commentDao = commentMapper.selectById(id);
         if(null == commentDao){
@@ -61,6 +61,7 @@ public class CommentServiceImpl implements CommentService {
         }
         commentMapper.autodecreaseReplysNumber(commentDao.getParentId());
         commentMapper.deleteById(id);
+        return commentDao.getPostId();
     }
 
     @Override

@@ -1,6 +1,0 @@
-com\forezp\controller\ClazzController.class
-com\forezp\pojo\dao\ClazzDao.class
-com\forezp\service\ClazzService.class
-com\forezp\service\impl\ClazzServiceImpl.class
-com\forezp\pojo\dao\MajorDao.class
-com\forezp\ServiceClazzApplication.class

@@ -39,4 +39,8 @@ public interface PostService {
     PostVo info(Long postId);
 
     List<PostVo> liked(Long id);
+
+    void commentAdd(Long postId);
+
+    void commentCancel(Long postId);
 }

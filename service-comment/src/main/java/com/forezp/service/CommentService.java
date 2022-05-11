@@ -19,7 +19,7 @@ public interface CommentService {
 
     CommentDao save(CommentDto commentDto, UserInfo userInfo);
 
-    void delete(Long id) throws MyException;
+    Long delete(Long id) throws MyException;
 
     void like(Long id, UserInfo userInfo);
 
