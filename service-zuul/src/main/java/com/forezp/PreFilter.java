@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -39,7 +40,12 @@ public class PreFilter extends ZuulFilter{
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
+        HttpServletResponse response = ctx.getResponse();
         log.info(String.format("%s >>> %s", request.getMethod(), request.getRequestURL().toString()));
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", request.getMethod());
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type,token");
 
         if(!isNeedToken(request)){
             log.info("not need token");

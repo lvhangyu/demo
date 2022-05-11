@@ -6,6 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @Component
 public class PostFilter extends ZuulFilter {
     private static Logger log = LoggerFactory.getLogger(PostFilter.class);
@@ -28,6 +31,12 @@ public class PostFilter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         log.info("进入post过滤器");
+        HttpServletRequest request = ctx.getRequest();
+        HttpServletResponse response = ctx.getResponse();
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", request.getMethod());
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type,token");
         ctx.setResponseBody(ctx.getResponseBody());
         ctx.setResponseStatusCode(ctx.getResponse().getStatus());
         return null;

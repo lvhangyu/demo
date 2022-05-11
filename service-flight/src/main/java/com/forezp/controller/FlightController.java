@@ -64,6 +64,8 @@ public class FlightController {
             @RequestParam(required = false, value = "remainingTicket") Integer remainingTicket,
             @RequestParam(required = false, value = "ticketPrice") BigDecimal ticketPrice,
             @RequestParam(required = false, value = "cabinType") Integer cabinType,
+            @RequestParam(required = false, value = "discounted_ticket_price") BigDecimal discounted_ticket_price,
+            @RequestParam(required = false, value = "discount") String discount,
             HttpServletRequest request, HttpServletResponse response) throws ParseException {
         FlightDTO flightDTO = new FlightDTO();
         flightDTO.setId(id)
@@ -77,7 +79,9 @@ public class FlightController {
                 .setAirportTax(airportTax)
                 .setRemainingTicket(remainingTicket)
                 .setTicketPrice(ticketPrice)
-                .setCabinType(cabinType);
+                .setCabinType(cabinType)
+                .setDiscountedTicketPrice(discounted_ticket_price)
+                .setDiscount(discount);
         System.out.println(flightDTO.toString());
         FlightVO flightVO = flightService.update(flightDTO);
         System.out.println(flightVO.getFlightDate());
@@ -111,6 +115,20 @@ public class FlightController {
             @RequestParam(required = false, value = "cabinType") Integer cabinType,
             HttpServletRequest request, HttpServletResponse response) throws ParseException {
         List<FlightVO> flightVOList = flightService.serach(flightDate, aviationCorp, departureAddr, arrivalAddr, departureTime, arrivalTime, ticketPrice, cabinType);
+        return new ResultModel<List<FlightVO>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(flightVOList);
+    }
+
+    /**
+     * 特价机票
+     * @param request
+     * @param response
+     * @return
+     * @throws ParseException
+     */
+    @GetMapping("/discountedTicket")
+    public ResultModel<List<FlightVO>> discountedTicket(
+            HttpServletRequest request, HttpServletResponse response) throws ParseException {
+        List<FlightVO> flightVOList = flightService.discountedTicket();
         return new ResultModel<List<FlightVO>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(flightVOList);
     }
 

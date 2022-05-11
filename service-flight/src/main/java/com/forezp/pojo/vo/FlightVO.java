@@ -33,6 +33,8 @@ public class FlightVO {
     private Integer remainingTicket;
     private BigDecimal ticketPrice;
     private Integer cabinType;
+    private BigDecimal discountedTicketPrice;
+    private String discount;
     private Date ctime;
     private Date mtime;
 }

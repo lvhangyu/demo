@@ -8,6 +8,7 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsAutoIncrement;
 import com.gitee.sunchenbin.mybatis.actable.annotation.IsKey;
 import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
+import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import jdk.nashorn.internal.objects.annotations.Constructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,6 +44,8 @@ public class FlightDTO {
     private Integer remainingTicket;
     private BigDecimal ticketPrice;
     private Integer cabinType;
+    private BigDecimal discountedTicketPrice;
+    private String discount;
 //    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date ctime;
 //    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")

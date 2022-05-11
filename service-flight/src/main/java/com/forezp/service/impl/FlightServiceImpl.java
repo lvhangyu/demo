@@ -51,13 +51,12 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public FlightVO update(FlightDTO flightDTO) {
-        FlightDO flightDO = new FlightDO();
+        FlightDO flightDO = flightMapper.selectById(flightDTO.getId());
         BeanUtils.copyProperties(flightDTO, flightDO);
         flightDO.setMtime(new Date());
         flightMapper.updateById(flightDO);
-        FlightDO flightDONew = flightMapper.selectById(flightDO.getId());
         FlightVO flightVO = new FlightVO();
-        BeanUtils.copyProperties(flightDONew, flightVO);
+        BeanUtils.copyProperties(flightDO, flightVO);
         return flightVO;
     }
 
@@ -108,6 +107,19 @@ public class FlightServiceImpl implements FlightService {
         CopyOptions copyOptions = new CopyOptions();
         copyOptions.ignoreCase();
         flightVOList = BeanUtil.copyToList(flightDOList, FlightVO.class, copyOptions);
+        return flightVOList;
+    }
+
+    @Override
+    public List<FlightVO> discountedTicket() {
+        QueryWrapper<FlightDO> wrapper = new QueryWrapper<>();
+        wrapper.isNotNull("discounted_ticket_price");
+        wrapper.isNotNull("discount");
+        wrapper.orderByDesc("flight_date");
+        List<FlightDO> flightDOList = flightMapper.selectList(wrapper);
+        CopyOptions copyOptions = new CopyOptions();
+        copyOptions.ignoreCase();
+        List<FlightVO> flightVOList = BeanUtil.copyToList(flightDOList, FlightVO.class, copyOptions);
         return flightVOList;
     }
 }

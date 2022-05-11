@@ -62,6 +62,10 @@ public class FlightDO {
     private Integer remainingTicket;
     @Column(name = "ticket_price",comment = "票价",type = MySqlTypeConstant.DECIMAL,length = 65)
     private BigDecimal ticketPrice;
+    @Column(name = "discounted_ticket_price",comment = "特价票价",type = MySqlTypeConstant.DECIMAL,length = 65)
+    private BigDecimal discountedTicketPrice;
+    @Column(name = "discount",comment = "折扣力度")
+    private String discount;
     @Column(name = "cabin_type",comment = "仓位类型, 0 头等舱，1 商务舱，2 经济舱")
     private Integer cabinType;
     @Column(name = "ctime",comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)

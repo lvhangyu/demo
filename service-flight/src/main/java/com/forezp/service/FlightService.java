@@ -23,4 +23,6 @@ public interface FlightService {
     List<FlightVO> query();
     FlightVO info(Long id);
     List<FlightVO> serach(Date flightDate, String aviationCorp, String departureAddr, String arrivalAddr, Date departureTime, Date arrivalTime, BigDecimal ticketPrice, Integer cabinType);
+
+    List<FlightVO> discountedTicket();
 }
