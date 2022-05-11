@@ -36,3 +36,7 @@ mvnw.cmd
 *.db
 *.properties
 
+*.lst
+*.class
+*.jar
+*.original

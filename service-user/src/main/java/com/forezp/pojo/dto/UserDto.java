@@ -12,7 +12,6 @@ import java.util.Date;
 public class UserDto {
     private String username;
     private String password;
-
     private Integer role;
     private Integer gender;
     private Integer age;

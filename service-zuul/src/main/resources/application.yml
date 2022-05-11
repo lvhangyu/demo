@@ -31,6 +31,8 @@ zuul:
     api-flight:
       path: /flight/**
       serviceId: service-flight
+  sensitive-headers: Access-Control-Allow-Origin
+  ignored-headers: Access-Control-Allow-Origin,H-APP-Id,Token,APPToken
 
 hystrix:
   command:
