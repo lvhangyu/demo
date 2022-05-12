@@ -41,4 +41,6 @@ public class OrderVo {
     private Date ctime;
     //@Column(name = "mtime", comment = "修改时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date mtime;
+    //@Column(name = "flight_id",comment = "航班id")
+    private Object flightInfo;
 }

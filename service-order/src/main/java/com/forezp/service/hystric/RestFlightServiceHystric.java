@@ -1,5 +1,6 @@
 package com.forezp.service.hystric;
 
+import com.forezp.mvc.ResultModel;
 import com.forezp.service.RestFlightService;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,7 @@ public class RestFlightServiceHystric implements RestFlightService {
 
 
     @Override
-    public String getQuery(String header, Long accountId) {
-        return "sorry";
+    public ResultModel info(Long id) {
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.forezp.service;
 
+import com.forezp.mvc.ResultModel;
 import com.forezp.service.hystric.RestFlightServiceHystric;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Service
 @FeignClient(value = "service-flight",fallback = RestFlightServiceHystric.class)
 public interface RestFlightService {
-    @GetMapping(value = "/create")
-    String getQuery(@RequestHeader("userInfo") String userInfo,
-                    @RequestParam("accountId") Long accountId);
+    @GetMapping(value = "/info")
+    ResultModel info(@RequestParam(value = "id") Long id);
 }

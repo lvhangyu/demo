@@ -46,9 +46,7 @@ public class OrderController {
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public ResultModel<List<OrderVo>> selectList(
                                                  HttpServletRequest request, HttpServletResponse response){
-        List<OrderVo> orderVoList = new ArrayList<>();
-        List<OrderDO> orderDOList = orderService.getList();
-        orderVoList =  BeanUtil.copyToList(orderDOList, OrderVo.class, null);
+        List<OrderVo> orderVoList = orderService.getList();
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(orderVoList);
     }
 
@@ -60,9 +58,7 @@ public class OrderController {
     public ResultModel<OrderVo> create(@CurrentUser UserInfo userInfo,
                                        @RequestBody OrderDTO orderDTO,
                                        HttpServletRequest request, HttpServletResponse response){
-        OrderVo orderVo = new OrderVo();
-        OrderDO orderDO = orderService.create(orderDTO, userInfo);
-        BeanUtils.copyProperties(orderDO, orderVo);
+        OrderVo orderVo = orderService.create(orderDTO, userInfo);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(orderVo);
     }
 
@@ -95,9 +91,7 @@ public class OrderController {
             @PathVariable("id") Long id,
             @RequestParam("status") Integer status,
                                        HttpServletRequest request, HttpServletResponse response) throws MyException {
-        OrderVo orderVo = new OrderVo();
-        OrderDO orderDO = orderService.update(userInfo, id, status);
-        BeanUtils.copyProperties(orderDO, orderVo);
+        OrderVo orderVo = orderService.update(userInfo, id, status);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(orderVo);
     }
 
@@ -111,9 +105,9 @@ public class OrderController {
     @GetMapping("/list_by_user")
     public ResultModel<List<OrderVo>> getOrderByUserId(@CurrentUser UserInfo userInfo,
                                        HttpServletRequest request, HttpServletResponse response){
-        List<OrderVo> orderVoList = new ArrayList<>();
-        List<OrderDO> orderDOList = orderService.listByUserId(userInfo.getId());
-        orderVoList =  BeanUtil.copyToList(orderDOList, OrderVo.class, null);
+
+        List<OrderVo> orderVoList = orderService.listByUserId(userInfo.getId());
+
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(orderVoList);
     }
 
