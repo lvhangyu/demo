@@ -20,4 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface RestFlightService {
     @GetMapping(value = "/info")
     ResultModel info(@RequestParam(value = "id") Long id);
+
+    @GetMapping(value = "/seat/info")
+    ResultModel seatInfo(@RequestParam(value = "seatId") Long seatId);
 }

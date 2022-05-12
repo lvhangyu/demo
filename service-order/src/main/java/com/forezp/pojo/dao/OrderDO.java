@@ -36,6 +36,8 @@ public class OrderDO {
     private Long userId;
     @Column(name = "flight_id",comment = "航班id")
     private Long flightId;
+    @Column(name = "seat_number",comment = "座位号")
+    private Long seatNumber;
     @Column(name = "order_code",comment = "订单编号")
     private String orderCode;
     @Column(name = "user_name",comment = "乘机人姓名")

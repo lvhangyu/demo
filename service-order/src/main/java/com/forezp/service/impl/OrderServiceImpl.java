@@ -33,7 +33,9 @@ public class OrderServiceImpl implements OrderService {
         orderVoList =  BeanUtil.copyToList(orderDOList, OrderVo.class, null);
         for (OrderVo orderVo : orderVoList){
             ResultModel resultModel = restFlightService.info(orderVo.getFlightId());
+            ResultModel seatInfo = restFlightService.seatInfo(orderVo.getSeatNumber());
             orderVo.setFlightInfo(resultModel.getData());
+            orderVo.setSeatInfo(seatInfo.getData());
         }
         return orderVoList;
     }
@@ -47,7 +49,9 @@ public class OrderServiceImpl implements OrderService {
         OrderVo orderVo = new OrderVo();
         BeanUtils.copyProperties(orderDO, orderVo);
         ResultModel resultModel = restFlightService.info(orderVo.getFlightId());
+        ResultModel seatInfo = restFlightService.seatInfo(orderVo.getSeatNumber());
         orderVo.setFlightInfo(resultModel.getData());
+        orderVo.setSeatInfo(seatInfo.getData());
         return orderVo;
     }
 
@@ -62,7 +66,9 @@ public class OrderServiceImpl implements OrderService {
         OrderVo orderVo = new OrderVo();
         BeanUtils.copyProperties(orderDO, orderVo);
         ResultModel resultModel = restFlightService.info(orderVo.getFlightId());
+        ResultModel seatInfo = restFlightService.seatInfo(orderVo.getSeatNumber());
         orderVo.setFlightInfo(resultModel.getData());
+        orderVo.setSeatInfo(seatInfo.getData());
         return orderVo;
     }
 
@@ -75,7 +81,9 @@ public class OrderServiceImpl implements OrderService {
         orderVoList =  BeanUtil.copyToList(orderDOList, OrderVo.class, null);
         for (OrderVo orderVo : orderVoList){
             ResultModel resultModel = restFlightService.info(orderVo.getFlightId());
+            ResultModel seatInfo = restFlightService.seatInfo(orderVo.getSeatNumber());
             orderVo.setFlightInfo(resultModel.getData());
+            orderVo.setSeatInfo(seatInfo.getData());
         }
         return orderVoList;
     }

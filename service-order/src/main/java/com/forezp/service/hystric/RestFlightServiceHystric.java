@@ -17,6 +17,11 @@ public class RestFlightServiceHystric implements RestFlightService {
 
     @Override
     public ResultModel info(Long id) {
-        return null;
+        return new ResultModel<>();
+    }
+
+    @Override
+    public ResultModel seatInfo(Long seatId) {
+        return new ResultModel<>();
     }
 }
