@@ -1,10 +1,12 @@
 package com.forezp.pojo.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.forezp.pojo.dao.FlightDO;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName Flight
@@ -35,6 +37,8 @@ public class FlightVO {
     private Integer cabinType;
     private BigDecimal discountedTicketPrice;
     private String discount;
+    private Integer seatCount;
+    private List<FlightDO.Seat> seatList;
     private Date ctime;
     private Date mtime;
 }

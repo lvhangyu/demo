@@ -1,6 +1,8 @@
 package com.forezp.service.impl;
 
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.forezp.exception.MyException;
 import com.forezp.mapper.UserMapper;
@@ -74,5 +76,22 @@ public class UserServiceImpl implements UserService {
         UserVo userVo = new UserVo();
         BeanUtils.copyProperties(userDao, userVo);
         return userVo;
+    }
+
+    @Override
+    public List<UserVo> list() {
+        QueryWrapper<UserDao> wrapper = new QueryWrapper<>();
+        wrapper.eq("role", "1");
+        List<UserDao> userDaoList = userMapper.selectList(wrapper);
+        CopyOptions copyOptions = new CopyOptions();
+        copyOptions.ignoreCase();
+        List<UserVo> userVoList = BeanUtil.copyToList(userDaoList, UserVo.class, copyOptions);
+        return userVoList;
+    }
+
+
+    @Override
+    public void delete(Long id) {
+        userMapper.deleteById(id);
     }
 }

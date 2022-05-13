@@ -25,20 +25,23 @@ public class SeatManage {
     @TableId(type = IdType.AUTO) //mybatis-plus主键注解
     @IsKey                         //actable主键注解
     @IsAutoIncrement             //自增
-    @Column(name = "seat_number",comment = "座位号")
-    private Integer seatNumber;
+    @Column(name = "id",comment = "id")
+    private Long id;
+    @Column(name = "seat_list",comment = "座位列表")
+    private List<Seat> seatList;
     @Column(name = "flight_id",comment = "航班id")
     private Long flightId;
-    @Column(name = "user_id",comment = "用户id")
-    private Long userId;
-    @Column(name = "user_name",comment = "用户名字")
-    private String userName;
-    @Column(name = "status",comment = "座位状态 0未占用 1已占用 2不可售卖")
-    private Integer status;
     @Column(name = "ctime",comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date ctime = new Date();
     @Column(name = "mtime",comment = "修改时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date mtime = new Date();
 
 
+    public static class Seat{
+        private String seatNumber;
+        private Boolean exits;
+        private Long userId;
+        private String userName;
+
+    }
 }

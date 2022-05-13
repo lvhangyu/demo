@@ -26,7 +26,7 @@ public class OrderDTO {
     private Long id;
     private Long userId;
     private Long flightId;
-    private Long seatId;
+    private Long seatNumber;
     private String orderCode;
     private String userName;
     private String userNumber;

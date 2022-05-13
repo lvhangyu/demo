@@ -20,15 +20,16 @@ public class SeatManageServiceImpl implements SeatManageService {
     @Override
     public List<SeatManage> create(Integer number, Long flightId) {
         List<SeatManage> seatManageList = new ArrayList<>();
-        for (int i = 0; i < number; i ++){
-            SeatManage seatManage = new SeatManage();
-            seatManage.setFlightId(flightId);
-            seatManage.setStatus(0);
-            seatManage.setCtime(new Date());
-            seatManage.setMtime(new Date());
-            seatManageMapper.insert(seatManage);
-            seatManageList.add(seatManage);
-        }
+//        for (int i = 0; i < number; i ++){
+//            SeatManage seatManage = new SeatManage();
+//            seatManage.setSeatNumber(flightId);
+//            seatManage.setFlightId(flightId);
+//            seatManage.setStatus(0);
+//            seatManage.setCtime(new Date());
+//            seatManage.setMtime(new Date());
+//            seatManageMapper.insert(seatManage);
+//            seatManageList.add(seatManage);
+//        }
         return seatManageList;
     }
 
@@ -50,7 +51,7 @@ public class SeatManageServiceImpl implements SeatManageService {
     @Override
     public SeatManage updateStatus(Long seatId, Integer status) {
         SeatManage seatManage = seatManageMapper.selectById(seatId);
-        seatManage.setStatus(status);
+       // seatManage.setStatus(status);
         seatManageMapper.updateById(seatManage);
         return seatManage;
     }

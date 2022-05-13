@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -83,5 +84,21 @@ public class UserController {
             HttpServletRequest request, HttpServletResponse response){
         UserVo userVo =  userService.update(userDto, userInfo);
         return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
+    }
+
+
+    @GetMapping("/list")
+    public ResultModel<List<UserVo>> list(
+            HttpServletRequest request, HttpServletResponse response) throws MyException {
+        List<UserVo> userVo =  userService.list();
+        return new ResultModel<List<UserVo>>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
+    }
+
+    @PostMapping("/delete")
+    public ResultModel delete(
+            @RequestParam("id") Long id,
+            HttpServletRequest request, HttpServletResponse response) throws MyException {
+        userService.delete(id);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
     }
 }

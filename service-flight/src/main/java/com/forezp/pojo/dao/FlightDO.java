@@ -13,6 +13,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName Flight
@@ -68,8 +69,23 @@ public class FlightDO {
     private String discount;
     @Column(name = "cabin_type",comment = "仓位类型, 0 头等舱，1 商务舱，2 经济舱")
     private Integer cabinType;
+    @Column(name = "seat_count",comment = "座位数")
+    private Integer seatCount;
+    @JsonFormat(shape=JsonFormat.Shape.STRING)
+    @Column(name = "seat_list",comment = "座位列表")
+    private List<Seat> seatList;
     @Column(name = "ctime",comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date ctime = new Date();
     @Column(name = "mtime",comment = "修改时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date mtime = new Date();
+
+
+    @Data
+    public static class Seat{
+        private String seatNumber;
+        private Boolean exits;
+        private Long userId;
+        private String userName;
+
+    }
 }

@@ -5,6 +5,8 @@ import com.forezp.mvc.UserInfo;
 import com.forezp.pojo.dto.UserDto;
 import com.forezp.pojo.vo.UserVo;
 
+import java.util.List;
+
 public interface UserService {
 
     UserVo login(UserDto userDto) throws MyException;
@@ -13,4 +15,8 @@ public interface UserService {
 
 
     UserVo update(UserDto userDto, UserInfo userInfo);
+
+    List<UserVo> list();
+
+    void delete(Long id);
 }

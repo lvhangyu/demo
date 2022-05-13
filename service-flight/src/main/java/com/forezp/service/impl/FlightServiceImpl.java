@@ -38,6 +38,14 @@ public class FlightServiceImpl implements FlightService {
         flightDO.setFlightTime(DateUtil.getDurationByDate(flightDO.getArrivalTime(),flightDO.getDepartureTime(),DateUtil.dateFormat[1]));
         flightDO.setCtime(new Date());
         flightDO.setMtime(new Date());
+        List<FlightDO.Seat> seatList = new ArrayList<>();
+        for (int i = 1; i <= flightDTO.getSeatCount(); i ++){
+            FlightDO.Seat seat = new FlightDO.Seat();
+            seat.setSeatNumber(String.valueOf(i));
+            seat.setExits(true);
+            seatList.add(seat);
+        }
+        flightDO.setSeatList(seatList);
         int result = flightMapper.insert(flightDO);
         FlightVO flightVO = new FlightVO();
         BeanUtils.copyProperties(flightDO, flightVO);

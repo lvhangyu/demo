@@ -46,6 +46,7 @@ public class FlightDTO {
     private Integer cabinType;
     private BigDecimal discountedTicketPrice;
     private String discount;
+    private Integer seatCount;
 //    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date ctime;
 //    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
