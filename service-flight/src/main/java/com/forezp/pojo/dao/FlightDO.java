@@ -71,9 +71,9 @@ public class FlightDO {
     private Integer cabinType;
     @Column(name = "seat_count",comment = "座位数")
     private Integer seatCount;
-    @JsonFormat(shape=JsonFormat.Shape.STRING)
-    @Column(name = "seat_list",comment = "座位列表")
-    private List<Seat> seatList;
+//    @JsonFormat(shape= JsonFormat.Shape.STRING)
+    @Column(name = "seat_list",comment = "座位列表", type = MySqlTypeConstant.TEXT)
+    private String seatList;
     @Column(name = "ctime",comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date ctime = new Date();
     @Column(name = "mtime",comment = "修改时间", type = MySqlTypeConstant.TIMESTAMP)

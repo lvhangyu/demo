@@ -2,6 +2,7 @@ package com.forezp.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.forezp.mapper.FlightMapper;
 import com.forezp.pojo.dao.FlightDO;
@@ -39,13 +40,15 @@ public class FlightServiceImpl implements FlightService {
         flightDO.setCtime(new Date());
         flightDO.setMtime(new Date());
         List<FlightDO.Seat> seatList = new ArrayList<>();
-        for (int i = 1; i <= flightDTO.getSeatCount(); i ++){
-            FlightDO.Seat seat = new FlightDO.Seat();
-            seat.setSeatNumber(String.valueOf(i));
-            seat.setExits(true);
-            seatList.add(seat);
+        if(null != flightDTO.getSeatCount()){
+            for (int i = 1; i <= flightDTO.getSeatCount(); i ++){
+                FlightDO.Seat seat = new FlightDO.Seat();
+                seat.setSeatNumber(String.valueOf(i));
+                seat.setExits(true);
+                seatList.add(seat);
+            }
+            flightDO.setSeatList(JSONObject.toJSONString(seatList));
         }
-        flightDO.setSeatList(seatList);
         int result = flightMapper.insert(flightDO);
         FlightVO flightVO = new FlightVO();
         BeanUtils.copyProperties(flightDO, flightVO);
