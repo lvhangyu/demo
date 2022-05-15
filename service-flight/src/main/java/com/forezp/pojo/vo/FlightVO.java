@@ -38,7 +38,7 @@ public class FlightVO {
     private BigDecimal discountedTicketPrice;
     private String discount;
     private Integer seatCount;
-    private List<FlightDO.Seat> seatList;
+    private String seatList;
     private Date ctime;
     private Date mtime;
 }

@@ -23,6 +23,8 @@ public class UserDao {
     @Unique
     @Column(name = "username",comment = "用户名字")
     private String username;
+    @Column(name = "user_number",comment = "身份证")
+    private String userNumber;
     @Column(name = "gender",comment = "性别")
     private Integer gender;
     @Column(name = "age",comment = "年龄")

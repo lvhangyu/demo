@@ -14,6 +14,7 @@ import com.forezp.service.RestFlightService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,15 +34,15 @@ public class OrderServiceImpl implements OrderService {
         orderVoList =  BeanUtil.copyToList(orderDOList, OrderVo.class, null);
         for (OrderVo orderVo : orderVoList){
             ResultModel resultModel = restFlightService.info(orderVo.getFlightId());
-            ResultModel seatInfo = restFlightService.seatInfo(orderVo.getSeatNumber());
             orderVo.setFlightInfo(resultModel.getData());
-            orderVo.setSeatInfo(seatInfo.getData());
         }
         return orderVoList;
     }
 
+
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public OrderVo create(OrderDTO orderDTO, UserInfo userInfo) {
+    public OrderVo create(OrderDTO orderDTO, UserInfo userInfo) throws MyException {
         OrderDO orderDO = new OrderDO();
         BeanUtils.copyProperties(orderDTO, orderDO);
         orderDO.setUserId(userInfo.getId());
@@ -49,9 +50,11 @@ public class OrderServiceImpl implements OrderService {
         OrderVo orderVo = new OrderVo();
         BeanUtils.copyProperties(orderDO, orderVo);
         ResultModel resultModel = restFlightService.info(orderVo.getFlightId());
-        ResultModel seatInfo = restFlightService.seatInfo(orderVo.getSeatNumber());
+        ResultModel resultModel1 = restFlightService.setSeat(orderVo.getFlightId(), orderVo.getSeatNumber(), userInfo.getId(), userInfo.getUsername(), userInfo.getUserNumber());
+        if(resultModel1.getCode() == 400){
+            throw new MyException(resultModel1.getCode(), resultModel1.getMsg());
+        }
         orderVo.setFlightInfo(resultModel.getData());
-        orderVo.setSeatInfo(seatInfo.getData());
         return orderVo;
     }
 
@@ -66,9 +69,7 @@ public class OrderServiceImpl implements OrderService {
         OrderVo orderVo = new OrderVo();
         BeanUtils.copyProperties(orderDO, orderVo);
         ResultModel resultModel = restFlightService.info(orderVo.getFlightId());
-        ResultModel seatInfo = restFlightService.seatInfo(orderVo.getSeatNumber());
         orderVo.setFlightInfo(resultModel.getData());
-        orderVo.setSeatInfo(seatInfo.getData());
         return orderVo;
     }
 
@@ -81,9 +82,7 @@ public class OrderServiceImpl implements OrderService {
         orderVoList =  BeanUtil.copyToList(orderDOList, OrderVo.class, null);
         for (OrderVo orderVo : orderVoList){
             ResultModel resultModel = restFlightService.info(orderVo.getFlightId());
-            ResultModel seatInfo = restFlightService.seatInfo(orderVo.getSeatNumber());
             orderVo.setFlightInfo(resultModel.getData());
-            orderVo.setSeatInfo(seatInfo.getData());
         }
         return orderVoList;
     }
@@ -91,5 +90,20 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void deleteById(Long id) {
         orderMapper.deleteById(id);
+    }
+
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void cancel(Long id) throws MyException {
+        //更新订单状态
+        OrderDO orderDO = orderMapper.selectById(id);
+        orderDO.setStatus(1);
+        orderMapper.updateById(orderDO);
+        //更新航班座位
+        ResultModel resultModel1 = restFlightService.seatCancel(orderDO.getFlightId(), orderDO.getSeatNumber());
+        if(resultModel1.getCode() == 400){
+            throw new MyException(resultModel1.getCode(), resultModel1.getMsg());
+        }
     }
 }

@@ -10,6 +10,7 @@ public class UserInfo {
     private Long id;
     private Integer role;
     private String username;
+    private String userNumber;
     private Integer gender;
     private Integer age;
     private String email;

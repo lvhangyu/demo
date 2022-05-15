@@ -82,7 +82,7 @@ public class FlightDO {
 
     @Data
     public static class Seat{
-        private String seatNumber;
+        private Long seatNumber;
         private Boolean exits;
         private Long userId;
         private String userName;

@@ -1,5 +1,6 @@
 package com.forezp.service;
 
+import com.forezp.exception.MyException;
 import com.forezp.pojo.dao.SeatManage;
 
 import java.util.List;
@@ -14,4 +15,8 @@ public interface SeatManageService {
     SeatManage info(Long seatId);
 
     SeatManage updateStatus(Long seatId, Integer status);
+
+    SeatManage set(Long flightId, Long seatNumber, Long userId, String username, String userNumber) throws MyException;
+
+    SeatManage cancel(Long flightId, Long seatNumber);
 }

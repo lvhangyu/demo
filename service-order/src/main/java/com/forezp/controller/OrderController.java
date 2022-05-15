@@ -57,7 +57,7 @@ public class OrderController {
     @PostMapping("/create")
     public ResultModel<OrderVo> create(@CurrentUser UserInfo userInfo,
                                        @RequestBody OrderDTO orderDTO,
-                                       HttpServletRequest request, HttpServletResponse response){
+                                       HttpServletRequest request, HttpServletResponse response) throws MyException {
         OrderVo orderVo = orderService.create(orderDTO, userInfo);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success").setData(orderVo);
     }
@@ -135,6 +135,20 @@ public class OrderController {
     public ResultModel deleteById(@PathVariable("id") Long id,
                                   HttpServletRequest request, HttpServletResponse response){
         orderService.deleteById(id);
+        return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
+
+    /**
+     * 删除订单
+     * @param id
+     * @param request
+     * @param response
+     * @return
+     */
+    @PostMapping("/cancel/{id}")
+    public ResultModel cancel(@PathVariable("id") Long id,
+                                  HttpServletRequest request, HttpServletResponse response) throws MyException {
+        orderService.cancel(id);
         return new ResultModel().setCode(HttpStatus.OK.value()).setMsg("success");
     }
 

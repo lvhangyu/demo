@@ -21,7 +21,18 @@ public class RestFlightServiceHystric implements RestFlightService {
     }
 
     @Override
-    public ResultModel seatInfo(Long seatId) {
-        return new ResultModel<>();
+    public ResultModel setSeat(Long flightId, Long seatNumber, Long userId, String userName, String userNumber) {
+        ResultModel resultModel = new ResultModel<>();
+        resultModel.setMsg("座位已被占!");
+        resultModel.setCode(400);
+        return resultModel;
+    }
+
+    @Override
+    public ResultModel seatCancel(Long flightId, Long seatNumber) {
+        ResultModel resultModel = new ResultModel<>();
+        resultModel.setMsg("取消座位失败!");
+        resultModel.setCode(400);
+        return resultModel;
     }
 }

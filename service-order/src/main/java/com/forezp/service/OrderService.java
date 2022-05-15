@@ -12,11 +12,13 @@ public interface OrderService {
 
     List<OrderVo> getList();
 
-    OrderVo create(OrderDTO orderDTO, UserInfo userInfo);
+    OrderVo create(OrderDTO orderDTO, UserInfo userInfo) throws MyException;
 
     OrderVo update(UserInfo userInfo, Long id, Integer status) throws MyException;
 
     List<OrderVo> listByUserId(Long userId);
 
     void deleteById(Long id);
+
+    void cancel(Long id) throws MyException;
 }

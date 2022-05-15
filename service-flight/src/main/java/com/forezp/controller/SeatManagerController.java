@@ -1,5 +1,6 @@
 package com.forezp.controller;
 
+import com.forezp.exception.MyException;
 import com.forezp.mvc.ResultModel;
 import com.forezp.pojo.dao.SeatManage;
 import com.forezp.service.SeatManageService;
@@ -53,5 +54,26 @@ public class SeatManagerController {
             HttpServletRequest request, HttpServletResponse response) throws ParseException {
         SeatManage seatManage = seatManageService.updateStatus(seatId, status);
         return new ResultModel<SeatManage>().setCode(HttpStatus.OK.value()).setMsg("success").setData(seatManage);
+    }
+
+    @PostMapping("/set")
+    public ResultModel<SeatManage> set(
+            @RequestParam(value = "flightId") Long flightId,
+            @RequestParam(value = "seatNumber") Long seatNumber,
+            @RequestParam(value = "userId") Long userId,
+            @RequestParam(value = "userName") String userName,
+            @RequestParam(value = "userNumber") String userNumber,
+            HttpServletRequest request, HttpServletResponse response) throws ParseException, MyException {
+        SeatManage seatManage = seatManageService.set(flightId, seatNumber, userId, userName, userNumber);
+        return new ResultModel<SeatManage>().setCode(HttpStatus.OK.value()).setMsg("success");
+    }
+
+    @PostMapping("/cancel")
+    public ResultModel<SeatManage> cancel(
+            @RequestParam(value = "flightId") Long flightId,
+            @RequestParam(value = "seatNumber") Long seatNumber,
+            HttpServletRequest request, HttpServletResponse response) throws ParseException, MyException {
+        SeatManage seatManage = seatManageService.cancel(flightId, seatNumber);
+        return new ResultModel<SeatManage>().setCode(HttpStatus.OK.value()).setMsg("success");
     }
 }

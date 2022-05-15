@@ -54,7 +54,7 @@ public class OrderDO {
     private Integer ticketType;
     @Column(name = "ticket_price",comment = "机票价格", type = MySqlTypeConstant.DECIMAL, length = 65)
     private BigDecimal ticketPrice;
-    @Column(name = "status",comment = "订单状态（0待出票 1已出票 2申请改签 3已改签 4申请退票 5已退票）",  type = MySqlTypeConstant.TINYINT)
+    @Column(name = "status",comment = "订单状态（0已下单 1取消订单）",  type = MySqlTypeConstant.TINYINT)
     private Integer status;
     @Column(name = "ctime", comment = "创建时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date ctime;

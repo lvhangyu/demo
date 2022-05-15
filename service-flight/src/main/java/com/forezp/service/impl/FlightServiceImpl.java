@@ -43,7 +43,7 @@ public class FlightServiceImpl implements FlightService {
         if(null != flightDTO.getSeatCount()){
             for (int i = 1; i <= flightDTO.getSeatCount(); i ++){
                 FlightDO.Seat seat = new FlightDO.Seat();
-                seat.setSeatNumber(String.valueOf(i));
+                seat.setSeatNumber(Long.valueOf(i));
                 seat.setExits(true);
                 seatList.add(seat);
             }
