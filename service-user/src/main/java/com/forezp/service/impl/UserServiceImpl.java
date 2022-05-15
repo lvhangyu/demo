@@ -94,4 +94,12 @@ public class UserServiceImpl implements UserService {
     public void delete(Long id) {
         userMapper.deleteById(id);
     }
+
+    @Override
+    public UserVo info(Long userId) {
+        UserDao userDao = userMapper.selectById(userId);
+        UserVo userVo = new UserVo();
+        BeanUtils.copyProperties(userDao, userVo);
+        return userVo;
+    }
 }

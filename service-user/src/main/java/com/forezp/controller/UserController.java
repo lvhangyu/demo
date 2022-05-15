@@ -87,6 +87,14 @@ public class UserController {
     }
 
 
+    @GetMapping("/info")
+    public ResultModel<UserVo> info(
+            @RequestParam("id") Long userId,
+            HttpServletRequest request, HttpServletResponse response) throws MyException {
+        UserVo userVo =  userService.info(userId);
+        return new ResultModel<UserVo>().setCode(HttpStatus.OK.value()).setMsg("success").setData(userVo);
+    }
+
     @GetMapping("/list")
     public ResultModel<List<UserVo>> list(
             HttpServletRequest request, HttpServletResponse response) throws MyException {

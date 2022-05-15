@@ -19,4 +19,6 @@ public interface UserService {
     List<UserVo> list();
 
     void delete(Long id);
+
+    UserVo info(Long userId);
 }
