@@ -51,37 +51,38 @@ public class FlightController {
 
     @PostMapping("/update")
     public ResultModel<FlightVO> update(
-            @RequestParam(required = true, value = "id") Long id,
-            @RequestParam(required = false, value = "flightDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date flightDate,
-            @RequestParam(required = false, value = "aviationCorp") String aviationCorp,
-            @RequestParam(required = false, value = "departureAddr") String departureAddr,
-            @RequestParam(required = false, value = "arrivalAddr") String arrivalAddr,
-            @RequestParam(required = false, value = "departureTime") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date departureTime,
-            @RequestParam(required = false, value = "arrivalTime") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date arrivalTime,
-            @RequestParam(required = false, value = "luggage") Integer luggage,
-            @RequestParam(required = false, value = "fuelSurcharge") BigDecimal fuelSurcharge,
-            @RequestParam(required = false, value = "airportTax") BigDecimal airportTax,
-            @RequestParam(required = false, value = "remainingTicket") Integer remainingTicket,
-            @RequestParam(required = false, value = "ticketPrice") BigDecimal ticketPrice,
-            @RequestParam(required = false, value = "cabinType") Integer cabinType,
-            @RequestParam(required = false, value = "discounted_ticket_price") BigDecimal discounted_ticket_price,
-            @RequestParam(required = false, value = "discount") String discount,
+//            @RequestParam(required = true, value = "id") Long id,
+//            @RequestParam(required = false, value = "flightDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date flightDate,
+//            @RequestParam(required = false, value = "aviationCorp") String aviationCorp,
+//            @RequestParam(required = false, value = "departureAddr") String departureAddr,
+//            @RequestParam(required = false, value = "arrivalAddr") String arrivalAddr,
+//            @RequestParam(required = false, value = "departureTime") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date departureTime,
+//            @RequestParam(required = false, value = "arrivalTime") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date arrivalTime,
+//            @RequestParam(required = false, value = "luggage") Integer luggage,
+//            @RequestParam(required = false, value = "fuelSurcharge") BigDecimal fuelSurcharge,
+//            @RequestParam(required = false, value = "airportTax") BigDecimal airportTax,
+//            @RequestParam(required = false, value = "remainingTicket") Integer remainingTicket,
+//            @RequestParam(required = false, value = "ticketPrice") BigDecimal ticketPrice,
+//            @RequestParam(required = false, value = "cabinType") Integer cabinType,
+//            @RequestParam(required = false, value = "discounted_ticket_price") BigDecimal discounted_ticket_price,
+//            @RequestParam(required = false, value = "discount") String discount,
+            @RequestBody FlightDTO flightDTO,
             HttpServletRequest request, HttpServletResponse response) throws ParseException {
-        FlightDTO flightDTO = new FlightDTO();
-        flightDTO.setId(id)
-                .setFlightDate(flightDate)
-                .setAviationCorp(aviationCorp)
-                .setDepartureAddr(departureAddr)
-                .setArrivalAddr(arrivalAddr)
-                .setDepartureTime(departureTime)
-                .setArrivalTime(arrivalTime).setLuggage(luggage)
-                .setFuelSurcharge(fuelSurcharge)
-                .setAirportTax(airportTax)
-                .setRemainingTicket(remainingTicket)
-                .setTicketPrice(ticketPrice)
-                .setCabinType(cabinType)
-                .setDiscountedTicketPrice(discounted_ticket_price)
-                .setDiscount(discount);
+//        FlightDTO flightDTO = new FlightDTO();
+//        flightDTO.setId(id)
+//                .setFlightDate(flightDate)
+//                .setAviationCorp(aviationCorp)
+//                .setDepartureAddr(departureAddr)
+//                .setArrivalAddr(arrivalAddr)
+//                .setDepartureTime(departureTime)
+//                .setArrivalTime(arrivalTime).setLuggage(luggage)
+//                .setFuelSurcharge(fuelSurcharge)
+//                .setAirportTax(airportTax)
+//                .setRemainingTicket(remainingTicket)
+//                .setTicketPrice(ticketPrice)
+//                .setCabinType(cabinType)
+//                .setDiscountedTicketPrice(discounted_ticket_price)
+//                .setDiscount(discount);
         System.out.println(flightDTO.toString());
         FlightVO flightVO = flightService.update(flightDTO);
         System.out.println(flightVO.getFlightDate());

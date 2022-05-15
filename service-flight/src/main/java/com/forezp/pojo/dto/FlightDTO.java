@@ -1,5 +1,6 @@
 package com.forezp.pojo.dto;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -47,8 +48,25 @@ public class FlightDTO {
     private BigDecimal discountedTicketPrice;
     private String discount;
     private Integer seatCount;
-//    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
-    private Date ctime;
-//    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
-    private Date mtime;
+
+    public static void main(String[] args) {
+        FlightDTO flightDTO = new FlightDTO();
+        flightDTO.setId(0L);
+        flightDTO.setFlightDate(new Date());
+        flightDTO.setAviationCorp("");
+        flightDTO.setFlightCode("");
+        flightDTO.setDepartureAddr("");
+        flightDTO.setArrivalAddr("");
+        flightDTO.setDepartureTime(new Date());
+        flightDTO.setArrivalTime(new Date());
+        flightDTO.setLuggage(0);
+        flightDTO.setFuelSurcharge(new BigDecimal("0"));
+        flightDTO.setAirportTax(new BigDecimal("0"));
+        flightDTO.setRemainingTicket(0);
+        flightDTO.setTicketPrice(new BigDecimal("0"));
+        flightDTO.setCabinType(0);
+        flightDTO.setDiscountedTicketPrice(new BigDecimal("0"));
+        flightDTO.setDiscount("");
+        System.out.println(JSONObject.toJSONString(flightDTO));
+    }
 }
