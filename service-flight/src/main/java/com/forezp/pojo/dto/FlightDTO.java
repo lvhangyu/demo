@@ -48,6 +48,7 @@ public class FlightDTO {
     private BigDecimal discountedTicketPrice;
     private String discount;
     private Integer seatCount;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
     private Date boardingTime;
     private String boardingRoom;
 

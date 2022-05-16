@@ -40,5 +40,7 @@ public class FlightVO {
     private Integer seatCount;
     private String seatList;
     private Date ctime;
+    private Date boardingTime;
+    private String boardingRoom;
     private Date mtime;
 }
