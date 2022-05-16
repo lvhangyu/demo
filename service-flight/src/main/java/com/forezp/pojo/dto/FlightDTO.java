@@ -48,6 +48,8 @@ public class FlightDTO {
     private BigDecimal discountedTicketPrice;
     private String discount;
     private Integer seatCount;
+    private Date boardingTime;
+    private String boardingRoom;
 
     public static void main(String[] args) {
         FlightDTO flightDTO = new FlightDTO();
