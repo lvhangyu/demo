@@ -60,4 +60,7 @@ public class OrderDO {
     private Date ctime;
     @Column(name = "mtime", comment = "修改时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date mtime;
+
+    @Column(name = "flight_infob",comment = "航班信息",  type = MySqlTypeConstant.TEXT)
+    private String flightInfob;
 }

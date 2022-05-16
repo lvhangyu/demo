@@ -1,6 +1,8 @@
 package com.forezp.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.forezp.exception.MyException;
 import com.forezp.mapper.OrderMapper;
@@ -33,8 +35,11 @@ public class OrderServiceImpl implements OrderService {
         List<OrderVo> orderVoList = new ArrayList<>();
         orderVoList =  BeanUtil.copyToList(orderDOList, OrderVo.class, null);
         for (OrderVo orderVo : orderVoList){
-            ResultModel resultModel = restFlightService.info(orderVo.getFlightId());
-            orderVo.setFlightInfo(resultModel.getData());
+//            ResultModel resultModel = restFlightService.info(orderVo.getFlightId());
+            if(null != orderVo.getFlightInfob()){
+                orderVo.setFlightInfo(JSONObject.parse(orderVo.getFlightInfob()));
+                orderVo.setFlightInfob(null);
+            }
         }
         return orderVoList;
     }
@@ -46,15 +51,25 @@ public class OrderServiceImpl implements OrderService {
         OrderDO orderDO = new OrderDO();
         BeanUtils.copyProperties(orderDTO, orderDO);
         orderDO.setUserId(userInfo.getId());
+        ResultModel resultModel = restFlightService.info(orderDTO.getFlightId());
+        if(resultModel == null || resultModel.getCode() == null){
+            throw new MyException(400, "航班信息异常!");
+        }
+        JSONObject jsonObject = JSON.parseObject(JSONObject.toJSONString(resultModel.getData()));
+        orderDO.setFlightInfob(JSONObject.toJSONString(resultModel.getData()));
+        orderDO.setBoardingRoom(jsonObject.getString("boardingRoom"));
+        orderDO.setBoardingTime(jsonObject.getDate("boardingTime"));
         orderMapper.insert(orderDO);
         OrderVo orderVo = new OrderVo();
         BeanUtils.copyProperties(orderDO, orderVo);
-        ResultModel resultModel = restFlightService.info(orderVo.getFlightId());
         ResultModel resultModel1 = restFlightService.setSeat(orderVo.getFlightId(), orderVo.getSeatNumber(), userInfo.getId(), userInfo.getUsername(), userInfo.getUserNumber());
         if(resultModel1.getCode() == 400){
             throw new MyException(resultModel1.getCode(), resultModel1.getMsg());
         }
-        orderVo.setFlightInfo(resultModel.getData());
+        if(null != orderVo.getFlightInfob()){
+            orderVo.setFlightInfo(JSONObject.parse(orderVo.getFlightInfob()));
+            orderVo.setFlightInfob(null);
+        }
         return orderVo;
     }
 
@@ -68,8 +83,10 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.updateById(orderDO);
         OrderVo orderVo = new OrderVo();
         BeanUtils.copyProperties(orderDO, orderVo);
-        ResultModel resultModel = restFlightService.info(orderVo.getFlightId());
-        orderVo.setFlightInfo(resultModel.getData());
+        if(null != orderVo.getFlightInfob()){
+            orderVo.setFlightInfo(JSONObject.parse(orderVo.getFlightInfob()));
+            orderVo.setFlightInfob(null);
+        }
         return orderVo;
     }
 
@@ -81,8 +98,10 @@ public class OrderServiceImpl implements OrderService {
         List<OrderVo> orderVoList = new ArrayList<>();
         orderVoList =  BeanUtil.copyToList(orderDOList, OrderVo.class, null);
         for (OrderVo orderVo : orderVoList){
-            ResultModel resultModel = restFlightService.info(orderVo.getFlightId());
-            orderVo.setFlightInfo(resultModel.getData());
+            if(null != orderVo.getFlightInfob()){
+                orderVo.setFlightInfo(JSONObject.parse(orderVo.getFlightInfob()));
+                orderVo.setFlightInfob(null);
+            }
         }
         return orderVoList;
     }

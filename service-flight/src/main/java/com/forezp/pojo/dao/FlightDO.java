@@ -79,6 +79,11 @@ public class FlightDO {
     @Column(name = "mtime",comment = "修改时间", type = MySqlTypeConstant.TIMESTAMP)
     private Date mtime = new Date();
 
+    @Column(name = "boarding_time",comment = "登机时间", type = MySqlTypeConstant.TIMESTAMP)
+    private Date boardingTime;
+    @Column(name = "boarding_room",comment = "登机室")
+    private String boardingRoom;
+
 
     @Data
     public static class Seat{
