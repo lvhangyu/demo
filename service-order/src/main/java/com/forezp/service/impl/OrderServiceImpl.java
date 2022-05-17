@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -51,6 +52,7 @@ public class OrderServiceImpl implements OrderService {
         OrderDO orderDO = new OrderDO();
         BeanUtils.copyProperties(orderDTO, orderDO);
         orderDO.setUserId(userInfo.getId());
+        orderDO.setOrderCode(UUID.randomUUID().toString());
         ResultModel resultModel = restFlightService.info(orderDTO.getFlightId());
         if(resultModel == null || resultModel.getCode() == null){
             throw new MyException(400, "航班信息异常!");
@@ -62,7 +64,7 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.insert(orderDO);
         OrderVo orderVo = new OrderVo();
         BeanUtils.copyProperties(orderDO, orderVo);
-        ResultModel resultModel1 = restFlightService.setSeat(orderVo.getFlightId(), orderVo.getSeatNumber(), userInfo.getId(), userInfo.getUsername(), userInfo.getUserNumber());
+        ResultModel resultModel1 = restFlightService.setSeat(orderVo.getFlightId(), orderVo.getSeatNumber(),orderDTO.getMobile(), orderDTO.getUserName(), orderDTO.getUserNumber());
         if(resultModel1.getCode() == 400){
             throw new MyException(resultModel1.getCode(), resultModel1.getMsg());
         }

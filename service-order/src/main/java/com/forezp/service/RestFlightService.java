@@ -25,7 +25,7 @@ public interface RestFlightService {
     @PostMapping(value = "/seat/set")
     ResultModel setSeat(@RequestParam(value = "flightId") Long flightId,
                         @RequestParam(value = "seatNumber") Long seatNumber,
-                        @RequestParam(value = "userId") Long userId,
+                        @RequestParam(value = "mobile") String mobile,
                         @RequestParam(value = "userName") String userName,
                         @RequestParam(value = "userNumber") String userNumber
     );

@@ -16,7 +16,7 @@ public interface SeatManageService {
 
     SeatManage updateStatus(Long seatId, Integer status);
 
-    SeatManage set(Long flightId, Long seatNumber, Long userId, String username, String userNumber) throws MyException;
+    SeatManage set(Long flightId, Long seatNumber, String mobile, String username, String userNumber) throws MyException;
 
     SeatManage cancel(Long flightId, Long seatNumber);
 }

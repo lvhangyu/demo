@@ -63,7 +63,7 @@ public class SeatManageServiceImpl implements SeatManageService {
     @Autowired
     private FlightMapper flightMapper;
     @Override
-    public synchronized SeatManage set(Long flightId, Long seatNumber, Long userId, String username, String userNumber) throws MyException {
+    public synchronized SeatManage set(Long flightId, Long seatNumber, String mobile, String username, String userNumber) throws MyException {
         FlightDO flightDO = flightMapper.selectById(flightId);
         JSONArray jsonArray = JSONObject.parseArray(flightDO.getSeatList());
         for (Object object : jsonArray){
@@ -73,7 +73,7 @@ public class SeatManageServiceImpl implements SeatManageService {
                     throw new MyException(400, "航班座位已被占!");
                 }
                 jsonObject.put("exits",Boolean.valueOf("false"));
-                jsonObject.put("userId",userId);
+                jsonObject.put("mobile",mobile);
                 jsonObject.put("userName", username);
                 jsonObject.put("userNumber", userNumber);
             }
