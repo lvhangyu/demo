@@ -10,6 +10,7 @@ import com.forezp.pojo.vo.MajorClazzVo;
 import com.forezp.pojo.vo.MajorVo;
 import com.forezp.service.MajorClazzService;
 import com.forezp.util.ExcelUtil;
+import org.apache.commons.collections.map.ListOrderedMap;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,10 +69,10 @@ public class MajorClazzServiceImpl implements MajorClazzService {
 
     private MajorClazzDao parseExeclData(List<List<String>> dataList) {
         MajorClazzDao majorClazzDao = new MajorClazzDao();
-        Map<String, Map<String, Map<String, String>>> contentMap = new HashMap(16);
-        Map<String, Map<String, String>> dayMap = new HashMap<>(16);
-        Map<String, String> amMap = new HashMap<>(16);
-        Map<String, String> pmMap = new HashMap<>(16);
+        Map<String, Map<String, Map<String, String>>> contentMap = new ListOrderedMap();
+        Map<String, Map<String, String>> dayMap = new ListOrderedMap();
+        Map<String, String> amMap = new ListOrderedMap();
+        Map<String, String> pmMap = new ListOrderedMap();
         String[] dayStrs = {"Mon","Tues","Wed","Thur","Fri"};
 
         for (int i = 0; i <5 ; i++) {
